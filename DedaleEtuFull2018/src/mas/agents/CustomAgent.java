@@ -1,6 +1,10 @@
 package mas.agents;
 
 import env.Environment;
+import jade.core.AID;
+import jade.domain.AMSService;
+import jade.domain.FIPAAgentManagement.AMSAgentDescription;
+import jade.domain.FIPAAgentManagement.SearchConstraints;
 import mas.abstractAgent;
 import scala.util.parsing.combinator.testing.Str;
 
@@ -8,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Aagent extends abstractAgent {
+public class CustomAgent extends abstractAgent {
 
     /**
      *
@@ -18,6 +22,7 @@ public class Aagent extends abstractAgent {
     private HashMap<String,String[]> map;
     private List<String> iter;
     public int cpt;
+
 
     protected void setup(){
         super.setup();
@@ -45,6 +50,23 @@ public class Aagent extends abstractAgent {
 
     }
 
+    public AMSAgentDescription[] getAgents() {
+        AMSAgentDescription[] agents = null;
+        try {
+            SearchConstraints c = new SearchConstraints();
+            c.setMaxResults ( new Long(-1) );
+            agents = AMSService.search( this, new AMSAgentDescription (), c );
+        }catch(Exception e) {
+            System.out.println( "Problem searching AMS: " + e );
+            e.printStackTrace();
+
+        }
+        return agents;
+    }
+
+
+
+
     public HashMap<String, String[]> getMap() {
         return map;
     }
@@ -52,6 +74,7 @@ public class Aagent extends abstractAgent {
     public void addNode(String node,String[] fils){
         map.put(node, fils);
     }
+
     public String finIter (){
         return iter.remove(iter.size()-1);
     }
@@ -59,6 +82,7 @@ public class Aagent extends abstractAgent {
     public void pushPosition (String pos){
         iter.add(pos);
     }
+
     public void increment(){
         cpt++;
     }
@@ -66,4 +90,5 @@ public class Aagent extends abstractAgent {
     public void fusion(HashMap<String,String[]> map2) {
         map.putAll(map2);
     }
+
 }

@@ -11,13 +11,6 @@ import java.util.List;
 
 public class
 
-
-
-
-
-
-
-
 SayHello extends TickerBehaviour{
 
 	/**

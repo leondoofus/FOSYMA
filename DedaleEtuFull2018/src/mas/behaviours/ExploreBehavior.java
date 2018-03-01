@@ -3,16 +3,12 @@ package mas.behaviours;
 import env.Attribute;
 import env.Couple;
 import jade.core.behaviours.SimpleBehaviour;
-import mas.agents.Aagent;
+import mas.agents.CustomAgent;
+import mas.util.*;
 
+import java.io.IOException;
 import java.util.*;
 
-import org.graphstream.algorithm.Dijkstra;
-import org.graphstream.algorithm.Dijkstra.Element;
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.DefaultGraph;
-import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.stream.file.FileSourceDGS;
 
 
 public class ExploreBehavior extends SimpleBehaviour {
@@ -21,11 +17,11 @@ public class ExploreBehavior extends SimpleBehaviour {
      *
      */
     private static final long serialVersionUID = 9088209402507795289L;
-    private Aagent myagent;
+    private CustomAgent myagent;
     private boolean passToSendBehaviour;
 
 
-    public ExploreBehavior(final Aagent myagent) {
+    public ExploreBehavior(final CustomAgent myagent) {
         super(myagent);
         this.myagent = myagent;
         //super(myagent);
@@ -35,8 +31,7 @@ public class ExploreBehavior extends SimpleBehaviour {
     @Override
     public void action() {
         String myPosition = ((mas.abstractAgent) this.myAgent).getCurrentPosition();
-
-        if (myPosition != "") {
+        if (!myPosition.equals("")) {
             myagent.pushPosition(myPosition);
             // recupere tous les voisins
             List<Couple<String, List<Attribute>>> lobs = ((mas.abstractAgent) this.myAgent).observe();
@@ -62,100 +57,60 @@ public class ExploreBehavior extends SimpleBehaviour {
                     break;
                 }
             }
-
-
+            System.out.println("printing the next case where i want to go");
+            System.out.println(notvisited);
+            try {
+                System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to execute its next move");
+                System.in.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if (notvisited != null) {
                 boolean test = ((mas.abstractAgent) this.myAgent).moveTo(notvisited);
                 if(!test) {
                     passToSendBehaviour = true;
-                    /*ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                    msg.setSender(this.myAgent.getAID());
-                    try {
-                        msg.setContentObject(myagent.getMap());
-                        if (!myAgent.getLocalName().equals("Agent1")) {
-                            msg.addReceiver(new AID("Agent1", AID.ISLOCALNAME));
-                        } else {
-                            msg.addReceiver(new AID("Agent2", AID.ISLOCALNAME));
-                        }
-                        ((mas.abstractAgent) this.myAgent).sendMessage(msg);
-                    } catch (IOException e){
-                        block();
-                    }*/
                 }
             } else {
-                /*Backtracking
-                System.out.println(this.myagent.getLocalName()+" "+myagent.cpt);
-                try {
-                    String s = myagent.finIter();
-                    if (s.equals(myPosition))
-                        s = myagent.finIter();
+                System.out.println("the agent is now blocked and cant move");
+                System.out.println("dijkstra");
+                HashMap<String,String[]> myMap = myagent.getMap();
+                Set<String> explored = myMap.keySet();
+                Set<String> unexplored = new HashSet<String>();
+                for (String key: myMap.keySet()) {
+                    //converting the set to an array of strings because FUCK YOU JAVA
+                    String[] tmp = myMap.get(key);
+                    for (String s:tmp){
+                        unexplored.add(s);
+                    }
+                }
+                String[] unexploredAsStringtmp =unexplored.toArray(new String[unexplored.size()]);
+                for(String s :unexploredAsStringtmp){
+                    if(explored.contains(s)){
+                        unexplored.remove(s);
+                    }
+                }
+                String[] exploredAsString = explored.toArray(new String[explored.size()]);
+                String[] unexploredAsString =unexplored.toArray(new String[unexplored.size()]);
+                System.out.println("printing explored nodes");
+                for(String s : exploredAsString){
+                    System.out.println(s);
+                }
+                System.out.println("print unexplored nodes");
+                for(String s : unexploredAsString){
+                    System.out.println(s);
+                }
+                System.out.println("my destination : " + unexploredAsString[0] + " my position : "+ myPosition);
+                ArrayList<String> path = ShortestPath.solve(unexploredAsString[0],myPosition,myMap,new ArrayList<String>());
+                String[] pathAstring = path.toArray(new String[path.size()]);
+                //TDO REVERSE THIS ARRAY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                for(String s:pathAstring){
+                    System.out.println("path : "+s);
                     ((mas.abstractAgent) this.myAgent).moveTo(s);
-                } catch (ArrayIndexOutOfBoundsException e){
-                    System.out.println(this.myagent.getLocalName()+" I explored the whole map");
-                }*/
-                // Plus court chemin vers non exploré plus proche
-                HashMap<String,String[]> m = this.myagent.getMap();
-                Set<String> explored = m.keySet();
-                Set<String[]> unexplored = new HashSet<>();
-                unexplored.addAll(m.values());
-                //Cette ligne ne marche pas putain
-                unexplored.removeAll(m.keySet());
-
-                System.out.println("--------------");
-                for (String s : explored) {
-                    System.out.print(s+",");
-
                 }
-                System.out.println();
-                System.out.println("");
-                for (String[] s : unexplored) {
-                    for(String t:s){
-                        System.out.print(t+",");
-                    }
-                }
-                System.out.println("");
-                System.out.println("--------------");
-
-                /*unexplored.addAll(m.values());
-                unexplored.removeAll(m.keySet());
-                Graph g = new SingleGraph("PCC");
-                for (String s : explored){
-                    g.addNode(s);
-                }
-                for (String[] s: unexplored){
-                    for (String t : s)
-                        try {
-                            g.addNode(t);
-                        }catch (Exception e){
-                            System.out.println("lol");
-                        }
-
-                }
-
-                for (String s : explored){
-                    for (int i = 0; i < m.get(s).length; i++){
-                        try {
-                            g.addEdge(s + m.get(s)[i], s, m.get(s)[i]);
-                        } catch (Exception e){
-                            System.out.println("lol2");
-                        }
-                    }
-                }
-
-                Graph graph = new DefaultGraph("Dijkstra Test");
-
-                Dijkstra dijkstra = new Dijkstra();//   (Element.edge, "weight", "A");
-                dijkstra.init(graph);
-                dijkstra.setSource(graph.getNode(myPosition));
-                dijkstra.compute();
-                System.out.println(dijkstra.getPath(graph.getNode((String) unexplored.toArray()[0])));
-                */
-            }
 
             }
-
-
         }
+    }
 
 
     @Override
@@ -165,6 +120,6 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public boolean done() {
-        return passToSendBehaviour;
+        return false;
     }
 }
