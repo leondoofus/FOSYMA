@@ -7,6 +7,7 @@ import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 import mas.agents.CustomAgent;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -24,7 +25,12 @@ public class ReceiveMessageBehaviour extends SimpleBehaviour{
 
 
     public void action() {
-        //1) receive the message
+        try {
+            System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to recive message");
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
 
         final ACLMessage msg = this.myAgent.receive(msgTemplate);

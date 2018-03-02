@@ -3,11 +3,13 @@ package mas.behaviours;
 import env.Attribute;
 import env.Couple;
 import jade.core.behaviours.SimpleBehaviour;
+import mas.abstractAgent;
 import mas.agents.CustomAgent;
 import mas.util.*;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.Collections;
 
 
 
@@ -21,20 +23,27 @@ public class ExploreBehavior extends SimpleBehaviour {
     private boolean passToSendBehaviour;
 
 
-    public ExploreBehavior(final CustomAgent myagent) {
-        super(myagent);
-        this.myagent = myagent;
-        //super(myagent);
+    public ExploreBehavior(final CustomAgent customAgent) {
+        super(customAgent);
+        this.myagent = customAgent;
+        //super(customAgent);
         passToSendBehaviour = false;
     }
 
     @Override
     public void action() {
-        String myPosition = ((mas.abstractAgent) this.myAgent).getCurrentPosition();
+        passToSendBehaviour = false;
+        try {
+            System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to move");
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
         if (!myPosition.equals("")) {
             myagent.pushPosition(myPosition);
             // recupere tous les voisins
-            List<Couple<String, List<Attribute>>> lobs = ((mas.abstractAgent) this.myAgent).observe();
+            List<Couple<String, List<Attribute>>> lobs = ((abstractAgent) this.myAgent).observe();
             if (!myagent.getMap().containsKey(myPosition)) {
                 myagent.increment();
                 String[] fils = new String[lobs.size() - 1];
@@ -57,16 +66,12 @@ public class ExploreBehavior extends SimpleBehaviour {
                     break;
                 }
             }
-            System.out.println("printing the next case where i want to go");
+            System.out.print("printing the next case where i want to go : ");
             System.out.println(notvisited);
-            try {
-                System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to execute its next move");
-                System.in.read();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             if (notvisited != null) {
-                boolean test = ((mas.abstractAgent) this.myAgent).moveTo(notvisited);
+                boolean test = ((abstractAgent) this.myAgent).moveTo(notvisited);
+                System.out.println(test);
+                System.out.println(passToSendBehaviour);
                 if(!test) {
                     passToSendBehaviour = true;
                 }
@@ -77,7 +82,6 @@ public class ExploreBehavior extends SimpleBehaviour {
                 Set<String> explored = myMap.keySet();
                 Set<String> unexplored = new HashSet<String>();
                 for (String key: myMap.keySet()) {
-                    //converting the set to an array of strings because FUCK YOU JAVA
                     String[] tmp = myMap.get(key);
                     for (String s:tmp){
                         unexplored.add(s);
@@ -99,15 +103,19 @@ public class ExploreBehavior extends SimpleBehaviour {
                 for(String s : unexploredAsString){
                     System.out.println(s);
                 }
-                System.out.println("my destination : " + unexploredAsString[0] + " my position : "+ myPosition);
-                ArrayList<String> path = ShortestPath.solve(unexploredAsString[0],myPosition,myMap,new ArrayList<String>());
-                String[] pathAstring = path.toArray(new String[path.size()]);
-                //TDO REVERSE THIS ARRAY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                for(String s:pathAstring){
-                    System.out.println("path : "+s);
-                    ((mas.abstractAgent) this.myAgent).moveTo(s);
+                if (unexploredAsString.length > 0){
+                    System.out.println("my destination : " + unexploredAsString[0] + " my position : "+ myPosition);
+                    ArrayList<String> path = ShortestPath.solve(unexploredAsString[0],myPosition,myMap,new ArrayList<String>());
+                    Collections.reverse(path);
+                    String[] pathAstring = path.toArray(new String[path.size()]);
+                    for(String s:pathAstring){
+                        System.out.println("path : "+s);
+                        if(!((abstractAgent) this.myAgent).moveTo(s)){
+                            passToSendBehaviour = true;
+                            break;
+                        }
+                    }
                 }
-
             }
         }
     }
@@ -115,11 +123,13 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public int onEnd() {
-        return 1;
+        System.out.println("end");
+        return 0;
     }
 
     @Override
     public boolean done() {
+        System.out.println("done");
         return false;
     }
 }

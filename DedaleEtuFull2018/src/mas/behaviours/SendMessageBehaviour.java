@@ -22,6 +22,12 @@ public class SendMessageBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
+        try {
+            System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to send message");
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //get all the agents
         AMSAgentDescription [] allAgents = customAgent.getAgents();
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
