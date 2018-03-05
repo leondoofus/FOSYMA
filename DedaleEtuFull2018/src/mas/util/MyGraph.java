@@ -1,9 +1,11 @@
 package mas.util;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class MyGraph {
-    public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst) throws NodeUnknownException {
+    public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
+        System.out.println("Dijkstra called :");
         if (src.equals(dst))
             return new ArrayList<String>();
         ArrayList<String> explored = new ArrayList<>(map.keySet());
@@ -20,9 +22,7 @@ public class MyGraph {
         //for (String s : unexplored)
         //    System.out.println(s);
         // explored and unexplored are well computed
-        // A voir plus la condition ci-dessous
-        if (unexplored.contains(src) || !explored.contains(src) || (!explored.contains(dst) && !unexplored.contains(dst)))
-            throw new NodeUnknownException("Src/Dst unknown");
+
         ArrayList<ArrayList<String>> graph = new ArrayList<>();
         boolean dstInGraph = false;
         ArrayList<String> tmp2 = new ArrayList<>();
@@ -33,33 +33,46 @@ public class MyGraph {
             for (String higherLevel : graph.get(graph.size()-1)){
                 if (map.get(higherLevel) != null)
                     for (String neighbour : map.get(higherLevel)){
-                        if (neighbour.equals(dst))
-                            dstInGraph = true;
-                        if (!inGraph(graph,neighbour))
+                        if (!inGraph(graph,neighbour) && !inArray(tmp2,neighbour)) {
                             tmp2.add(neighbour);
+                            if (neighbour.equals(dst))
+                                dstInGraph = true;
+                        }
                     }
             }
             graph.add(tmp2);
         }
-        /*
+
         for (ArrayList<String> a : graph) {
             for (String s : a) {
-                System.out.print(s);
+                System.out.print(s+"\t");
             }
             System.out.println();
-        }*/
+        }
+        System.out.println("Fin print graph");
         ArrayList<String> chemin = new ArrayList<>();
         chemin.add(dst);
         for (int i = graph.size() - 2; i >= 0; i--){
-            if (map.get(chemin.get(0)) != null) {
-                for (int j = 0; j < map.get(chemin.get(0)).length; j++) {
-                    if (graph.get(i).contains(map.get(chemin.get(0))[j]) && !unexplored.contains(map.get(chemin.get(0))[j])) {
-                        chemin.add(0, map.get(chemin.get(0))[j]);
-                        break;
+            boolean ok = false;
+            for (String s : graph.get(i)){
+                if (!ok) {
+                    if (!unexplored.contains(s)) {
+                        for (String t : map.get(s)) {
+                            if (!ok)
+                                if (t.equals(chemin.get(0))) {
+                                    chemin.add(0,s);
+                                    ok = true;
+                                }
+                        }
                     }
                 }
             }
         }
+        chemin.remove(0);
+        for (String s : chemin)
+            System.out.println(s+"\t");
+        System.out.println("---");
+
         return chemin;
     }
 
@@ -69,5 +82,13 @@ public class MyGraph {
                 if (noeud.equals(node))
                     return true;
         return false;
+    }
+
+    private static boolean inArray(ArrayList<String> array, String node){
+        for (String s : array)
+            if (s.equals(node))
+                return true;
+        return false;
+
     }
 }

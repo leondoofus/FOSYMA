@@ -8,6 +8,7 @@ import mas.agents.CustomAgent;
 import mas.util.*;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Collections;
 
@@ -33,13 +34,15 @@ public class ExploreBehavior extends SimpleBehaviour {
     @Override
     public void action() {
         passToSendBehaviour = false;
+        String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
+        System.out.println("I'm at the case : "+myPosition);
         try {
             System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to move");
-            System.in.read();
-        } catch (IOException e) {
+            //System.in.read();
+            Thread.sleep(1500);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
         if (!myPosition.equals("")) {
             myagent.pushPosition(myPosition);
             // recupere tous les voisins
@@ -104,7 +107,19 @@ public class ExploreBehavior extends SimpleBehaviour {
                     System.out.println(s);
                 }
                 if (unexploredAsString.length > 0){
+                    //TODO It works with my algo here
                     System.out.println("my destination : " + unexploredAsString[0] + " my position : "+ myPosition);
+                    ArrayList<String> path = MyGraph.dijkstra(myMap,myPosition,unexploredAsString[0]);
+                    for(String s: path){
+                        System.out.println("path : "+s);
+                        //TODO have to see this because the prof said that we can only move once for each iteration
+                        if(!((abstractAgent) this.myAgent).moveTo(s)){
+                            passToSendBehaviour = true;
+                            break;
+                        }
+                    }
+                    // TODO your algo doesn't work
+                    /*
                     ArrayList<String> path = ShortestPath.solve(unexploredAsString[0],myPosition,myMap,new ArrayList<>());
                     Collections.reverse(path);
                     String[] pathAstring = path.toArray(new String[path.size()]);
@@ -114,7 +129,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                             passToSendBehaviour = true;
                             break;
                         }
-                    }
+                    }*/
                 }
             }
         }
