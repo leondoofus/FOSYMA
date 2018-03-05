@@ -207,7 +207,7 @@ public class Principal {
 		agentName="Agent1";
 		try {
 
-			Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give informations to the agent
+			Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give information to the agent
 			AgentController	ag=c.createNewAgent(agentName,ExploreAgent.class.getName(),objtab);
 			agentList.add(ag);
 			System.out.println(agentName+" launched");

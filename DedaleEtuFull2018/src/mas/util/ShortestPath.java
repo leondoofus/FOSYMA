@@ -10,7 +10,7 @@ public class ShortestPath {
         System.out.println(dst+" "+src);
         if(dst.equals(src)){
             System.out.println("go to spep");
-            ArrayList<String> res = new ArrayList<String>();
+            ArrayList<String> res = new ArrayList<>();
             res.add(src);
             return res;
         }else{

@@ -105,7 +105,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                 }
                 if (unexploredAsString.length > 0){
                     System.out.println("my destination : " + unexploredAsString[0] + " my position : "+ myPosition);
-                    ArrayList<String> path = ShortestPath.solve(unexploredAsString[0],myPosition,myMap,new ArrayList<String>());
+                    ArrayList<String> path = ShortestPath.solve(unexploredAsString[0],myPosition,myMap,new ArrayList<>());
                     Collections.reverse(path);
                     String[] pathAstring = path.toArray(new String[path.size()]);
                     for(String s:pathAstring){

@@ -33,5 +33,11 @@ public class TestClass {
         } catch (NodeUnknownException e) {
             e.printStackTrace();
         }
+        System.out.println("lala");
+
+        ArrayList<String> a = mas.util.ShortestPath.solve("A","I",map,new ArrayList<>(map.keySet()));
+        if (a == null) System.out.println("shit");
+        for (String s : a)
+            System.out.println(s);
     }
 }

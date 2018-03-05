@@ -22,8 +22,8 @@ public class ExploreAgent extends CustomAgent {
         fsmBehaviour.registerTransition("C","B",1);
 
         addBehaviour(new ExploreBehavior(this));
-        addBehaviour(new ReceiveMessageBehaviour(this));
-        addBehaviour(new SendMessageBehaviour(this));
+        //addBehaviour(new ReceiveMessageBehaviour(this));
+        //addBehaviour(new SendMessageBehaviour(this));
 
     }
 

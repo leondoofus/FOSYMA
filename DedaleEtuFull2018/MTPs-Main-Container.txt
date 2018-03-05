@@ -1,1 +1,1 @@
-http://192.168.1.50:7778/acc
+http://ppti-14-403-07.ufr-info-p6.jussieu.fr:7778/acc
