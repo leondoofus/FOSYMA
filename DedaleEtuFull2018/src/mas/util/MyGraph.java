@@ -1,6 +1,5 @@
 package mas.util;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MyGraph {
@@ -43,16 +42,16 @@ public class MyGraph {
             graph.add(tmp2);
         }
 
-        for (ArrayList<String> a : graph) {
+        /*for (ArrayList<String> a : graph) {
             for (String s : a) {
                 System.out.print(s+"\t");
             }
             System.out.println();
         }
-        System.out.println("Fin print graph");
+        System.out.println("Fin print graph");*/
         ArrayList<String> chemin = new ArrayList<>();
         chemin.add(dst);
-        for (int i = graph.size() - 2; i >= 0; i--){
+        for (int i = graph.size() - 2; i > 0; i--){
             boolean ok = false;
             for (String s : graph.get(i)){
                 if (!ok) {
@@ -68,10 +67,9 @@ public class MyGraph {
                 }
             }
         }
-        chemin.remove(0);
-        for (String s : chemin)
+        /*for (String s : chemin)
             System.out.println(s+"\t");
-        System.out.println("---");
+        System.out.println("---");*/
 
         return chemin;
     }
