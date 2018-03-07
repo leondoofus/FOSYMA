@@ -3,8 +3,12 @@ package mas.agents;
 import env.Environment;
 import jade.core.AID;
 import jade.domain.AMSService;
+import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.AMSAgentDescription;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.SearchConstraints;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
 import mas.abstractAgent;
 import scala.util.parsing.combinator.testing.Str;
 
@@ -40,6 +44,19 @@ public class CustomAgent extends abstractAgent {
             System.exit(-1);
         }
         iter = new ArrayList<>();
+        DFAgentDescription dfd = new DFAgentDescription();
+        dfd.setName(getAID());
+        ServiceDescription sd = new ServiceDescription();
+        sd.setType("explorer");
+        //exore here
+        sd.setName(getLocalName());
+        dfd.addServices(sd);
+        try {
+            DFService.register(this,dfd);
+        } catch (FIPAException fe){
+            fe.printStackTrace();
+        }
+
         System.out.println("the agent "+this.getLocalName()+ " is started");
     }
 
@@ -50,18 +67,18 @@ public class CustomAgent extends abstractAgent {
 
     }
 
-    public AMSAgentDescription[] getAgents() {
-        AMSAgentDescription[] agents = null;
+    public DFAgentDescription[] getAgents() {
+        DFAgentDescription dfd = new DFAgentDescription();
+        ServiceDescription sd = new ServiceDescription();
+        sd.setType("explorer");
+        dfd.addServices(sd);
+        DFAgentDescription [] result = new DFAgentDescription[0];
         try {
-            SearchConstraints c = new SearchConstraints();
-            c.setMaxResults ( new Long(-1) );
-            agents = AMSService.search( this, new AMSAgentDescription (), c );
-        }catch(Exception e) {
-            System.out.println( "Problem searching AMS: " + e );
+            result = DFService.search(this,dfd);
+        } catch (FIPAException e) {
             e.printStackTrace();
-
         }
-        return agents;
+        return result;
     }
 
 

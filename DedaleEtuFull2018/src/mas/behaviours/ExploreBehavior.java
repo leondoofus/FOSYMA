@@ -18,26 +18,22 @@ public class ExploreBehavior extends SimpleBehaviour {
      */
     private static final long serialVersionUID = 9088209402507795289L;
     private CustomAgent myagent;
-    private boolean passToSendBehaviour;
+    private int behaviorChoice;
     private ArrayList<String> steps;
 
 
     public ExploreBehavior(final CustomAgent customAgent) {
         super(customAgent);
         this.myagent = customAgent;
-        //super(customAgent);
-        passToSendBehaviour = false;
         steps = new ArrayList<>();
     }
 
     @Override
     public void action() {
         System.out.println("Explore .............");
-/*
-        passToSendBehaviour = false;
+        behaviorChoice = 1; // pass to receive par def
         String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
         System.out.println("I'm at the case : " + myPosition);
-        System.out.println("Press Enter in the console to allow the agent " + this.myAgent.getLocalName() + " to move");
         if (steps.isEmpty()) {
             if (!myPosition.equals("")) {
                 myagent.pushPosition(myPosition);
@@ -69,14 +65,11 @@ public class ExploreBehavior extends SimpleBehaviour {
                 System.out.println(notvisited);
                 if (notvisited != null) {
                     boolean test = ((abstractAgent) this.myAgent).moveTo(notvisited);
-                    System.out.println(test);
-                    System.out.println(passToSendBehaviour);
                     if (!test) {
-                        passToSendBehaviour = true;
+                        behaviorChoice = 2;
                     }
                 } else {
                     System.out.println("the agent is now blocked and cant move");
-                    System.out.println("dijkstra");
                     HashMap<String, String[]> myMap = myagent.getMap();
                     Set<String> explored = myMap.keySet();
                     Set<String> unexplored = new HashSet<>();
@@ -94,21 +87,20 @@ public class ExploreBehavior extends SimpleBehaviour {
                     }
                     String[] exploredAsString = explored.toArray(new String[explored.size()]);
                     String[] unexploredAsString = unexplored.toArray(new String[unexplored.size()]);
-                    System.out.println("printing explored nodes");
-                    for (String s : exploredAsString) {
-                        System.out.println(s);
-                    }
                     System.out.println("print unexplored nodes");
                     for (String s : unexploredAsString) {
-                        System.out.println(s);
+                        System.out.print(" "+s);
                     }
+                    System.out.println();
+                    if (unexplored.isEmpty())
+                        System.err.println("WOooooooooooooooooo explored la carte");
                     if (unexploredAsString.length > 0) {
-                        //TODO It works with my algo here
                         System.out.println("my destination : " + unexploredAsString[0] + " my position : " + myPosition);
                         steps = MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]);
                         String step = steps.remove(0);
                         if (!((abstractAgent) this.myAgent).moveTo(step)) {
                             steps.clear();
+                            behaviorChoice = 2;
                         }
                     }
                 }
@@ -116,22 +108,21 @@ public class ExploreBehavior extends SimpleBehaviour {
         } else {
             String step = steps.remove(0);
             if (!((abstractAgent) this.myAgent).moveTo(step)) {
-                //passToSendBehaviour = true;
+                behaviorChoice = 2;
                 steps.clear();
             }
-        }*/
+        }
+        //behaviorEnded = true;
     }
 
 
     @Override
     public int onEnd() {
-        //System.out.println("end");
-        return 1;
+        return behaviorChoice;
     }
 
     @Override
     public boolean done() {
-        //System.out.println("done");
         return true;
     }
 }

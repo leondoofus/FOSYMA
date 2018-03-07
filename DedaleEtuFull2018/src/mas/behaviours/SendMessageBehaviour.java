@@ -1,9 +1,12 @@
 package mas.behaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
+import jade.domain.DFService;
 import jade.lang.acl.ACLMessage;
 import mas.agents.CustomAgent;
 import jade.domain.FIPAAgentManagement.*;
+import mas.util.Langage;
+import sun.util.locale.LanguageTag;
 
 import java.io.IOException;
 
@@ -22,32 +25,32 @@ public class SendMessageBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
-        System.out.println("sendinggggggggggggggggg");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        /*
-        try {
-            System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to send message");
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+        System.err.println("sending ---------------------------");
+
         //get all the agents
-        AMSAgentDescription [] allAgents = customAgent.getAgents();
+        /*DFAgentDescription [] allAgents = customAgent.getAgents();
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setSender(this.customAgent.getAID());
         try {
             msg.setContentObject(customAgent.getMap());
-            for(AMSAgentDescription agent: allAgents){
+            for(DFAgentDescription agent: allAgents){
                 msg.addReceiver(agent.getName());
             }
             ((mas.abstractAgent) this.myAgent).sendMessage(msg);
         } catch (IOException e){
                         block();
         }*/
+        DFAgentDescription [] allAgents = customAgent.getAgents();
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.setSender(this.customAgent.getAID());
+        msg.setContent(Langage.COMMUNICATION);
+        for(DFAgentDescription agent: allAgents){
+            msg.addReceiver(agent.getName());
+        }
+        ((mas.abstractAgent) this.myAgent).sendMessage(msg);
+
     }
 
     @Override
