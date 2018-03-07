@@ -32,17 +32,12 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
-
-            passToSendBehaviour = false;
-            String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
-            System.out.println("I'm at the case : " + myPosition);
-            try {
-                System.out.println("Press Enter in the console to allow the agent " + this.myAgent.getLocalName() + " to move");
-                //System.in.read();
-                Thread.sleep(1500);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        System.out.println("Explore .............");
+/*
+        passToSendBehaviour = false;
+        String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
+        System.out.println("I'm at the case : " + myPosition);
+        System.out.println("Press Enter in the console to allow the agent " + this.myAgent.getLocalName() + " to move");
         if (steps.isEmpty()) {
             if (!myPosition.equals("")) {
                 myagent.pushPosition(myPosition);
@@ -115,32 +110,6 @@ public class ExploreBehavior extends SimpleBehaviour {
                         if (!((abstractAgent) this.myAgent).moveTo(step)) {
                             steps.clear();
                         }
-
-                        /*for (String s : path) {
-                            System.out.println("path : " + s);
-                            //TODO have to see this because the prof said that we can only move once for each iteration
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            if (!((abstractAgent) this.myAgent).moveTo(s)) {
-                                passToSendBehaviour = true;
-                                break;
-                            }
-                        }*/
-                        // TODO your algo doesn't work
-                    /*
-                    ArrayList<String> path = ShortestPath.solve(unexploredAsString[0],myPosition,myMap,new ArrayList<>());
-                    Collections.reverse(path);
-                    String[] pathAstring = path.toArray(new String[path.size()]);
-                    for(String s:pathAstring){
-                        System.out.println("path : "+s);
-                        if(!((abstractAgent) this.myAgent).moveTo(s)){
-                            passToSendBehaviour = true;
-                            break;
-                        }
-                    }*/
                     }
                 }
             }
@@ -150,19 +119,19 @@ public class ExploreBehavior extends SimpleBehaviour {
                 //passToSendBehaviour = true;
                 steps.clear();
             }
-        }
+        }*/
     }
 
 
     @Override
     public int onEnd() {
-        System.out.println("end");
-        return 0;
+        //System.out.println("end");
+        return 1;
     }
 
     @Override
     public boolean done() {
-        System.out.println("done");
-        return false;
+        //System.out.println("done");
+        return true;
     }
 }

@@ -25,12 +25,11 @@ public class ReceiveMessageBehaviour extends SimpleBehaviour{
 
 
     public void action() {
-        try {
-            System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to recive message");
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("receive ------------------");
+/*
+        System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to recive message");
+
+
         final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
 
         final ACLMessage msg = this.myAgent.receive(msgTemplate);
@@ -49,12 +48,18 @@ public class ReceiveMessageBehaviour extends SimpleBehaviour{
 
         }else{
             block();// the behaviour goes to sleep until the arrival of a new message in the agent's Inbox.
-        }
+        }*/
     }
 
     @Override
     public boolean done() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public int onEnd() {
+        //System.out.println("end");
+        return 2;
     }
 
 }

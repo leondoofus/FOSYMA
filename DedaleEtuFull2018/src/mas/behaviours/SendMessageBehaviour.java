@@ -22,6 +22,13 @@ public class SendMessageBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
+        System.out.println("sendinggggggggggggggggg");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        /*
         try {
             System.out.println("Press Enter in the console to allow the agent "+this.myAgent.getLocalName() +" to send message");
             System.in.read();
@@ -40,11 +47,17 @@ public class SendMessageBehaviour extends SimpleBehaviour {
             ((mas.abstractAgent) this.myAgent).sendMessage(msg);
         } catch (IOException e){
                         block();
-        }
+        }*/
     }
 
     @Override
     public boolean done() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public int onEnd() {
+        //System.out.println("end");
+        return 1;
     }
 }
