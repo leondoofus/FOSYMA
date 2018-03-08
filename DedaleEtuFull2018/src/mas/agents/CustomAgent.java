@@ -2,6 +2,7 @@ package mas.agents;
 
 import env.Environment;
 import jade.core.AID;
+import jade.core.Agent;
 import jade.domain.AMSService;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.AMSAgentDescription;
@@ -25,14 +26,12 @@ public class CustomAgent extends abstractAgent {
 
     private HashMap<String,String[]> map;
     private List<String> iter;
-    public int cpt;
-
+    private AID comuicatingAgent;
 
     protected void setup(){
         super.setup();
         map = new HashMap<>();
         iter = new ArrayList<>();
-        cpt = 0;
         //get the parameters given into the object[]. In the current case, the environment where the agent will evolve
         final Object[] args = getArguments();
         if(args[0]!=null){
@@ -48,7 +47,6 @@ public class CustomAgent extends abstractAgent {
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
         sd.setType("explorer");
-        //exore here
         sd.setName(getLocalName());
         dfd.addServices(sd);
         try {
@@ -58,13 +56,6 @@ public class CustomAgent extends abstractAgent {
         }
 
         System.out.println("the agent "+this.getLocalName()+ " is started");
-    }
-
-    /**
-     * This method is automatically called after doDelete()
-     */
-    protected void takeDown(){
-
     }
 
     public DFAgentDescription[] getAgents() {
@@ -83,6 +74,15 @@ public class CustomAgent extends abstractAgent {
 
 
 
+    public AID getComuicatingAgent() {
+        return comuicatingAgent;
+    }
+
+    public void setComuicatingAgent(AID comuicatingAgent) {
+        this.comuicatingAgent = comuicatingAgent;
+    }
+
+    protected void takeDown(){ }
 
     public HashMap<String, String[]> getMap() {
         return map;
@@ -98,10 +98,6 @@ public class CustomAgent extends abstractAgent {
 
     public void pushPosition (String pos){
         iter.add(pos);
-    }
-
-    public void increment(){
-        cpt++;
     }
 
     public void fusion(HashMap<String,String[]> map2) {

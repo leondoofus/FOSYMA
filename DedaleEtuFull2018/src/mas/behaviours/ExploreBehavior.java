@@ -40,7 +40,6 @@ public class ExploreBehavior extends SimpleBehaviour {
                 // recupere tous les voisins
                 List<Couple<String, List<Attribute>>> lobs = ((abstractAgent) this.myAgent).observe();
                 if (!myagent.getMap().containsKey(myPosition)) {
-                    myagent.increment();
                     String[] fils = new String[lobs.size() - 1];
                     int i = 0;
                     for (Couple c : lobs) {

@@ -1,37 +1,28 @@
 package mas.behaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
-import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import mas.agents.CustomAgent;
-import jade.domain.FIPAAgentManagement.*;
 import mas.util.Langage;
 
-import java.io.IOException;
+public class SendMapBehaviour extends SimpleBehaviour {
 
-//this method sends my map to all the agents in my range
-
-public class SendMessageBehaviour extends SimpleBehaviour {
-
-    private static final long serialVersionUID = 9088209402507795289L;
     private CustomAgent customAgent;
 
 
-    public SendMessageBehaviour(final CustomAgent customAgent) {
+    //TODO gerer la terminaison du behaviour.
+    public SendMapBehaviour(final CustomAgent customAgent){
         super(customAgent);
         this.customAgent = customAgent;
     }
 
     @Override
     public void action() {
-        System.err.println("sending ---------------------------");
-        DFAgentDescription [] allAgents = customAgent.getAgents();
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setSender(this.customAgent.getAID());
         msg.setContent(Langage.COMMUNICATION);
-        for(DFAgentDescription agent: allAgents){
-            msg.addReceiver(agent.getName());
-        }
+        msg.addReceiver(this.customAgent.getComuicatingAgent());
         ((mas.abstractAgent) this.myAgent).sendMessage(msg);
     }
 
@@ -40,7 +31,6 @@ public class SendMessageBehaviour extends SimpleBehaviour {
         return true;
     }
 
-    @Override
     public int onEnd() {
         //System.out.println("end");
         return 1;

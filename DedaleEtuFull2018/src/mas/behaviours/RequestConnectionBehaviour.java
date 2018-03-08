@@ -1,34 +1,28 @@
 package mas.behaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
-import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import mas.agents.CustomAgent;
-import jade.domain.FIPAAgentManagement.*;
 import mas.util.Langage;
 
-import java.io.IOException;
+public class RequestConnectionBehaviour extends SimpleBehaviour {
 
-//this method sends my map to all the agents in my range
-
-public class SendMessageBehaviour extends SimpleBehaviour {
-
-    private static final long serialVersionUID = 9088209402507795289L;
     private CustomAgent customAgent;
 
-
-    public SendMessageBehaviour(final CustomAgent customAgent) {
+    public RequestConnectionBehaviour(final CustomAgent customAgent) {
         super(customAgent);
         this.customAgent = customAgent;
     }
 
     @Override
     public void action() {
-        System.err.println("sending ---------------------------");
-        DFAgentDescription [] allAgents = customAgent.getAgents();
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        System.out.println(this.myAgent.getLocalName() + " : is requesting communication channel");
+        DFAgentDescription[] allAgents = customAgent.getAgents();
+        ACLMessage msg = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL); //acceptation de la proposition de communication
         msg.setSender(this.customAgent.getAID());
-        msg.setContent(Langage.COMMUNICATION);
+        msg.setContent("Starting Communication");
         for(DFAgentDescription agent: allAgents){
             msg.addReceiver(agent.getName());
         }
@@ -39,10 +33,8 @@ public class SendMessageBehaviour extends SimpleBehaviour {
     public boolean done() {
         return true;
     }
-
     @Override
     public int onEnd() {
-        //System.out.println("end");
         return 1;
     }
 }
