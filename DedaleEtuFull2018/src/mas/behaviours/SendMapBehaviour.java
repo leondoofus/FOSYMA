@@ -9,6 +9,7 @@ import mas.util.Langage;
 public class SendMapBehaviour extends SimpleBehaviour {
 
     private CustomAgent customAgent;
+    private int nextBehaviourSelect; //1 = go to recive map , 2 = go back to explore behaviour
 
 
     //TODO gerer la terminaison du behaviour.
@@ -28,11 +29,16 @@ public class SendMapBehaviour extends SimpleBehaviour {
 
     @Override
     public boolean done() {
+        if(customAgent.getPreviousbehaviour() == "CheckMailBehavior"){
+            nextBehaviourSelect =1;
+        }else{
+            nextBehaviourSelect = 2;
+        }
+        customAgent.setPreviousbehaviour("SendMapBehaviour");
         return true;
     }
 
     public int onEnd() {
-        //System.out.println("end");
-        return 1;
+        return nextBehaviourSelect;
     }
 }

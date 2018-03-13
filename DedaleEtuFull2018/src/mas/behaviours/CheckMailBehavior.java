@@ -40,6 +40,7 @@ public class CheckMailBehavior extends SimpleBehaviour {
 
     @Override
     public boolean done() {
+        customAgent.setPreviousbehaviour("CheckMailBehavior");
         return true;
     }
 

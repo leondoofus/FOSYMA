@@ -17,14 +17,14 @@ public class ExploreBehavior extends SimpleBehaviour {
      *
      */
     private static final long serialVersionUID = 9088209402507795289L;
-    private CustomAgent myagent;
+    private CustomAgent customAgent;
     private int behaviorChoice;
     private ArrayList<String> steps;
 
 
     public ExploreBehavior(final CustomAgent customAgent) {
         super(customAgent);
-        this.myagent = customAgent;
+        this.customAgent = customAgent;
         steps = new ArrayList<>();
     }
 
@@ -36,10 +36,10 @@ public class ExploreBehavior extends SimpleBehaviour {
         System.out.println("I'm at the case : " + myPosition);
         if (steps.isEmpty()) {
             if (!myPosition.equals("")) {
-                myagent.pushPosition(myPosition);
+                customAgent.pushPosition(myPosition);
                 // recupere tous les voisins
                 List<Couple<String, List<Attribute>>> lobs = ((abstractAgent) this.myAgent).observe();
-                if (!myagent.getMap().containsKey(myPosition)) {
+                if (!customAgent.getMap().containsKey(myPosition)) {
                     String[] fils = new String[lobs.size() - 1];
                     int i = 0;
                     for (Couple c : lobs) {
@@ -48,14 +48,14 @@ public class ExploreBehavior extends SimpleBehaviour {
                             i++;
                         }
                     }
-                    myagent.addNode(myPosition, fils);
+                    customAgent.addNode(myPosition, fils);
                 }
 
 
-                String[] fils = myagent.getMap().get(myPosition);
+                String[] fils = customAgent.getMap().get(myPosition);
                 String notvisited = null;
                 for (String s : fils) {
-                    if (!myagent.getMap().keySet().contains(s)) {
+                    if (!customAgent.getMap().keySet().contains(s)) {
                         notvisited = s;
                         break;
                     }
@@ -69,7 +69,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     }
                 } else {
                     System.out.println("the agent is now blocked and cant move");
-                    HashMap<String, String[]> myMap = myagent.getMap();
+                    HashMap<String, String[]> myMap = customAgent.getMap();
                     Set<String> explored = myMap.keySet();
                     Set<String> unexplored = new HashSet<>();
                     for (String key : myMap.keySet()) {
@@ -122,6 +122,7 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public boolean done() {
+        customAgent.setPreviousbehaviour("CheckMailBehavior");
         return true;
     }
 }

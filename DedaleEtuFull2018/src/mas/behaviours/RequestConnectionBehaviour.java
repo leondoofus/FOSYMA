@@ -31,6 +31,7 @@ public class RequestConnectionBehaviour extends SimpleBehaviour {
 
     @Override
     public boolean done() {
+        customAgent.setPreviousbehaviour("RequestConnectionBehaviour");
         return true;
     }
     @Override

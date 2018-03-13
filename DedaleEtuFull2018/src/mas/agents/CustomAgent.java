@@ -27,6 +27,7 @@ public class CustomAgent extends abstractAgent {
     private HashMap<String,String[]> map;
     private List<String> iter;
     private AID comuicatingAgent;
+    private String Previousbehaviour;
 
     protected void setup(){
         super.setup();
@@ -104,4 +105,11 @@ public class CustomAgent extends abstractAgent {
         map.putAll(map2);
     }
 
+    public String getPreviousbehaviour() {
+        return Previousbehaviour;
+    }
+
+    public void setPreviousbehaviour(String previousbehaviour) {
+        Previousbehaviour = previousbehaviour;
+    }
 }

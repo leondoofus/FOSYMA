@@ -40,7 +40,8 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
 
     @Override
     public boolean done() {
-        return false;
+        customAgent.setPreviousbehaviour("ReceiveMapBehaviour");
+        return true;
     }
 
     public int onEnd() {
