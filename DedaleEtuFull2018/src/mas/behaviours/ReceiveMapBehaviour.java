@@ -29,6 +29,7 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
                     System.out.println(this.myAgent.getLocalName() + " : Map received from " + received.getSender().getLocalName());
                     HashMap map = (HashMap) received.getContentObject();
                     customAgent.fusion(map);
+                    customAgent.clearSteps();
                 }
             } catch (UnreadableException e) {
                 e.printStackTrace();
