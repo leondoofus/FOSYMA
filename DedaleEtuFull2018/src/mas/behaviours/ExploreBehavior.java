@@ -19,22 +19,29 @@ public class ExploreBehavior extends SimpleBehaviour {
     private static final long serialVersionUID = 9088209402507795289L;
     private CustomAgent customAgent;
     private int behaviorChoice;
-    private ArrayList<String> steps;
+    private int nbexp = 0;
+
 
 
     public ExploreBehavior(final CustomAgent customAgent) {
         super(customAgent);
         this.customAgent = customAgent;
-        steps = new ArrayList<>();
+
     }
 
     @Override
     public void action() {
-        System.out.println("Explore .............");
+        nbexp ++;
+        /*try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        System.out.println( this.customAgent.getName()+ "Explore .............");
         behaviorChoice = 1; // pass to receive par def
         String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
-        System.out.println("I'm at the case : " + myPosition);
-        if (steps.isEmpty()) {
+        System.err.println( this.customAgent.getName()+ "I'm at the case : " + myPosition+ " "+nbexp);
+        if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
                 customAgent.pushPosition(myPosition);
                 // recupere tous les voisins
@@ -60,15 +67,16 @@ public class ExploreBehavior extends SimpleBehaviour {
                         break;
                     }
                 }
-                System.out.print("printing the next case where i want to go : ");
+                System.out.print( this.customAgent.getName()+ "printing the next case where i want to go : ");
                 System.out.println(notvisited);
                 if (notvisited != null) {
                     boolean test = ((abstractAgent) this.myAgent).moveTo(notvisited);
                     if (!test) {
+                        //TODO gestion du blocage !!!!!!!!!!!!!!!
                         behaviorChoice = 2;
                     }
                 } else {
-                    System.out.println("the agent is now blocked and cant move");
+                    System.out.println( this.customAgent.getName()+ "the agent is now blocked and cant move");
                     HashMap<String, String[]> myMap = customAgent.getMap();
                     Set<String> explored = myMap.keySet();
                     Set<String> unexplored = new HashSet<>();
@@ -86,29 +94,32 @@ public class ExploreBehavior extends SimpleBehaviour {
                     }
                     String[] exploredAsString = explored.toArray(new String[explored.size()]);
                     String[] unexploredAsString = unexplored.toArray(new String[unexplored.size()]);
-                    System.out.println("print unexplored nodes");
+                    System.out.println(  this.customAgent.getName()+ "print unexplored nodes");
                     for (String s : unexploredAsString) {
                         System.out.print(" "+s);
                     }
                     System.out.println();
-                    if (unexplored.isEmpty())
-                        System.err.println("WOooooooooooooooooo explored la carte");
+                    if (unexplored.isEmpty()) {
+                        System.err.println( this.customAgent.getName() + " : I explored la carte");
+                        this.customAgent.die();
+                    }
+
                     if (unexploredAsString.length > 0) {
-                        System.out.println("my destination : " + unexploredAsString[0] + " my position : " + myPosition);
-                        steps = MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]);
-                        String step = steps.remove(0);
+                        System.out.println( this.customAgent.getName()+ "my destination : " + unexploredAsString[0] + " my position : " + myPosition);
+                        this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]));
+                        String step = this.customAgent.popStep();
                         if (!((abstractAgent) this.myAgent).moveTo(step)) {
-                            steps.clear();
+                            this.customAgent.clearSteps();
                             behaviorChoice = 2;
                         }
                     }
                 }
             }
         } else {
-            String step = steps.remove(0);
+            String step = this.customAgent.popStep();
             if (!((abstractAgent) this.myAgent).moveTo(step)) {
                 behaviorChoice = 2;
-                steps.clear();
+                this.customAgent.clearSteps();
             }
         }
         //behaviorEnded = true;
@@ -117,7 +128,8 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public int onEnd() {
-        return behaviorChoice;
+        return 1;
+        //return behaviorChoice;
     }
 
     @Override

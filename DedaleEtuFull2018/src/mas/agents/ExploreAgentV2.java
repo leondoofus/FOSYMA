@@ -27,17 +27,24 @@ public class ExploreAgentV2 extends CustomAgent {
 
         FSMBehaviour fsmBehaviour = new FSMBehaviour();
         fsmBehaviour.registerFirstState(new ExploreBehavior(this),"Exp");
-        fsmBehaviour.registerFirstState(new CheckMailBehavior(this),"Ckm");
-        fsmBehaviour.registerFirstState(new RequestConnectionBehaviour(this),"Com");
-        fsmBehaviour.registerFirstState(new SendMapBehaviour(this),"Smp");
+        fsmBehaviour.registerState(new CheckMailBehavior(this),"Ckm");
+        fsmBehaviour.registerState(new RequestConnectionBehaviour(this),"Com");
+        fsmBehaviour.registerState(new SendMapBehaviour(this),"Smp");
         fsmBehaviour.registerState(new ReceiveMapBehaviour(this),"Rmp");
 
-        fsmBehaviour.registerTransition("Exp","Ckm",1); //explore to receive
+        fsmBehaviour.registerTransition("Exp","Ckm",1); //explore to check mail
 
-        fsmBehaviour.registerTransition("A","B",2); //explore to send
-        fsmBehaviour.registerTransition("B","C",1); //send to receive
-        fsmBehaviour.registerTransition("C","A",1); //receive to explore
-        fsmBehaviour.registerTransition("C","B",2); //receive to send
+        fsmBehaviour.registerTransition("Ckm","Com",1); //check mail to start com
+        fsmBehaviour.registerTransition("Ckm","Smp",2); //check mail to send map
+
+        fsmBehaviour.registerTransition("Com","Rmp",1); //com to recive
+
+        fsmBehaviour.registerTransition("Smp","Rmp",1); // send to recive
+        fsmBehaviour.registerTransition("Smp","Exp",2); // send to recive
+
+        fsmBehaviour.registerTransition("Rmp","Exp",1); // send to recive
+        fsmBehaviour.registerTransition("Rmp","Smp",2); // send to recive
+
 
         addBehaviour(fsmBehaviour);
 

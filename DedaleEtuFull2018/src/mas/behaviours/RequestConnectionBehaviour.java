@@ -5,7 +5,6 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import mas.agents.CustomAgent;
-import mas.util.Langage;
 
 public class RequestConnectionBehaviour extends SimpleBehaviour {
 
@@ -24,7 +23,8 @@ public class RequestConnectionBehaviour extends SimpleBehaviour {
         msg.setSender(this.customAgent.getAID());
         msg.setContent("Starting Communication");
         for(DFAgentDescription agent: allAgents){
-            msg.addReceiver(agent.getName());
+            if (!agent.getName().getName().equals(myAgent.getName()))
+                msg.addReceiver(agent.getName());
         }
         ((mas.abstractAgent) this.myAgent).sendMessage(msg);
     }

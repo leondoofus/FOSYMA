@@ -26,5 +26,7 @@ public class TestClass {
         */
         for (String s : mas.util.MyGraph.dijkstra(map,"I","A"))
             System.out.println(s);
+
+
     }
 }

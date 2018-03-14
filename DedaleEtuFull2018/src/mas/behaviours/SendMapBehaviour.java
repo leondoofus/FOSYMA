@@ -4,7 +4,9 @@ import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import mas.agents.CustomAgent;
-import mas.util.Langage;
+
+import java.io.IOException;
+import java.io.Serializable;
 
 public class SendMapBehaviour extends SimpleBehaviour {
 
@@ -22,7 +24,11 @@ public class SendMapBehaviour extends SimpleBehaviour {
     public void action() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setSender(this.customAgent.getAID());
-        msg.setContent(Langage.COMMUNICATION);
+        try {
+            msg.setContentObject (this.customAgent.getMap());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         msg.addReceiver(this.customAgent.getComuicatingAgent());
         ((mas.abstractAgent) this.myAgent).sendMessage(msg);
     }

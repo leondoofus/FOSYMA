@@ -5,7 +5,6 @@ import jade.domain.DFService;
 import jade.lang.acl.ACLMessage;
 import mas.agents.CustomAgent;
 import jade.domain.FIPAAgentManagement.*;
-import mas.util.Langage;
 
 import java.io.IOException;
 
@@ -28,7 +27,7 @@ public class SendMessageBehaviour extends SimpleBehaviour {
         DFAgentDescription [] allAgents = customAgent.getAgents();
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setSender(this.customAgent.getAID());
-        msg.setContent(Langage.COMMUNICATION);
+        //msg.setContent(Langage.COMMUNICATION);
         for(DFAgentDescription agent: allAgents){
             msg.addReceiver(agent.getName());
         }

@@ -21,7 +21,7 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
     public void action() {
         System.out.println(this.myAgent.getLocalName() +" Is waiting for a Map");
         nextBehaviourSelect = 1;
-        ACLMessage received = this.myAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.INFORM),50);
+        ACLMessage received = this.myAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.INFORM),500);
         if(received != null){
             try {
                 if (received.getContentObject() instanceof HashMap) {

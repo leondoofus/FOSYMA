@@ -28,11 +28,13 @@ public class CustomAgent extends abstractAgent {
     private List<String> iter;
     private AID comuicatingAgent;
     private String Previousbehaviour;
+    private ArrayList<String> steps;
 
     protected void setup(){
         super.setup();
         map = new HashMap<>();
         iter = new ArrayList<>();
+        steps = new ArrayList<>();
         //get the parameters given into the object[]. In the current case, the environment where the agent will evolve
         final Object[] args = getArguments();
         if(args[0]!=null){
@@ -70,6 +72,7 @@ public class CustomAgent extends abstractAgent {
         } catch (FIPAException e) {
             e.printStackTrace();
         }
+
         return result;
     }
 
@@ -111,5 +114,28 @@ public class CustomAgent extends abstractAgent {
 
     public void setPreviousbehaviour(String previousbehaviour) {
         Previousbehaviour = previousbehaviour;
+    }
+
+    public void die(){
+        doDelete();
+    }
+
+    public void setSteps(ArrayList<String> steps){
+        this.steps = steps;
+    }
+
+    public String popStep(){
+        return steps.remove(0);
+    }
+
+    public void clearSteps(){
+        steps.clear();
+    }
+
+    public boolean stepsIsEmpty(){
+        return steps.isEmpty();
+    }
+    public String getStep(){
+        return steps.get(0);
     }
 }
