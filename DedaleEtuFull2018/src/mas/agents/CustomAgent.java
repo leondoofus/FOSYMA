@@ -135,6 +135,7 @@ public class CustomAgent extends abstractAgent {
     public boolean stepsIsEmpty(){
         return steps.isEmpty();
     }
+
     public String getStep(){
         return steps.get(0);
     }

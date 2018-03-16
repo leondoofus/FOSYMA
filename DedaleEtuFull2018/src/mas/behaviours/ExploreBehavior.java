@@ -106,7 +106,9 @@ public class ExploreBehavior extends SimpleBehaviour {
 
                     if (unexploredAsString.length > 0) {
                         System.out.println( this.customAgent.getName()+ "my destination : " + unexploredAsString[0] + " my position : " + myPosition);
-                        this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]));
+                        //TODO compare tous les noeuds non explores et faire en sorte que l'agent aille vers le plus proche #for all in unexplored
+                        //this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]));
+                        this.customAgent.setSteps(MyGraph.dijkstraNoeudPlusProche(myMap,myPosition,unexploredAsString));
                         String step = this.customAgent.popStep();
                         if (!((abstractAgent) this.myAgent).moveTo(step)) {
                             this.customAgent.clearSteps();

@@ -74,6 +74,16 @@ public class MyGraph {
         return chemin;
     }
 
+    public static ArrayList<String> dijkstraNoeudPlusProche (HashMap<String, String[]> map, String src, String [] unexplored){
+        if (unexplored.length == 0) return new ArrayList<>();
+        ArrayList<String> res = dijkstra(map,src,unexplored[0]);
+        for (int i = 1; i < unexplored.length; i++){
+            ArrayList<String> tmp = dijkstra(map,src,unexplored[i]);
+            if (tmp.size() < res.size()) res = tmp;
+        }
+        return res;
+    }
+
     private static boolean inGraph(ArrayList<ArrayList<String>> graph, String node){
         for (ArrayList<String> hauteur : graph)
             for (String noeud : hauteur)
