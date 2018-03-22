@@ -20,13 +20,13 @@ public class SendStepsBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
-        MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+        MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE);
         ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {
             System.out.println(this.customAgent.getLocalName() + "<----Position received from " + msg.getSender().getLocalName());
             String receiverPosition = msg.getContent();
 
-            msg = new ACLMessage(ACLMessage.INFORM);
+            msg = new ACLMessage(ACLMessage.PROPAGATE);
             msg.setSender(this.customAgent.getAID());
             HashMap<String,String[]> map = this.customAgent.getMap();
             ArrayList<String> explored = new ArrayList<>(map.keySet());
@@ -38,8 +38,8 @@ public class SendStepsBehavior extends SimpleBehaviour {
             unexplored.addAll(tmp);
             unexplored.removeAll(explored);
 
-            ArrayList<String> steps = new ArrayList<>();
-            for (String s :  unexplored){
+            ArrayList<String> steps = MyGraph.dijkstraNoeudPlusProche(map,receiverPosition,unexplored.toArray(new String[unexplored.size()]));
+            /*for (String s :  unexplored){
                 steps = MyGraph.dijkstra(map,this.customAgent.getCurrentPosition(),s);
                 if (!steps.get(0).equals(this.customAgent.getCurrentPosition())){
                     break;
@@ -47,7 +47,7 @@ public class SendStepsBehavior extends SimpleBehaviour {
                 else {
                     steps = new ArrayList<>();
                 }
-            }
+            }*/
             try {
                 msg.setContentObject (steps);
             } catch (IOException e) {

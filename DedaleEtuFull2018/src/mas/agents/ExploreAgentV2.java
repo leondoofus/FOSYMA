@@ -45,8 +45,9 @@ public class ExploreAgentV2 extends CustomAgent {
         fsmBehaviour.registerTransition("Smp","Rmp",1); // send to receive
         fsmBehaviour.registerTransition("Smp","Spos",2); // send to sendpos
 
-        fsmBehaviour.registerTransition("Rmp","Sstep",1); // send to receive
+        fsmBehaviour.registerTransition("Rmp","Exp",1); // receive to explore
         fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
+        fsmBehaviour.registerTransition("Rmp","Spos",3); //receive to sendPos
 
         fsmBehaviour.registerTransition("Spos","Rstep",1); // sendpos to receiveSteps
         fsmBehaviour.registerTransition("Rstep","Exp",1); // receiveSteps to Exp

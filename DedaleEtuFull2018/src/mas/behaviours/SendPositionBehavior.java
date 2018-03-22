@@ -20,7 +20,7 @@ public class SendPositionBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        ACLMessage msg = new ACLMessage(ACLMessage.PROPAGATE);
         msg.setSender(this.customAgent.getAID());
         msg.setContent(this.customAgent.getCurrentPosition());
         msg.addReceiver(this.customAgent.getCommunicatingAgent());

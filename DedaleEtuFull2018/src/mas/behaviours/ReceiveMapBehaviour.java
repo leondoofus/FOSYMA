@@ -20,7 +20,7 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
 
     public void action() {
         System.out.println(this.myAgent.getLocalName() +" Is waiting for a Map");
-        //nextBehaviourSelect = 1;
+        nextBehaviourSelect = 1;
         ACLMessage received = this.myAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.INFORM),50);
         if(received != null){
             try {
@@ -34,18 +34,19 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
             } catch (UnreadableException e) {
                 e.printStackTrace();
             }
-            //nextBehaviourSelect = 2;
+            nextBehaviourSelect = 2;
         }
 
     }
 
     @Override
     public boolean done() {
-        if(customAgent.getPreviousbehaviour().equals("RequestConnectionBehaviour")){
-            nextBehaviourSelect =1 ; //pass to send Steps
-        }else{
-            nextBehaviourSelect = 2; //pass to receive map
-        }
+        if (nextBehaviourSelect != 1)
+            if(customAgent.getPreviousbehaviour().equals("RequestConnectionBehaviour")){
+                nextBehaviourSelect = 3 ; //pass to send Steps
+            }else{
+                nextBehaviourSelect = 2; //pass to send map
+            }
         customAgent.setPreviousbehaviour("ReceiveMapBehaviour");
         return true;
     }

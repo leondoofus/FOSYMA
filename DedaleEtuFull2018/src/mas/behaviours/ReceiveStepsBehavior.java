@@ -20,7 +20,7 @@ public class ReceiveStepsBehavior extends SimpleBehaviour {
 
     public void action() {
         System.out.println(this.myAgent.getLocalName() +" Is waiting for Steps");
-        final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+        final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE);
         final ACLMessage msg = this.myAgent.receive(msgTemplate);
         if (msg != null) {
             System.out.println(this.myAgent.getLocalName() + "<----Result received from " + msg.getSender().getLocalName());
