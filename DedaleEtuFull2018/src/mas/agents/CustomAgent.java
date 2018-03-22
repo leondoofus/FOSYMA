@@ -2,16 +2,11 @@ package mas.agents;
 
 import env.Environment;
 import jade.core.AID;
-import jade.core.Agent;
-import jade.domain.AMSService;
 import jade.domain.DFService;
-import jade.domain.FIPAAgentManagement.AMSAgentDescription;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.SearchConstraints;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import mas.abstractAgent;
-import scala.util.parsing.combinator.testing.Str;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +21,7 @@ public class CustomAgent extends abstractAgent {
 
     private HashMap<String,String[]> map;
     private List<String> iter;
-    private AID comuicatingAgent;
+    private AID comunicatingAgent;
     private String Previousbehaviour;
     private ArrayList<String> steps;
 
@@ -78,12 +73,12 @@ public class CustomAgent extends abstractAgent {
 
 
 
-    public AID getComuicatingAgent() {
-        return comuicatingAgent;
+    public AID getCommunicatingAgent() {
+        return comunicatingAgent;
     }
 
-    public void setComuicatingAgent(AID comuicatingAgent) {
-        this.comuicatingAgent = comuicatingAgent;
+    public void setCommunicatingAgent(AID comunicatingAgent) {
+        this.comunicatingAgent = comunicatingAgent;
     }
 
     protected void takeDown(){ }

@@ -18,7 +18,7 @@ public class ExploreBehavior extends SimpleBehaviour {
      */
     private static final long serialVersionUID = 9088209402507795289L;
     private CustomAgent customAgent;
-    private int behaviorChoice;
+    //private int behaviorChoice;
     private int nbexp = 0;
 
 
@@ -38,7 +38,7 @@ public class ExploreBehavior extends SimpleBehaviour {
             e.printStackTrace();
         }*/
         System.out.println( this.customAgent.getName()+ "Explore .............");
-        behaviorChoice = 1; // pass to receive par def
+        //behaviorChoice = 1; // pass to receive par def
         String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
         System.err.println( this.customAgent.getName()+ "I'm at the case : " + myPosition+ " "+nbexp);
         if (this.customAgent.stepsIsEmpty()) {
@@ -73,7 +73,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     boolean test = ((abstractAgent) this.myAgent).moveTo(notvisited);
                     if (!test) {
                         //TODO gestion du blocage !!!!!!!!!!!!!!!
-                        behaviorChoice = 2;
+                        //behaviorChoice = 2;
                     }
                 } else {
                     System.out.println( this.customAgent.getName()+ "the agent is now blocked and cant move");
@@ -106,13 +106,12 @@ public class ExploreBehavior extends SimpleBehaviour {
 
                     if (unexploredAsString.length > 0) {
                         System.out.println( this.customAgent.getName()+ "my destination : " + unexploredAsString[0] + " my position : " + myPosition);
-                        //TODO compare tous les noeuds non explores et faire en sorte que l'agent aille vers le plus proche #for all in unexplored
                         //this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]));
                         this.customAgent.setSteps(MyGraph.dijkstraNoeudPlusProche(myMap,myPosition,unexploredAsString));
                         String step = this.customAgent.popStep();
                         if (!((abstractAgent) this.myAgent).moveTo(step)) {
                             this.customAgent.clearSteps();
-                            behaviorChoice = 2;
+                            //behaviorChoice = 2;
                         }
                     }
                 }
@@ -120,7 +119,7 @@ public class ExploreBehavior extends SimpleBehaviour {
         } else {
             String step = this.customAgent.popStep();
             if (!((abstractAgent) this.myAgent).moveTo(step)) {
-                behaviorChoice = 2;
+                //behaviorChoice = 2;
                 this.customAgent.clearSteps();
             }
         }

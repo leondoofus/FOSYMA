@@ -22,7 +22,7 @@ public class CheckMailBehavior extends SimpleBehaviour {
         final ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {
             if(msg.getPostTimeStamp() - System.currentTimeMillis() < 50){
-                customAgent.setComuicatingAgent(msg.getSender());
+                customAgent.setCommunicatingAgent(msg.getSender());
                 System.out.println(this.customAgent.getLocalName() + " : --Result received from " + msg.getSender().getLocalName());
                 nextBehaviourSelect = 2;
             }else{

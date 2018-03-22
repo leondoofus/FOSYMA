@@ -1,17 +1,15 @@
 package mas.behaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import mas.agents.CustomAgent;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 public class SendMapBehaviour extends SimpleBehaviour {
 
     private CustomAgent customAgent;
-    private int nextBehaviourSelect; //1 = go to recive map , 2 = go back to explore behaviour
+    private int nextBehaviourSelect; //1 = go to receive map , 2 = go to send position
 
 
     //TODO gerer la terminaison du behaviour.
@@ -29,16 +27,16 @@ public class SendMapBehaviour extends SimpleBehaviour {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        msg.addReceiver(this.customAgent.getComuicatingAgent());
+        msg.addReceiver(this.customAgent.getCommunicatingAgent());
         ((mas.abstractAgent) this.myAgent).sendMessage(msg);
     }
 
     @Override
     public boolean done() {
-        if(customAgent.getPreviousbehaviour() == "CheckMailBehavior"){
-            nextBehaviourSelect =1;
+        if(customAgent.getPreviousbehaviour().equals("CheckMailBehavior")){
+            nextBehaviourSelect = 1; // pass to receive map
         }else{
-            nextBehaviourSelect = 2;
+            nextBehaviourSelect = 2; //pass to send position
         }
         customAgent.setPreviousbehaviour("SendMapBehaviour");
         return true;
