@@ -23,7 +23,6 @@ public class SendMessageBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
-        System.err.println("sending ---------------------------");
         DFAgentDescription [] allAgents = customAgent.getAgents();
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setSender(this.customAgent.getAID());

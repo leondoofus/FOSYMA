@@ -37,10 +37,9 @@ public class ExploreBehavior extends SimpleBehaviour {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        System.out.println( this.customAgent.getName()+ "Explore .............");
         //behaviorChoice = 1; // pass to receive par def
         String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
-        System.err.println( this.customAgent.getName()+ "I'm at the case : " + myPosition+ " "+nbexp);
+        //System.out.println( this.myAgent.getLocalName()+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
         if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
                 customAgent.pushPosition(myPosition);
@@ -67,16 +66,20 @@ public class ExploreBehavior extends SimpleBehaviour {
                         break;
                     }
                 }
-                System.out.print( this.customAgent.getName()+ "printing the next case where i want to go : ");
-                System.out.println(notvisited);
+                //System.out.print( this.myAgent.getLocalName()+ " printing the next case where i want to go : ");
+                //System.out.println(notvisited);
                 if (notvisited != null) {
                     boolean test = ((abstractAgent) this.myAgent).moveTo(notvisited);
                     if (!test) {
-                        //TODO gestion du blocage !!!!!!!!!!!!!!!
-                        //behaviorChoice = 2;
+                        System.out.println(this.myAgent.getLocalName() + "im stuck ");
+                        Random r= new Random();
+                        //1) get a couple <Node ID,list of percepts> from the list of observables
+                        int moveId=r.nextInt(lobs.size());
+                        //2) Move to the picked location. The move action (if any) MUST be the last action of your behaviour
+                        ((mas.abstractAgent)this.myAgent).moveTo(lobs.get(moveId).getLeft());
                     }
                 } else {
-                    System.out.println( this.customAgent.getName()+ "the agent is now blocked and cant move");
+                    //System.out.println( this.myAgent.getLocalName()+ " the agent is now blocked and cant move");
                     HashMap<String, String[]> myMap = customAgent.getMap();
                     Set<String> explored = myMap.keySet();
                     Set<String> unexplored = new HashSet<>();
@@ -92,20 +95,19 @@ public class ExploreBehavior extends SimpleBehaviour {
                             unexplored.remove(s);
                         }
                     }
-                    String[] exploredAsString = explored.toArray(new String[explored.size()]);
                     String[] unexploredAsString = unexplored.toArray(new String[unexplored.size()]);
-                    System.out.println(  this.customAgent.getName()+ "print unexplored nodes");
+                    //System.out.println(  this.myAgent.getLocalName()+ " print unexplored nodes");
                     for (String s : unexploredAsString) {
-                        System.out.print(" "+s);
+                        //System.out.print(" "+s);
                     }
-                    System.out.println();
+                    //System.out.println();
                     if (unexplored.isEmpty()) {
-                        System.err.println( this.customAgent.getName() + " : I explored la carte");
-                        this.customAgent.die();
+                        System.err.println( this.myAgent.getLocalName()+ " : I explored the map");
+                        explored.clear();
                     }
 
                     if (unexploredAsString.length > 0) {
-                        System.out.println( this.customAgent.getName()+ "my destination : " + unexploredAsString[0] + " my position : " + myPosition);
+                        //System.out.println( this.myAgent.getLocalName()+ " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
                         //this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]));
                         this.customAgent.setSteps(MyGraph.dijkstraNoeudPlusProche(myMap,myPosition,unexploredAsString));
                         String step = this.customAgent.popStep();

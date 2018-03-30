@@ -26,7 +26,7 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
             try {
                 if (received.getContentObject() instanceof HashMap) {
                     this.customAgent.setCommunicatingAgent(received.getSender());
-                    System.out.println(this.myAgent.getLocalName() + " : Map received from " + received.getSender().getLocalName());
+                    //System.out.println(this.myAgent.getLocalName() + " : Map received from " + received.getSender().getLocalName());
                     HashMap map = (HashMap) received.getContentObject();
                     customAgent.fusion(map);
                     customAgent.clearSteps();

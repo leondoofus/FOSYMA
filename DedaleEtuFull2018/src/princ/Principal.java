@@ -226,7 +226,6 @@ public class Principal {
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
 		}
-
         c = containerList.get("container0");
         agentName="Agent3";
         try {

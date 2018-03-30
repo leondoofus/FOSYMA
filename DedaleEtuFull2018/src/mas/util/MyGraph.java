@@ -4,13 +4,9 @@ import java.util.*;
 
 public class MyGraph {
     public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
-        System.out.println("Dijkstra called :");
         if (src.equals(dst))
             return new ArrayList<String>();
         ArrayList<String> explored = new ArrayList<>(map.keySet());
-        //for (String s : explored)
-        //    System.out.println(s);
-        //System.out.println("------");
         ArrayList<String> unexplored = new ArrayList<>();
         for (String[] s : map.values())
             unexplored.addAll(Arrays.asList(s));
@@ -18,10 +14,6 @@ public class MyGraph {
         unexplored.clear();
         unexplored.addAll(tmp);
         unexplored.removeAll(explored);
-        //for (String s : unexplored)
-        //    System.out.println(s);
-        // explored and unexplored are well computed
-
         ArrayList<ArrayList<String>> graph = new ArrayList<>();
         boolean dstInGraph = false;
         ArrayList<String> tmp2 = new ArrayList<>();
@@ -41,14 +33,6 @@ public class MyGraph {
             }
             graph.add(tmp2);
         }
-
-        /*for (ArrayList<String> a : graph) {
-            for (String s : a) {
-                System.out.print(s+"\t");
-            }
-            System.out.println();
-        }
-        System.out.println("Fin print graph");*/
         ArrayList<String> chemin = new ArrayList<>();
         chemin.add(dst);
         for (int i = graph.size() - 2; i > 0; i--){
@@ -67,10 +51,6 @@ public class MyGraph {
                 }
             }
         }
-        /*for (String s : chemin)
-            System.out.println(s+"\t");
-        System.out.println("---");*/
-
         return chemin;
     }
 

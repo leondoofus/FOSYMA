@@ -23,7 +23,7 @@ public class SendStepsBehavior extends SimpleBehaviour {
         MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE);
         ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {
-            System.out.println(this.customAgent.getLocalName() + "<----Position received from " + msg.getSender().getLocalName());
+            //System.out.println(this.customAgent.getLocalName() + "<----Position received from " + msg.getSender().getLocalName());
             String receiverPosition = msg.getContent();
 
             msg = new ACLMessage(ACLMessage.PROPAGATE);

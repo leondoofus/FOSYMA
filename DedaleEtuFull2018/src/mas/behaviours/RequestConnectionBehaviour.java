@@ -17,7 +17,7 @@ public class RequestConnectionBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
-        System.out.println(this.myAgent.getLocalName() + " : is requesting communication channel");
+        //System.out.println(this.myAgent.getLocalName() + " : is requesting communication channel");
         DFAgentDescription[] allAgents = customAgent.getAgents();
         ACLMessage msg = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL); //acceptation de la proposition de communication
         msg.setSender(this.customAgent.getAID());

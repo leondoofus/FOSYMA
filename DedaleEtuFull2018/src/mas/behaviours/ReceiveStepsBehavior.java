@@ -19,11 +19,11 @@ public class ReceiveStepsBehavior extends SimpleBehaviour {
     }
 
     public void action() {
-        System.out.println(this.myAgent.getLocalName() +" Is waiting for Steps");
+        //System.out.println(this.myAgent.getLocalName() +" Is waiting for Steps");
         final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE);
         final ACLMessage msg = this.myAgent.receive(msgTemplate);
         if (msg != null) {
-            System.out.println(this.myAgent.getLocalName() + "<----Result received from " + msg.getSender().getLocalName());
+            //System.out.println(this.myAgent.getLocalName() + "<----Result received from " + msg.getSender().getLocalName());
             try {
                 if (msg.getContentObject() instanceof ArrayList) {
                     customAgent.setSteps((ArrayList<String>) msg.getContentObject());

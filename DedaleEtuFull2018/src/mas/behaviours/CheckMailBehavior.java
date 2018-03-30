@@ -17,16 +17,16 @@ public class CheckMailBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
-        System.out.println(this.customAgent.getLocalName() +" Is checking his mailbox");
+        //System.out.println(this.customAgent.getLocalName() +" Is checking his mailbox");
         final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
         final ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {
             if(msg.getPostTimeStamp() - System.currentTimeMillis() < 50){
                 customAgent.setCommunicatingAgent(msg.getSender());
-                System.out.println(this.customAgent.getLocalName() + " : --Result received from " + msg.getSender().getLocalName());
+                //System.out.println(this.customAgent.getLocalName() + " : --Result received from " + msg.getSender().getLocalName());
                 nextBehaviourSelect = 2;
             }else{
-                System.out.println(this.customAgent.getLocalName() + " : --Warning message from  "+msg.getSender().getLocalName()+" too old !--");
+                //System.out.println(this.customAgent.getLocalName() + " : --Warning message from  "+msg.getSender().getLocalName()+" too old !--");
                 nextBehaviourSelect = 1;
             }
         }else{

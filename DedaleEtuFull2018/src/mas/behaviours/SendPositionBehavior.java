@@ -22,7 +22,11 @@ public class SendPositionBehavior extends SimpleBehaviour {
     public void action() {
         ACLMessage msg = new ACLMessage(ACLMessage.PROPAGATE);
         msg.setSender(this.customAgent.getAID());
-        msg.setContent(this.customAgent.getCurrentPosition());
+        try {
+            msg.setContentObject(this.customAgent.getCurrentPosition());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         msg.addReceiver(this.customAgent.getCommunicatingAgent());
         ((mas.abstractAgent) this.myAgent).sendMessage(msg);
     }

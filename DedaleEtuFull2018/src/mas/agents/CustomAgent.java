@@ -112,7 +112,9 @@ public class CustomAgent extends abstractAgent {
     }
 
     public void die(){
-        doDelete();
+        System.err.println("Agent-1 "+getAID().getLocalName()+" terminating.");
+        takeDown();
+        this.doDelete();
     }
 
     public void setSteps(ArrayList<String> steps){
