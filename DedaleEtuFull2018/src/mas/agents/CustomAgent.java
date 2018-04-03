@@ -30,30 +30,14 @@ public class CustomAgent extends abstractAgent {
         map = new HashMap<>();
         iter = new ArrayList<>();
         steps = new ArrayList<>();
-        //get the parameters given into the object[]. In the current case, the environment where the agent will evolve
         final Object[] args = getArguments();
         if(args[0]!=null){
-
             deployAgent((Environment) args[0]);
-
         }else{
             System.err.println("Malfunction during parameter's loading of agent"+ this.getClass().getName());
             System.exit(-1);
         }
         iter = new ArrayList<>();
-        DFAgentDescription dfd = new DFAgentDescription();
-        dfd.setName(getAID());
-        ServiceDescription sd = new ServiceDescription();
-        sd.setType("explorer");
-        sd.setName(getLocalName());
-        dfd.addServices(sd);
-        try {
-            DFService.register(this,dfd);
-        } catch (FIPAException fe){
-            fe.printStackTrace();
-        }
-
-        System.out.println("the agent "+this.getLocalName()+ " is started");
     }
 
     public DFAgentDescription[] getAgents() {

@@ -9,10 +9,7 @@ import mas.util.MyGraph;
 
 import java.util.*;
 
-
-
-public class ExploreBehavior extends SimpleBehaviour {
-
+public class CollectBehaviour extends SimpleBehaviour {
     private static final long serialVersionUID = 9088209402507795289L;
     private CustomAgent customAgent;
     //private int behaviorChoice;
@@ -20,7 +17,7 @@ public class ExploreBehavior extends SimpleBehaviour {
 
 
 
-    public ExploreBehavior(final CustomAgent customAgent) {
+    public CollectBehaviour(final CustomAgent customAgent) {
         super(customAgent);
         this.customAgent = customAgent;
 
@@ -28,15 +25,29 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
+        List<Couple<String, List<Attribute>>> lobs = ((abstractAgent) this.myAgent).observe();
+        List<Attribute> lattribute= lobs.get(0).getRight();
+        for(Attribute a:lattribute){
+            switch (a) {
+                case TREASURE : case DIAMONDS :
+                    System.out.println("My treasure type is :"+((mas.abstractAgent)this.myAgent).getMyTreasureType());
+                    System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    System.out.println("Value of the treasure on the current position: "+a.getName() +": "+ a.getValue());
+                    System.out.println("The agent grabbed :"+((mas.abstractAgent)this.myAgent).pick());
+                    System.out.println("the remaining backpack capacity is: "+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    break;
+
+                default:
+                    break;
+            }
+        }
         nbexp ++;
-        //behaviorChoice = 1; // pass to receive par def
         String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
         //System.out.println( this.myAgent.getLocalName()+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
         if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
                 customAgent.pushPosition(myPosition);
                 // recupere tous les voisins
-                List<Couple<String, List<Attribute>>> lobs = ((abstractAgent) this.myAgent).observe();
                 if (!customAgent.getMap().containsKey(myPosition)) {
                     String[] fils = new String[lobs.size() - 1];
                     int i = 0;
@@ -65,9 +76,11 @@ public class ExploreBehavior extends SimpleBehaviour {
                     if (!test) {
                         System.out.println(this.myAgent.getLocalName() + "im stuck ");
                         Random r= new Random();
+                        //1) get a couple <Node ID,list of percepts> from the list of observables
                         int moveId=r.nextInt(lobs.size());
+                        //2) Move to the picked location. The move action (if any) MUST be the last action of your behaviour
                         while (!((mas.abstractAgent)this.myAgent).moveTo(lobs.get(moveId).getLeft()))
-                             moveId=r.nextInt(lobs.size());
+                            moveId=r.nextInt(lobs.size());
 
                     }
                 } else {
@@ -81,23 +94,31 @@ public class ExploreBehavior extends SimpleBehaviour {
                             unexplored.add(s);
                         }
                     }
-                    for(String s : unexplored){
-                        if(explored.contains(s)){
+                    String[] unexploredAsStringtmp = unexplored.toArray(new String[unexplored.size()]);
+                    for (String s : unexploredAsStringtmp) {
+                        if (explored.contains(s)) {
                             unexplored.remove(s);
                         }
                     }
+                    String[] unexploredAsString = unexplored.toArray(new String[unexplored.size()]);
+                    //System.out.println(  this.myAgent.getLocalName()+ " print unexplored nodes");
+                    for (String s : unexploredAsString) {
+                        //System.out.print(" "+s);
+                    }
+                    //System.out.println();
                     if (unexplored.isEmpty()) {
                         System.err.println( this.myAgent.getLocalName()+ " : I explored the map");
                         this.customAgent.clearMap();
                     }
-                    String[] unexploredAsString = unexplored.toArray(new String[unexplored.size()]);
+
                     if (unexploredAsString.length > 0) {
                         //System.out.println( this.myAgent.getLocalName()+ " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
-                        //this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]))
+                        //this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]));
                         this.customAgent.setSteps(MyGraph.dijkstraNoeudPlusProche(myMap,myPosition,unexploredAsString));
                         String step = this.customAgent.popStep();
                         if (!((abstractAgent) this.myAgent).moveTo(step)) {
                             this.customAgent.clearSteps();
+                            //behaviorChoice = 2;
                         }
                     }
                 }
@@ -105,9 +126,11 @@ public class ExploreBehavior extends SimpleBehaviour {
         } else {
             String step = this.customAgent.popStep();
             if (!((abstractAgent) this.myAgent).moveTo(step)) {
+                //behaviorChoice = 2;
                 this.customAgent.clearSteps();
             }
         }
+        //behaviorEnded = true;
     }
 
 
