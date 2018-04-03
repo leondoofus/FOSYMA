@@ -136,4 +136,6 @@ public class CustomAgent extends abstractAgent {
     public String getStep(){
         return steps.get(0);
     }
+
+    public void clearMap () { map.clear(); }
 }

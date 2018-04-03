@@ -76,7 +76,9 @@ public class ExploreBehavior extends SimpleBehaviour {
                         //1) get a couple <Node ID,list of percepts> from the list of observables
                         int moveId=r.nextInt(lobs.size());
                         //2) Move to the picked location. The move action (if any) MUST be the last action of your behaviour
-                        ((mas.abstractAgent)this.myAgent).moveTo(lobs.get(moveId).getLeft());
+                        while (!((mas.abstractAgent)this.myAgent).moveTo(lobs.get(moveId).getLeft()))
+                             moveId=r.nextInt(lobs.size());
+
                     }
                 } else {
                     //System.out.println( this.myAgent.getLocalName()+ " the agent is now blocked and cant move");
@@ -103,7 +105,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     //System.out.println();
                     if (unexplored.isEmpty()) {
                         System.err.println( this.myAgent.getLocalName()+ " : I explored the map");
-                        explored.clear();
+                        this.customAgent.clearMap();
                     }
 
                     if (unexploredAsString.length > 0) {
