@@ -4,7 +4,7 @@ import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import mas.agents.CustomAgent;
-import mas.util.MyGraph;
+import mas.util.Tools;
 
 import java.io.IOException;
 import java.util.*;
@@ -38,9 +38,9 @@ public class SendStepsBehavior extends SimpleBehaviour {
             unexplored.addAll(tmp);
             unexplored.removeAll(explored);
 
-            ArrayList<String> steps = MyGraph.dijkstraNoeudPlusProche(map,receiverPosition,unexplored.toArray(new String[unexplored.size()]));
+            ArrayList<String> steps = Tools.dijkstraNoeudPlusProche(map,receiverPosition,unexplored.toArray(new String[unexplored.size()]));
             /*for (String s :  unexplored){
-                steps = MyGraph.dijkstra(map,this.customAgent.getCurrentPosition(),s);
+                steps = Tools.dijkstra(map,this.customAgent.getCurrentPosition(),s);
                 if (!steps.get(0).equals(this.customAgent.getCurrentPosition())){
                     break;
                 }
@@ -55,7 +55,7 @@ public class SendStepsBehavior extends SimpleBehaviour {
             }
             msg.addReceiver(this.customAgent.getCommunicatingAgent());
             ((mas.abstractAgent) this.myAgent).sendMessage(msg);
-            this.customAgent.setSteps(MyGraph.dijkstraNoeudPlusProche(map,this.customAgent.getCurrentPosition(),unexplored.toArray(new String[unexplored.size()])));
+            this.customAgent.setSteps(Tools.dijkstraNoeudPlusProche(map,this.customAgent.getCurrentPosition(),unexplored.toArray(new String[unexplored.size()])));
         }
     }
 

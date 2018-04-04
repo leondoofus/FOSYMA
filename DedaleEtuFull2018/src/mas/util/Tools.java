@@ -2,7 +2,7 @@ package mas.util;
 
 import java.util.*;
 
-public class MyGraph {
+public class Tools {
     public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
         if (src.equals(dst))
             return new ArrayList<String>();

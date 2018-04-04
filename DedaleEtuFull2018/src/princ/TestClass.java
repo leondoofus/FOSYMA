@@ -24,7 +24,7 @@ public class TestClass {
             for (String t : map.get(s))
                 System.out.println(s+" "+t);
         */
-        //for (String s : mas.util.MyGraph.dijkstra(map,"I","A"))
+        //for (String s : mas.util.Tools.dijkstra(map,"I","A"))
         //    System.out.println(s);
 
 

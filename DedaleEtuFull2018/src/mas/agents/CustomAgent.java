@@ -1,5 +1,7 @@
 package mas.agents;
 
+import env.Attribute;
+import env.Couple;
 import env.Environment;
 import jade.core.AID;
 import jade.domain.DFService;
@@ -8,9 +10,7 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import mas.abstractAgent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class CustomAgent extends abstractAgent {
 
@@ -19,16 +19,16 @@ public class CustomAgent extends abstractAgent {
      */
     private static final long serialVersionUID = -1784844593772918359L;
 
+    private HashMap<String,List<Attribute>> data;
     private HashMap<String,String[]> map;
-    private List<String> iter;
     private AID comunicatingAgent;
     private String Previousbehaviour;
     private ArrayList<String> steps;
 
     protected void setup(){
         super.setup();
+        data = new HashMap<>();
         map = new HashMap<>();
-        iter = new ArrayList<>();
         steps = new ArrayList<>();
         final Object[] args = getArguments();
         if(args[0]!=null){
@@ -37,7 +37,6 @@ public class CustomAgent extends abstractAgent {
             System.err.println("Malfunction during parameter's loading of agent"+ this.getClass().getName());
             System.exit(-1);
         }
-        iter = new ArrayList<>();
     }
 
     public DFAgentDescription[] getAgents() {
@@ -55,7 +54,49 @@ public class CustomAgent extends abstractAgent {
         return result;
     }
 
+    public void updateMap( List<Couple<String, List<Attribute>>> lobs,String myPosition){
+        if (!map.containsKey(myPosition)) {
+            String[] sons = new String[lobs.size() - 1];
+            int i = 0;
+            for (Couple c : lobs) {
+                data.put(myPosition,(List<Attribute>) c.getRight());
+                if (!myPosition.equals(c.getLeft())) {
+                    sons[i] = (String) c.getLeft();
+                    i++;
+                }
+            }
+            map.put(myPosition, sons);
+        }
+    }
 
+    public String getUnvisitedNode(String myPosition){
+        String res = null;
+        String[] sons = map.get(myPosition);
+        for (String s : sons) {
+            if (!getMap().keySet().contains(s)) {
+                res = s;
+                break;
+            }
+        }
+        return res;
+    }
+
+
+    public  Set<String> geUnexploredNodes(){
+        Set<String> explored = map.keySet();
+        Set<String> unexplored = new HashSet<>();
+        for (String key : map.keySet()) {
+            String[] tmp = map.get(key);
+            unexplored.addAll(Arrays.asList(tmp));
+        }
+        String[] unexploredAsStringtmp = unexplored.toArray(new String[unexplored.size()]);
+        for (String s : unexploredAsStringtmp) {
+            if (explored.contains(s)) {
+                unexplored.remove(s);
+            }
+        }
+        return unexplored;
+    }
 
     public AID getCommunicatingAgent() {
         return comunicatingAgent;
@@ -65,27 +106,16 @@ public class CustomAgent extends abstractAgent {
         this.comunicatingAgent = comunicatingAgent;
     }
 
-    protected void takeDown(){ }
-
     public HashMap<String, String[]> getMap() {
         return map;
     }
 
-    public void addNode(String node,String[] fils){
-        map.put(node, fils);
-    }
-
-    public String finIter (){
-        return iter.remove(iter.size()-1);
-    }
-
-    public void pushPosition (String pos){
-        iter.add(pos);
-    }
+    public void clearMap () { map.clear(); }
 
     public void fusion(HashMap<String,String[]> map2) {
         map.putAll(map2);
     }
+
 
     public String getPreviousbehaviour() {
         return Previousbehaviour;
@@ -93,12 +123,6 @@ public class CustomAgent extends abstractAgent {
 
     public void setPreviousbehaviour(String previousbehaviour) {
         Previousbehaviour = previousbehaviour;
-    }
-
-    public void die(){
-        System.err.println("Agent-1 "+getAID().getLocalName()+" terminating.");
-        takeDown();
-        this.doDelete();
     }
 
     public void setSteps(ArrayList<String> steps){
@@ -121,5 +145,4 @@ public class CustomAgent extends abstractAgent {
         return steps.get(0);
     }
 
-    public void clearMap () { map.clear(); }
 }

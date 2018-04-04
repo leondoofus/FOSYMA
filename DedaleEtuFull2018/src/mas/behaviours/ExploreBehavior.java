@@ -5,7 +5,7 @@ import env.Couple;
 import jade.core.behaviours.SimpleBehaviour;
 import mas.abstractAgent;
 import mas.agents.CustomAgent;
-import mas.util.MyGraph;
+import mas.util.Tools;
 
 import java.util.*;
 
@@ -15,90 +15,52 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     private static final long serialVersionUID = 9088209402507795289L;
     private CustomAgent customAgent;
-    //private int behaviorChoice;
-    private int nbexp = 0;
+    private String myName;
 
 
 
     public ExploreBehavior(final CustomAgent customAgent) {
         super(customAgent);
         this.customAgent = customAgent;
+        myName = customAgent.getLocalName();
 
     }
 
     @Override
     public void action() {
-        nbexp ++;
-        //behaviorChoice = 1; // pass to receive par def
-        String myPosition = ((abstractAgent) this.myAgent).getCurrentPosition();
-        //System.out.println( this.myAgent.getLocalName()+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
+        String myPosition = (this.customAgent).getCurrentPosition();
+        //System.out.println( myName+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
         if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
-                customAgent.pushPosition(myPosition);
-                // recupere tous les voisins
-                List<Couple<String, List<Attribute>>> lobs = ( this.customAgent).observe();
-                if (!customAgent.getMap().containsKey(myPosition)) {
-                    String[] fils = new String[lobs.size() - 1];
-                    int i = 0;
-                    for (Couple c : lobs) {
-                        if (!myPosition.equals(c.getLeft())) {
-                            fils[i] = (String) c.getLeft();
-                            i++;
-                        }
-                    }
-                    customAgent.addNode(myPosition, fils);
-                }
-
-
-                String[] fils = customAgent.getMap().get(myPosition);
-                String notvisited = null;
-                for (String s : fils) {
-                    if (!customAgent.getMap().keySet().contains(s)) {
-                        notvisited = s;
-                        break;
-                    }
-                }
-                //System.out.print( this.myAgent.getLocalName()+ " printing the next case where i want to go : ");
-                //System.out.println(notvisited);
-                if (notvisited != null) {
-                    boolean test = (this.customAgent.moveTo(notvisited));
-                    if (!test) {
+                List<Couple<String, List<Attribute>>> lobs = (this.customAgent).observe();
+                customAgent.updateMap(lobs,myPosition);
+                String notVisited = customAgent.getUnvisitedNode(myPosition);
+                //System.out.print( myName+ " printing the next case where i want to go : ");
+                //System.out.println(notVisited);
+                if (notVisited != null) {
+                    boolean canMove = (this.customAgent.moveTo(notVisited));
+                    if (!canMove) {
                         customAgent.clearSteps();
-                        System.out.println(this.myAgent.getLocalName() + "im stuck ");
+                        System.out.println(myName + "im stuck ");
                         Random r= new Random();
                         int moveId=r.nextInt(lobs.size());
-                        while (!((mas.abstractAgent)this.myAgent).moveTo(lobs.get(moveId).getLeft()))
+                        while (!(this.customAgent).moveTo(lobs.get(moveId).getLeft()))
                              moveId=r.nextInt(lobs.size());
-
                     }
                 } else {
-                    //System.out.println( this.myAgent.getLocalName()+ " the agent is now blocked and cant move");
-                    HashMap<String, String[]> myMap = customAgent.getMap();
-                    Set<String> explored = myMap.keySet();
-                    Set<String> unexplored = new HashSet<>();
-                    for (String key : myMap.keySet()) {
-                        String[] tmp = myMap.get(key);
-                        for (String s : tmp) {
-                            unexplored.add(s);
-                        }
-                    }
-                    String[] unexploredAsStringtmp = unexplored.toArray(new String[unexplored.size()]);
-                    for (String s : unexploredAsStringtmp) {
-                        if(explored.contains(s)){
-                            unexplored.remove(s);
-                            }
-                    }
+                    //System.out.println( myName+ " the agent is now blocked and cant move");
+                    Set<String> unexplored = customAgent.geUnexploredNodes();
                     if (unexplored.isEmpty()) {
-                        System.err.println( this.myAgent.getLocalName()+ " : I explored the map");
+                        System.err.println( myName+ " : I explored the map");
                         this.customAgent.clearMap(); //TODO to delete
                     }
-                    String[] unexploredAsString = unexplored.toArray(new String[unexplored.size()]);
-                    if (unexploredAsString.length > 0) {
-                        //System.out.println( this.myAgent.getLocalName()+ " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
-                        //this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]))
-                        this.customAgent.setSteps(MyGraph.dijkstraNoeudPlusProche(myMap,myPosition,unexploredAsString));
+                    if (unexplored.size() > 0) {
+                        //System.out.println( myName + " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
+                        //this.customAgent.setSteps(Tools.dijkstra(myMap, myPosition, unexploredAsString[0]))
+                        this.customAgent.setSteps(Tools.dijkstraNoeudPlusProche(customAgent.getMap()
+                                ,myPosition,unexplored.toArray(new String[unexplored.size()])));
                         String step = this.customAgent.popStep();
-                        if (!((abstractAgent) this.myAgent).moveTo(step)) {
+                        if (!(this.customAgent).moveTo(step)) {
                             this.customAgent.clearSteps();
                         }
                     }
@@ -116,7 +78,6 @@ public class ExploreBehavior extends SimpleBehaviour {
     @Override
     public int onEnd() {
         return 1;
-        //return behaviorChoice;
     }
 
     @Override

@@ -19,7 +19,6 @@ import java.util.List;
 
 import env.EntityType;
 import env.Environment;
-import env.Environment.ENVtype;
 
 
 public class Principal {
@@ -208,7 +207,7 @@ public class Principal {
 		try {
 
 			Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give information to the agent
-			AgentController	ag=c.createNewAgent(agentName,ExploreAgentV2.class.getName(),objtab);
+			AgentController	ag=c.createNewAgent(agentName,ExploreAgent.class.getName(),objtab);
 			agentList.add(ag);
 			System.out.println(agentName+" launched");
 		} catch (StaleProxyException e) {
@@ -220,7 +219,7 @@ public class Principal {
 		try {
 
 			Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give information to the agent
-			AgentController	ag=c.createNewAgent(agentName,ExploreAgentV2.class.getName(),objtab);
+			AgentController	ag=c.createNewAgent(agentName,ExploreAgent.class.getName(),objtab);
 			agentList.add(ag);
 			System.out.println(agentName+" launched");
 		} catch (StaleProxyException e) {
@@ -231,12 +230,12 @@ public class Principal {
         try {
 
             Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give information to the agent
-            AgentController	ag=c.createNewAgent(agentName,ExploreAgentV2.class.getName(),objtab);
+            AgentController	ag=c.createNewAgent(agentName,ExploreAgent.class.getName(),objtab);
             agentList.add(ag);
             System.out.println(agentName+" launched");
         } catch (StaleProxyException e) {
             e.printStackTrace();
-        }*/
+        }
 		//Explorer (no backpack)
 
 		c = containerList.get("container0");
@@ -250,7 +249,7 @@ public class Principal {
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
 		}
-		/*
+
 		//Collector (backPack)
 		c = containerList.get("container0");
 		agentName="Agent3";

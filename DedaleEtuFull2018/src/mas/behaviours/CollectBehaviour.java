@@ -5,7 +5,7 @@ import env.Couple;
 import jade.core.behaviours.SimpleBehaviour;
 import mas.abstractAgent;
 import mas.agents.CustomAgent;
-import mas.util.MyGraph;
+import mas.util.Tools;
 
 import java.util.*;
 
@@ -25,6 +25,7 @@ public class CollectBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
+        /*
         List<Couple<String, List<Attribute>>> lobs = ((abstractAgent) this.myAgent).observe();
         List<Attribute> lattribute= lobs.get(0).getRight();
         for(Attribute a:lattribute){
@@ -46,7 +47,6 @@ public class CollectBehaviour extends SimpleBehaviour {
         //System.out.println( this.myAgent.getLocalName()+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
         if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
-                customAgent.pushPosition(myPosition);
                 // recupere tous les voisins
                 if (!customAgent.getMap().containsKey(myPosition)) {
                     String[] fils = new String[lobs.size() - 1];
@@ -113,8 +113,8 @@ public class CollectBehaviour extends SimpleBehaviour {
 
                     if (unexploredAsString.length > 0) {
                         //System.out.println( this.myAgent.getLocalName()+ " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
-                        //this.customAgent.setSteps(MyGraph.dijkstra(myMap, myPosition, unexploredAsString[0]));
-                        this.customAgent.setSteps(MyGraph.dijkstraNoeudPlusProche(myMap,myPosition,unexploredAsString));
+                        //this.customAgent.setSteps(Tools.dijkstra(myMap, myPosition, unexploredAsString[0]));
+                        this.customAgent.setSteps(Tools.dijkstraNoeudPlusProche(myMap,myPosition,unexploredAsString));
                         String step = this.customAgent.popStep();
                         if (!((abstractAgent) this.myAgent).moveTo(step)) {
                             this.customAgent.clearSteps();
@@ -130,7 +130,7 @@ public class CollectBehaviour extends SimpleBehaviour {
                 this.customAgent.clearSteps();
             }
         }
-        //behaviorEnded = true;
+        //behaviorEnded = true;*/
     }
 
 

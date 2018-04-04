@@ -5,9 +5,7 @@ import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
-import mas.behaviours.ExploreBehavior;
-import mas.behaviours.ReceiveMessageBehaviour;
-import mas.behaviours.SendMessageBehaviour;
+import mas.behaviours.*;
 
 
 public class ExploreAgent extends CustomAgent {
@@ -28,15 +26,33 @@ public class ExploreAgent extends CustomAgent {
         }
 
         FSMBehaviour fsmBehaviour = new FSMBehaviour();
-        fsmBehaviour.registerFirstState(new ExploreBehavior(this),"A");
-        fsmBehaviour.registerState(new SendMessageBehaviour(this),"B");
-        fsmBehaviour.registerState(new ReceiveMessageBehaviour(this),"C");
+        fsmBehaviour.registerFirstState(new ExploreBehavior(this),"Exp");
+        fsmBehaviour.registerState(new CheckMailBehavior(this),"Ckm");
+        fsmBehaviour.registerState(new RequestConnectionBehaviour(this),"Com");
+        fsmBehaviour.registerState(new SendMapBehaviour(this),"Smp");
+        fsmBehaviour.registerState(new ReceiveMapBehaviour(this),"Rmp");
+        fsmBehaviour.registerState(new SendPositionBehavior(this),"Spos");
+        fsmBehaviour.registerState(new ReceiveStepsBehavior(this),"Rstep");
+        fsmBehaviour.registerState(new SendStepsBehavior(this),"Sstep");
 
-        fsmBehaviour.registerTransition("A","C",1); //explore to receive
-        fsmBehaviour.registerTransition("A","B",2); //explore to send
-        fsmBehaviour.registerTransition("B","C",1); //send to receive
-        fsmBehaviour.registerTransition("C","A",1); //receive to explore
-        fsmBehaviour.registerTransition("C","B",2); //receive to send
+
+        fsmBehaviour.registerTransition("Exp","Ckm",1); //explore to check mail
+
+        fsmBehaviour.registerTransition("Ckm","Com",1); //check mail to start com
+        fsmBehaviour.registerTransition("Ckm","Smp",2); //check mail to send map
+
+        fsmBehaviour.registerTransition("Com","Rmp",1); //com to receive
+
+        fsmBehaviour.registerTransition("Smp","Rmp",1); // send to receive
+        fsmBehaviour.registerTransition("Smp","Spos",2); // send to sendpos
+
+        fsmBehaviour.registerTransition("Rmp","Exp",1); // receive to explore
+        fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
+        fsmBehaviour.registerTransition("Rmp","Spos",3); //receive to sendPos
+
+        fsmBehaviour.registerTransition("Spos","Rstep",1); // sendpos to receiveSteps
+        fsmBehaviour.registerTransition("Rstep","Exp",1); // receiveSteps to Exp
+        fsmBehaviour.registerTransition("Sstep","Exp",1); // sendSteps to Exp
 
         addBehaviour(fsmBehaviour);
 
