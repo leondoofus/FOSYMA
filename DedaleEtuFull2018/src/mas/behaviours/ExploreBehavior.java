@@ -36,7 +36,7 @@ public class ExploreBehavior extends SimpleBehaviour {
             if (!myPosition.equals("")) {
                 customAgent.pushPosition(myPosition);
                 // recupere tous les voisins
-                List<Couple<String, List<Attribute>>> lobs = ((abstractAgent) this.myAgent).observe();
+                List<Couple<String, List<Attribute>>> lobs = ( this.customAgent).observe();
                 if (!customAgent.getMap().containsKey(myPosition)) {
                     String[] fils = new String[lobs.size() - 1];
                     int i = 0;
@@ -61,8 +61,9 @@ public class ExploreBehavior extends SimpleBehaviour {
                 //System.out.print( this.myAgent.getLocalName()+ " printing the next case where i want to go : ");
                 //System.out.println(notvisited);
                 if (notvisited != null) {
-                    boolean test = ((abstractAgent) this.myAgent).moveTo(notvisited);
+                    boolean test = (this.customAgent.moveTo(notvisited));
                     if (!test) {
+                        customAgent.clearSteps();
                         System.out.println(this.myAgent.getLocalName() + "im stuck ");
                         Random r= new Random();
                         int moveId=r.nextInt(lobs.size());
@@ -81,14 +82,15 @@ public class ExploreBehavior extends SimpleBehaviour {
                             unexplored.add(s);
                         }
                     }
-                    for(String s : unexplored){
+                    String[] unexploredAsStringtmp = unexplored.toArray(new String[unexplored.size()]);
+                    for (String s : unexploredAsStringtmp) {
                         if(explored.contains(s)){
                             unexplored.remove(s);
-                        }
+                            }
                     }
                     if (unexplored.isEmpty()) {
                         System.err.println( this.myAgent.getLocalName()+ " : I explored the map");
-                        this.customAgent.clearMap();
+                        this.customAgent.clearMap(); //TODO to delete
                     }
                     String[] unexploredAsString = unexplored.toArray(new String[unexplored.size()]);
                     if (unexploredAsString.length > 0) {

@@ -35,6 +35,7 @@ public class ExploreAgentV2 extends CustomAgent {
         fsmBehaviour.registerState(new ReceiveStepsBehavior(this),"Rstep");
         fsmBehaviour.registerState(new SendStepsBehavior(this),"Sstep");
 
+
         fsmBehaviour.registerTransition("Exp","Ckm",1); //explore to check mail
 
         fsmBehaviour.registerTransition("Ckm","Com",1); //check mail to start com

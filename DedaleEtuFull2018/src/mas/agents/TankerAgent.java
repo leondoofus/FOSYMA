@@ -14,7 +14,7 @@ import mas.abstractAgent;
 import mas.behaviours.*;
 
 
-public class DummyTankerAgent extends abstractAgent{
+public class TankerAgent extends abstractAgent{
 
 	/**
 	 * 
@@ -45,7 +45,7 @@ public class DummyTankerAgent extends abstractAgent{
 		}
 
 		//Add the behaviours
-		addBehaviour(new RandomTankerBehaviour(this));
+		addBehaviour(new TankerBehaviour(this));
 
 		System.out.println("the agent "+this.getLocalName()+ " is started");
 
@@ -60,38 +60,3 @@ public class DummyTankerAgent extends abstractAgent{
 }
 
 
-/**************************************
- * 
- * 
- * 				BEHAVIOUR
- * 
- * 
- **************************************/
-
-class RandomTankerBehaviour extends TickerBehaviour{
-	/**
-	 * When an agent choose to move
-	 *  
-	 */
-	private static final long serialVersionUID = 9088209402507795289L;
-
-	public RandomTankerBehaviour (final mas.abstractAgent myagent) {
-		super(myagent, 10000);
-		//super(myagent);
-	}
-
-	@Override
-	public void onTick() {
-		//Example to retrieve the current position
-		String myPosition=((mas.abstractAgent)this.myAgent).getCurrentPosition();
-
-		if (myPosition!=""){
-			//List of observable from the agent's current position
-			List<Couple<String,List<Attribute>>> lobs=((mas.abstractAgent)this.myAgent).observe();//myPosition
-			
-			//DO NOTHING. But it could be a good idea to change that
-		}
-
-	}
-
-}
