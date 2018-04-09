@@ -24,10 +24,9 @@ public class CollectorAgent extends CustomAgent {
         } catch (FIPAException fe){
             fe.printStackTrace();
         }
-        System.out.println("the agent "+this.getLocalName()+ " is started");
 
         FSMBehaviour fsmBehaviour = new FSMBehaviour();
-        fsmBehaviour.registerFirstState(new CollectBehaviour(this),"Exp");
+        fsmBehaviour.registerFirstState(new CollectBehaviour(this),"Col");
         fsmBehaviour.registerState(new CheckMailBehavior(this),"Ckm");
         fsmBehaviour.registerState(new RequestConnectionBehaviour(this),"Com");
         fsmBehaviour.registerState(new SendMapBehaviour(this),"Smp");
@@ -36,7 +35,8 @@ public class CollectorAgent extends CustomAgent {
         fsmBehaviour.registerState(new ReceiveStepsBehavior(this),"Rstep");
         fsmBehaviour.registerState(new SendStepsBehavior(this),"Sstep");
 
-        fsmBehaviour.registerTransition("Exp","Ckm",1); //explore to check mail
+
+        fsmBehaviour.registerTransition("Col","Ckm",1); //explore to check mail
 
         fsmBehaviour.registerTransition("Ckm","Com",1); //check mail to start com
         fsmBehaviour.registerTransition("Ckm","Smp",2); //check mail to send map
@@ -46,15 +46,16 @@ public class CollectorAgent extends CustomAgent {
         fsmBehaviour.registerTransition("Smp","Rmp",1); // send to receive
         fsmBehaviour.registerTransition("Smp","Spos",2); // send to sendpos
 
-        fsmBehaviour.registerTransition("Rmp","Exp",1); // receive to explore
+        fsmBehaviour.registerTransition("Rmp","Col",1); // receive to explore
         fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
         fsmBehaviour.registerTransition("Rmp","Spos",3); //receive to sendPos
 
         fsmBehaviour.registerTransition("Spos","Rstep",1); // sendpos to receiveSteps
-        fsmBehaviour.registerTransition("Rstep","Exp",1); // receiveSteps to Exp
-        fsmBehaviour.registerTransition("Sstep","Exp",1); // sendSteps to Exp
+        fsmBehaviour.registerTransition("Rstep","Col",1); // receiveSteps to Exp
+        fsmBehaviour.registerTransition("Sstep","Col",1); // sendSteps to Exp
 
         addBehaviour(fsmBehaviour);
+
 
     }
 

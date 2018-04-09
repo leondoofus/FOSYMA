@@ -98,6 +98,19 @@ public class CustomAgent extends abstractAgent {
         return unexplored;
     }
 
+    public HashMap<String,List<Attribute>> getNodesAttributes(Set<String> nodes){
+        HashMap<String,List<Attribute>> res = new  HashMap<>();
+        for(String node : nodes ){
+            if(data.containsKey(node)){
+                res.put(node,data.get(node));
+            }
+        }
+        return res;
+    }
+
+
+
+
     public AID getCommunicatingAgent() {
         return comunicatingAgent;
     }
@@ -115,7 +128,6 @@ public class CustomAgent extends abstractAgent {
     public void fusion(HashMap<String,String[]> map2) {
         map.putAll(map2);
     }
-
 
     public String getPreviousbehaviour() {
         return Previousbehaviour;
