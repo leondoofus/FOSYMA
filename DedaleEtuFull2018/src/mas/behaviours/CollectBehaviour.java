@@ -31,11 +31,12 @@ public class CollectBehaviour extends SimpleBehaviour {
         for(Attribute a:lattribute){
             switch (a) {
                 case TREASURE : case DIAMONDS :
+                    /*
                     System.out.println("My treasure type is :"+((mas.abstractAgent)this.myAgent).getMyTreasureType());
                     System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
                     System.out.println("Value of the treasure on the current position: "+a.getName() +": "+ a.getValue());
                     System.out.println("The agent grabbed :"+((mas.abstractAgent)this.myAgent).pick());
-                    System.out.println("the remaining backpack capacity is: "+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    System.out.println("the remaining backpack capacity is: "+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());*/
                     break;
 
                 default:
@@ -47,7 +48,7 @@ public class CollectBehaviour extends SimpleBehaviour {
             if (!myPosition.equals("")) {
                 Set<String> unexplored = customAgent.geUnexploredNodes();
                 if (unexplored.isEmpty()) {
-                    System.out.println("I need more data on nodes");
+                    //System.out.println("I need more data on nodes");
                     randomMove();
                 }else{
                     HashMap<String,List<Attribute>> nodesAttributes = this.customAgent.getNodesAttributes(unexplored);
@@ -67,7 +68,7 @@ public class CollectBehaviour extends SimpleBehaviour {
                         }
                     }
                     if(nodesAttributes.isEmpty()){
-                        System.out.println("I need more data on nodes");
+                        //System.out.println("I need more data on nodes");
                         randomMove();
                     }else{
                         //going to the node with treasure that is the closest to me

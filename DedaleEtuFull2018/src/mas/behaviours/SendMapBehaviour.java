@@ -3,6 +3,7 @@ package mas.behaviours;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 import mas.agents.CustomAgent;
+import mas.agents.TankerAgent;
 
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ public class SendMapBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
+        if (customAgent instanceof TankerAgent) System.err.println("ici----------");
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setSender(this.customAgent.getAID());
         try {

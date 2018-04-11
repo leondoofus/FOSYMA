@@ -48,7 +48,7 @@ public class CollectorAgent extends CustomAgent {
 
         fsmBehaviour.registerTransition("Rmp","Col",1); // receive to explore
         fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
-        fsmBehaviour.registerTransition("Rmp","Spos",3); //receive to sendPos
+        fsmBehaviour.registerTransition("Rmp","Sstep",3); //receive to sendstep
 
         fsmBehaviour.registerTransition("Spos","Rstep",1); // sendpos to receiveSteps
         fsmBehaviour.registerTransition("Rstep","Col",1); // receiveSteps to Exp

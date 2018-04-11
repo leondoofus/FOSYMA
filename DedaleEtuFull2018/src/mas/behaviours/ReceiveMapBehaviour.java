@@ -5,6 +5,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 import mas.agents.CustomAgent;
+import mas.agents.TankerAgent;
 
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
     }
 
     public void action() {
-        System.out.println(this.myAgent.getLocalName() +" Is waiting for a Map");
+        //System.out.println(this.myAgent.getLocalName() +" Is waiting for a Map");
         nextBehaviourSelect = 1;
         ACLMessage received = this.myAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.INFORM),50);
         if(received != null){
@@ -43,15 +44,16 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
     public boolean done() {
         if (nextBehaviourSelect != 1)
             if(customAgent.getPreviousbehaviour().equals("RequestConnectionBehaviour")){
-                nextBehaviourSelect = 3 ; //pass to send Steps
-            }else{
-                nextBehaviourSelect = 2; //pass to send map
+                nextBehaviourSelect = 2 ; //pass to send map
+            }else{ //ca vient de sendmap
+                nextBehaviourSelect = 3; //pass to send step
             }
         customAgent.setPreviousbehaviour("ReceiveMapBehaviour");
         return true;
     }
 
     public int onEnd() {
+        if (customAgent instanceof TankerAgent) System.err.println(nextBehaviourSelect);
         return nextBehaviourSelect;
     }
 }

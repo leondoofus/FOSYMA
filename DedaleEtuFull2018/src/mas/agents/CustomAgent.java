@@ -157,4 +157,10 @@ public class CustomAgent extends abstractAgent {
         return steps.get(0);
     }
 
+    public void printMap (){
+        System.err.println("----------------");
+        for (String s : map.keySet())
+            System.out.print(s + " ");
+        System.err.println("----------------");
+    }
 }

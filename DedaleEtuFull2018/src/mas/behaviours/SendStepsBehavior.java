@@ -23,13 +23,14 @@ public class SendStepsBehavior extends SimpleBehaviour {
         MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE);
         ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {
+
             //System.out.println(this.customAgent.getLocalName() + "<----Position received from " + msg.getSender().getLocalName());
             String receiverPosition = msg.getContent();
 
             msg = new ACLMessage(ACLMessage.PROPAGATE);
             msg.setSender(this.customAgent.getAID());
             HashMap<String,String[]> map = this.customAgent.getMap();
-            ArrayList<String> explored = new ArrayList<>(map.keySet());
+            /*ArrayList<String> explored = new ArrayList<>(map.keySet());
             ArrayList<String> unexplored = new ArrayList<>();
             for (String[] s : map.values())
                 unexplored.addAll(Arrays.asList(s));
@@ -38,24 +39,32 @@ public class SendStepsBehavior extends SimpleBehaviour {
             unexplored.addAll(tmp);
             unexplored.removeAll(explored);
 
-            ArrayList<String> steps = Tools.dijkstraNoeudPlusProche(map,receiverPosition,unexplored.toArray(new String[unexplored.size()]));
-            /*for (String s :  unexplored){
-                steps = Tools.dijkstra(map,this.customAgent.getCurrentPosition(),s);
-                if (!steps.get(0).equals(this.customAgent.getCurrentPosition())){
+            ArrayList<String> steps = Tools.dijkstraNoeudPlusProche(map,receiverPosition,unexplored.toArray(new String[unexplored.size()]));*/
+            ArrayList<String> steps = Tools.dijkstra(map, customAgent.getCurrentPosition(), receiverPosition); //step de sender to receiver
+            ArrayList<String> step1 = new ArrayList<>();
+            ArrayList<String> step2 = new ArrayList<>();
+            for (String s : map.get(customAgent.getCurrentPosition())){
+                if (!s.equals(steps.get(0))){
+                    step1.add(s);
                     break;
                 }
-                else {
-                    steps = new ArrayList<>();
+            }
+            for (String s : map.get(receiverPosition)){
+                if (!s.equals(steps.get(steps.size()-2))){
+                    step2.add(s);
+                    break;
                 }
-            }*/
+            }
+
+
             try {
-                msg.setContentObject (steps);
+                msg.setContentObject (step2);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             msg.addReceiver(this.customAgent.getCommunicatingAgent());
             ((mas.abstractAgent) this.myAgent).sendMessage(msg);
-            this.customAgent.setSteps(Tools.dijkstraNoeudPlusProche(map,this.customAgent.getCurrentPosition(),unexplored.toArray(new String[unexplored.size()])));
+            this.customAgent.setSteps(step1);
         }
     }
 

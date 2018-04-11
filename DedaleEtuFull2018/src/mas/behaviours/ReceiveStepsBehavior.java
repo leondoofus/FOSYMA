@@ -5,6 +5,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 import mas.agents.CustomAgent;
+import mas.agents.TankerAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +33,6 @@ public class ReceiveStepsBehavior extends SimpleBehaviour {
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override

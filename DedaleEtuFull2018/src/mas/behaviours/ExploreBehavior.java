@@ -28,6 +28,7 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
+        //customAgent.printMap();
         String myPosition = (this.customAgent).getCurrentPosition();
         //System.out.println( myName+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
         if (this.customAgent.stepsIsEmpty()) {
@@ -51,7 +52,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     //System.out.println( myName+ " the agent is now blocked and cant move");
                     Set<String> unexplored = customAgent.geUnexploredNodes();
                     if (unexplored.isEmpty()) {
-                        System.err.println( myName+ " : I explored the map");
+                        System.err.println(myName + " : I explored the map");
                         this.customAgent.clearMap(); //TODO to delete
                     }
                     if (unexplored.size() > 0) {

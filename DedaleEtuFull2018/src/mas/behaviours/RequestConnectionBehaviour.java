@@ -5,6 +5,7 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import mas.agents.CustomAgent;
+import mas.agents.TankerAgent;
 
 public class RequestConnectionBehaviour extends SimpleBehaviour {
 

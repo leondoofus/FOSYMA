@@ -36,6 +36,8 @@ public class ExploreAgent extends CustomAgent {
         fsmBehaviour.registerState(new SendStepsBehavior(this),"Sstep");
 
 
+
+
         fsmBehaviour.registerTransition("Exp","Ckm",1); //explore to check mail
 
         fsmBehaviour.registerTransition("Ckm","Com",1); //check mail to start com
@@ -48,7 +50,7 @@ public class ExploreAgent extends CustomAgent {
 
         fsmBehaviour.registerTransition("Rmp","Exp",1); // receive to explore
         fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
-        fsmBehaviour.registerTransition("Rmp","Spos",3); //receive to sendPos
+        fsmBehaviour.registerTransition("Rmp","Sstep",3); //receive to sendstep
 
         fsmBehaviour.registerTransition("Spos","Rstep",1); // sendpos to receiveSteps
         fsmBehaviour.registerTransition("Rstep","Exp",1); // receiveSteps to Exp
