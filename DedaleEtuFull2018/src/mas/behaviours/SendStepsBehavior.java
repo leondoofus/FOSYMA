@@ -61,19 +61,29 @@ public class SendStepsBehavior extends SimpleBehaviour {
                 }
             }
             if (steps.size() == 1){
-                for (String s : map.get(receiverPosition)) {
+                //1) get a couple <Node ID,list of percepts> from the list of observables
+                String moveId = map.get(receiverPosition)[new Random().nextInt(map.get(receiverPosition).length)];
+                while (moveId.equals(steps.get(steps.size() - 2)))
+                    moveId = map.get(receiverPosition)[new Random().nextInt(map.get(receiverPosition).length)];
+                step2.add(moveId);
+                /*for (String s : map.get(receiverPosition)) {
                     if (!s.equals(customAgent.getCurrentPosition())) {
                         step2.add(s);
                         break;
                     }
-                }
+                }*/
             }else {
-                for (String s : map.get(receiverPosition)) {
+                String moveId = map.get(receiverPosition)[new Random().nextInt(map.get(receiverPosition).length)];
+                while (moveId.equals(customAgent.getCurrentPosition()))
+                    moveId = map.get(receiverPosition)[new Random().nextInt(map.get(receiverPosition).length)];
+                step2.add(moveId);
+
+                /*for (String s : map.get(receiverPosition)) {
                     if (!s.equals(steps.get(steps.size() - 2))) {
                         step2.add(s);
                         break;
                     }
-                }
+                }*/
             }
 
             try {
