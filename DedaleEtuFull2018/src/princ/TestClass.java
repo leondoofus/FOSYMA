@@ -26,7 +26,7 @@ public class TestClass {
         */
         //for (String s : mas.util.Tools.dijkstra(map,"I","A"))
         //    System.out.println(s);
-
+        System.out.println(mas.util.Tools.inCommunicationRange(map,"A","E"));
 
     }
 }

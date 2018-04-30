@@ -6,7 +6,6 @@ public class Tools {
     public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
         if (src.equals(dst))
             return new ArrayList<>();
-        System.out.println("aaaaaaaaaaa");
         ArrayList<String> explored = new ArrayList<>(map.keySet());
         ArrayList<String> unexplored = new ArrayList<>();
         for (String[] s : map.values())
@@ -20,7 +19,6 @@ public class Tools {
         ArrayList<String> tmp2 = new ArrayList<>();
         tmp2.add(src);
         graph.add(tmp2);
-        System.out.println("bbbbbbbbbbbb");
         while (!dstInGraph){
             tmp2 = new ArrayList<>();
             for (String higherLevel : graph.get(graph.size()-1)){
@@ -35,7 +33,6 @@ public class Tools {
             }
             graph.add(tmp2);
         }
-        System.out.println("cccccccc");
         ArrayList<String> chemin = new ArrayList<>();
         chemin.add(dst);
         for (int i = graph.size() - 2; i > 0; i--){
@@ -54,7 +51,6 @@ public class Tools {
                 }
             }
         }
-        System.out.println("ddddddddd");
         return chemin;
     }
 
@@ -82,5 +78,27 @@ public class Tools {
                 return true;
         return false;
 
+    }
+
+    public static boolean inCommunicationRange (HashMap<String,String[]> map, String src, String dst)  {
+        ArrayList<ArrayList<String>> graph = new ArrayList<>();
+        ArrayList<String> tmp2 = new ArrayList<>();
+        tmp2.add(src);
+        graph.add(tmp2);
+        for (int i = 0; i < 3; i++){
+            tmp2 = new ArrayList<>();
+            for (String higherLevel : graph.get(graph.size()-1)){
+                if (map.get(higherLevel) != null)
+                    for (String neighbour : map.get(higherLevel)){
+                        if (neighbour.equals(dst))
+                            return true;
+                        if (!inGraph(graph,neighbour) && !inArray(tmp2,neighbour)) {
+                            tmp2.add(neighbour);
+                        }
+                    }
+            }
+            graph.add(tmp2);
+        }
+        return false;
     }
 }

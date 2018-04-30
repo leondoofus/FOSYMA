@@ -20,12 +20,10 @@ public class ReceiveStepsBehavior extends SimpleBehaviour {
     }
 
     public void action() {
-        System.err.println(customAgent.getName() + "deb receive st");
         //System.out.println(this.myAgent.getLocalName() +" Is waiting for Steps");
         final ACLMessage msg = this.customAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE));
         if (msg != null) {
             //System.out.println(this.myAgent.getLocalName() + "<----Result received from " + msg.getSender().getLocalName());
-            System.err.println("wooooooooo");
             try {
                 if (msg.getContentObject() instanceof ArrayList) {
                     customAgent.setSteps((ArrayList<String>) msg.getContentObject());
@@ -34,7 +32,6 @@ public class ReceiveStepsBehavior extends SimpleBehaviour {
                 e.printStackTrace();
             }
         }
-        System.err.println(customAgent.getName() + "fin receive pos");
     }
 
     @Override

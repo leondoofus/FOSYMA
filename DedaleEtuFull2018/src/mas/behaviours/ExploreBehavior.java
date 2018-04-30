@@ -42,7 +42,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     boolean canMove = (this.customAgent.moveTo(notVisited));
                     if (!canMove) {
                         customAgent.clearSteps();
-                        System.out.println(myName + "im stuck ");
+                        System.out.println(myName + "I'm stuck ");
                         Random r= new Random();
                         int moveId=r.nextInt(lobs.size());
                         while (!(this.customAgent).moveTo(lobs.get(moveId).getLeft()))
@@ -53,7 +53,11 @@ public class ExploreBehavior extends SimpleBehaviour {
                     Set<String> unexplored = customAgent.geUnexploredNodes();
                     if (unexplored.isEmpty()) {
                         System.err.println(myName + " : I explored the map");
-                        this.customAgent.die();
+                        //Random move from the current position
+                        Random r= new Random();
+                        int moveId=r.nextInt(lobs.size());
+                        customAgent.moveTo(lobs.get(moveId).getLeft());
+                        //this.customAgent.die();
                         //this.customAgent.clearMap(); //TODO to delete
                     }
                     if (unexplored.size() > 0) {
