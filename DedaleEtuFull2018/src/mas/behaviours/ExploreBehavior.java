@@ -53,7 +53,8 @@ public class ExploreBehavior extends SimpleBehaviour {
                     Set<String> unexplored = customAgent.geUnexploredNodes();
                     if (unexplored.isEmpty()) {
                         System.err.println(myName + " : I explored the map");
-                        this.customAgent.clearMap(); //TODO to delete
+                        this.customAgent.die();
+                        //this.customAgent.clearMap(); //TODO to delete
                     }
                     if (unexplored.size() > 0) {
                         //System.out.println( myName + " my destination : " + unexploredAsString[0] + " my position : " + myPosition);

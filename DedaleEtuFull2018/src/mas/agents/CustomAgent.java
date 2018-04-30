@@ -163,4 +163,10 @@ public class CustomAgent extends abstractAgent {
             System.out.print(s + " ");
         System.err.println("----------------");
     }
+
+    public void die(){
+        System.err.println("Agent-1 "+getAID().getLocalName()+" terminating.");
+        takeDown();
+        this.doDelete();
+    }
 }

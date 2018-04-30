@@ -20,15 +20,13 @@ public class SendPositionBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
+        System.err.println(customAgent.getName() + "deb send pos");
         ACLMessage msg = new ACLMessage(ACLMessage.PROPAGATE);
         msg.setSender(this.customAgent.getAID());
-        try {
-            msg.setContentObject(this.customAgent.getCurrentPosition());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        msg.setContent(this.customAgent.getCurrentPosition());
         msg.addReceiver(this.customAgent.getCommunicatingAgent());
         ((mas.abstractAgent) this.myAgent).sendMessage(msg);
+        System.err.println(customAgent.getName() + "fin send pos");
     }
 
     @Override

@@ -5,7 +5,8 @@ import java.util.*;
 public class Tools {
     public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
         if (src.equals(dst))
-            return new ArrayList<String>();
+            return new ArrayList<>();
+        System.out.println("aaaaaaaaaaa");
         ArrayList<String> explored = new ArrayList<>(map.keySet());
         ArrayList<String> unexplored = new ArrayList<>();
         for (String[] s : map.values())
@@ -19,6 +20,7 @@ public class Tools {
         ArrayList<String> tmp2 = new ArrayList<>();
         tmp2.add(src);
         graph.add(tmp2);
+        System.out.println("bbbbbbbbbbbb");
         while (!dstInGraph){
             tmp2 = new ArrayList<>();
             for (String higherLevel : graph.get(graph.size()-1)){
@@ -33,6 +35,7 @@ public class Tools {
             }
             graph.add(tmp2);
         }
+        System.out.println("cccccccc");
         ArrayList<String> chemin = new ArrayList<>();
         chemin.add(dst);
         for (int i = graph.size() - 2; i > 0; i--){
@@ -51,6 +54,7 @@ public class Tools {
                 }
             }
         }
+        System.out.println("ddddddddd");
         return chemin;
     }
 
