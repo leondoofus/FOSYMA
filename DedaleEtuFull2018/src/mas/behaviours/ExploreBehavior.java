@@ -42,20 +42,19 @@ public class ExploreBehavior extends SimpleBehaviour {
                     boolean canMove = (this.customAgent.moveTo(notVisited));
                     if (!canMove) {
                         customAgent.clearSteps();
-                        System.out.println(myName + "I'm stuck ");
+                        //System.out.println(myName + "I'm stuck ");
 
                     }
                 } else {
                     //System.out.println( myName+ " the agent is now blocked and cant move");
-                    Set<String> unexplored = customAgent.geUnexploredNodes();
-                    if (unexplored.isEmpty()) {
+                    if (customAgent.isMapCompleted()) {
                         //System.err.println(myName + " : I explored the map");
                         //Random move from the current position
                         randomMove(lobs);
                         //this.customAgent.die();
                         //this.customAgent.clearMap(); //TODO to delete
-                    }
-                    if (unexplored.size() > 0) {
+                    } else {
+                        Set<String> unexplored = customAgent.getUnexploredNodes();
                         //System.out.println( myName + " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
                         //this.customAgent.setSteps(Tools.dijkstra(myMap, myPosition, unexploredAsString[0]))
                         this.customAgent.setSteps(Tools.dijkstraNoeudPlusProche(customAgent.getMap()

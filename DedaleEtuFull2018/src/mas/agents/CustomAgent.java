@@ -8,11 +8,13 @@ import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
+import jade.lang.acl.ACLMessage;
 import mas.abstractAgent;
 
 import java.util.*;
 
-public class CustomAgent extends abstractAgent {
+public class CustomAgent
+        extends abstractAgent {
 
     /**
      *
@@ -24,6 +26,7 @@ public class CustomAgent extends abstractAgent {
     private AID comunicatingAgent;
     private String previousBehaviour;
     private ArrayList<String> steps;
+    private boolean mapCompleted;
     private String tankerPos = null;
 
     protected void setup(){
@@ -31,6 +34,7 @@ public class CustomAgent extends abstractAgent {
         data = new HashMap<>();
         map = new HashMap<>();
         steps = new ArrayList<>();
+        mapCompleted = false;
         final Object[] args = getArguments();
         if(args[0]!=null){
             deployAgent((Environment) args[0]);
@@ -43,7 +47,8 @@ public class CustomAgent extends abstractAgent {
     public DFAgentDescription[] getAgents() {
         DFAgentDescription dfd = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
-        sd.setType("explorer");
+        //return all agents
+        //sd.setType("explorer");
         dfd.addServices(sd);
         DFAgentDescription [] result = new DFAgentDescription[0];
         try {
@@ -56,6 +61,7 @@ public class CustomAgent extends abstractAgent {
     }
 
     public void updateMap( List<Couple<String, List<Attribute>>> lobs,String myPosition){
+        if (mapCompleted) return;
         if (!map.containsKey(myPosition)) {
             String[] sons = new String[lobs.size() - 1];
             int i = 0;
@@ -68,6 +74,7 @@ public class CustomAgent extends abstractAgent {
             }
             map.put(myPosition, sons);
         }
+        if (getUnexploredNodes().isEmpty()) mapCompleted = true;
     }
 
     public String getUnvisitedNode(String myPosition){
@@ -83,7 +90,8 @@ public class CustomAgent extends abstractAgent {
     }
 
 
-    public  Set<String> geUnexploredNodes(){
+    public  Set<String> getUnexploredNodes(){
+        if (mapCompleted) return null;
         Set<String> explored = map.keySet();
         Set<String> unexplored = new HashSet<>();
         for (String key : map.keySet()) {
@@ -124,8 +132,12 @@ public class CustomAgent extends abstractAgent {
     public void clearMap () { map.clear(); }
 
     public void fusion(HashMap<String,String[]> map2) {
+        if (mapCompleted) return;
         map.putAll(map2);
+        if (getUnexploredNodes().isEmpty()) mapCompleted = true;
     }
+
+    public boolean isMapCompleted(){ return mapCompleted; }
 
     public String getPreviousBehaviour() {
         return previousBehaviour;
@@ -168,11 +180,21 @@ public class CustomAgent extends abstractAgent {
         this.doDelete();
     }
 
-    public boolean knowTanker(){
-        return tankerPos != null;
-    }
-
     public String getTankerPos(){
         return tankerPos;
+    }
+
+    public void setTankerPos(String pos){ tankerPos = pos; }
+
+    public void broadcastTanker (){
+        DFAgentDescription[] allAgents = getAgents();
+        ACLMessage msg = new ACLMessage(ACLMessage.SUBSCRIBE);
+        msg.setSender(getAID());
+        msg.setContent(getTankerPos());
+        for(DFAgentDescription agent: allAgents){
+            if (!agent.getName().getName().equals(getName()))
+                msg.addReceiver(agent.getName());
+        }
+        sendMessage(msg);
     }
 }

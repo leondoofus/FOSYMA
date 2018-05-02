@@ -5,8 +5,6 @@ import env.Couple;
 import jade.core.behaviours.SimpleBehaviour;
 import mas.abstractAgent;
 import mas.agents.CollectorAgent;
-import mas.agents.CustomAgent;
-import mas.agents.ExploreAgent;
 import mas.util.Tools;
 
 import java.util.*;
@@ -49,7 +47,7 @@ public class CollectBehaviour extends SimpleBehaviour {
         String myPosition = (this.customAgent).getCurrentPosition();
         if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
-                Set<String> unexplored = customAgent.geUnexploredNodes();
+                Set<String> unexplored = customAgent.getUnexploredNodes();
                 if (unexplored.isEmpty()) {
                     //System.out.println("I need more data on nodes");
                     randomMove();
@@ -111,21 +109,20 @@ public class CollectBehaviour extends SimpleBehaviour {
                     boolean canMove = (this.collectorAgent.moveTo(notVisited));
                     if (!canMove) {
                         collectorAgent.clearSteps();
-                        System.out.println(myName + "I'm stuck ");
+                        //System.out.println(myName + "I'm stuck ");
 
                     }
                 } else {
-                    Set<String> unexplored = collectorAgent.geUnexploredNodes();
-                    if (unexplored.isEmpty()) {
+                    if (collectorAgent.isMapCompleted()) {
                         if (collectorAgent.getBackPackFreeSpace() == 0){
-                            if (collectorAgent.knowTanker())
+                            if (collectorAgent.getTankerPos() != null)
                                 collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getTankerPos()));
                         } else {
                             if (collectorAgent.treasureCasesIsEmpty())
                                 if (collectorAgent.getInitBackpackCapacity() == collectorAgent.getBackPackFreeSpace())
                                     randomMove(lobs);
                                 else
-                                    if (collectorAgent.knowTanker())
+                                    if (collectorAgent.getTankerPos() != null)
                                         collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getTankerPos()));
                                     else
                                         randomMove(lobs);

@@ -17,28 +17,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Principal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/princ/Principal.java">
+      <file leaf-file-name="Tools.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mas/util/Tools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="216" column="0" lean-forward="true" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
+            <state relative-caret-position="266">
+              <caret line="112" column="26" lean-forward="true" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="26" />
               <folding>
-                <element signature="method#emptyPlatform#0;class#Principal#0" expanded="false" />
-                <element signature="method#createContainers#0;class#Principal#0" expanded="false" />
-                <element signature="method#createMonitoringAgents#0;class#Principal#0" expanded="false" />
+                <element signature="method#dijkstraNoeudPlusProche#0;class#Tools#0" />
+                <element signature="method#inGraph#0;class#Tools#0" />
+                <element signature="method#inArray#0;class#Tools#0" />
+                <element signature="method#inCommunicationRange#0;class#Tools#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CollectBehaviour.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CollectBehaviour.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mas/behaviours/CollectBehaviour.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="148" column="27" lean-forward="false" selection-start-line="148" selection-start-column="27" selection-end-line="148" selection-end-column="27" />
+            <state relative-caret-position="-483">
+              <caret line="124" column="77" selection-start-line="124" selection-start-column="77" selection-end-line="124" selection-end-column="77" />
               <folding>
-                <element signature="e#8199#8200#0" expanded="true" />
-                <element signature="e#8223#8224#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,29 +47,44 @@
       <file leaf-file-name="ExploreBehavior.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="75" column="5" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="75" selection-end-column="5" />
+            <state relative-caret-position="251">
+              <caret line="72" column="13" lean-forward="true" selection-start-line="69" selection-start-column="12" selection-end-line="72" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TankerBehaviour.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mas/behaviours/TankerBehaviour.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
               <folding>
-                <element signature="e#3182#3183#0" expanded="true" />
-                <element signature="e#3206#3207#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CollectorAgent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mas/agents/CollectorAgent.java">
+      <file leaf-file-name="CheckMailBehavior.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/mas/behaviours/CheckMailBehavior.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="94" column="50" lean-forward="false" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
+            <state relative-caret-position="211">
+              <caret line="24" column="77" lean-forward="true" selection-start-line="24" selection-start-column="77" selection-end-line="24" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BroadcastBehaviour.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mas/behaviours/BroadcastBehaviour.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
               <folding>
-                <element signature="method#setup#0;class#CollectorAgent#0" expanded="false" />
-                <element signature="e#3236#3237#0" expanded="true" />
-                <element signature="e#3284#3285#0" expanded="true" />
-                <element signature="e#3327#3328#0" expanded="true" />
-                <element signature="e#3370#3371#0" expanded="true" />
-                <element signature="e#3414#3415#0" expanded="true" />
-                <element signature="e#3473#3474#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#654#655#0" expanded="true" />
+                <element signature="e#699#700#0" expanded="true" />
+                <element signature="e#1108#1109#0" expanded="true" />
+                <element signature="e#1132#1133#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,24 +93,8 @@
       <file leaf-file-name="CustomAgent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mas/agents/CustomAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="175" column="25" lean-forward="false" selection-start-line="175" selection-start-column="25" selection-end-line="175" selection-end-column="25" />
-              <folding>
-                <element signature="e#4725#4726#0" expanded="true" />
-                <element signature="e#4765#4766#0" expanded="true" />
-                <element signature="e#4800#4801#0" expanded="true" />
-                <element signature="e#4832#4833#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tools.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mas/util/Tools.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="386">
+              <caret line="197" column="8" selection-start-line="197" selection-start-column="8" selection-end-line="197" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -111,9 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>got</find>
-      <find>cpt</find>
-      <find>une</find>
       <find>moveTo</find>
       <find>Agent1</find>
       <find>dij</find>
@@ -141,15 +137,13 @@
       <find>Tool</find>
       <find>Set</find>
       <find>print</find>
+      <find>fus</find>
+      <find>TankerAge</find>
+      <find>explo</find>
     </findStrings>
     <replaceStrings>
       <replace>Tnk</replace>
     </replaceStrings>
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -169,23 +163,26 @@
         <option value="$PROJECT_DIR$/src/mas/agents/ExploreAgentV2.java" />
         <option value="$PROJECT_DIR$/src/mas/agents/DummyTankerAgent.java" />
         <option value="$PROJECT_DIR$/src/mas/dummyagents/DummyExploAgent.java" />
-        <option value="$PROJECT_DIR$/src/mas/behaviours/RequestConnectionBehaviour.java" />
-        <option value="$PROJECT_DIR$/src/mas/behaviours/SendMapBehaviour.java" />
-        <option value="$PROJECT_DIR$/src/mas/behaviours/TankerBehaviour.java" />
-        <option value="$PROJECT_DIR$/src/mas/behaviours/CheckMailBehavior.java" />
-        <option value="$PROJECT_DIR$/src/mas/behaviours/ReceiveMapBehaviour.java" />
         <option value="$PROJECT_DIR$/src/princ/TestClass.java" />
-        <option value="$PROJECT_DIR$/src/mas/util/Tools.java" />
         <option value="$PROJECT_DIR$/src/mas/behaviours/SendPositionBehavior.java" />
-        <option value="$PROJECT_DIR$/src/princ/Principal.java" />
         <option value="$PROJECT_DIR$/src/mas/behaviours/ReceiveStepsBehavior.java" />
         <option value="$PROJECT_DIR$/src/mas/behaviours/SendStepsBehavior.java" />
-        <option value="$PROJECT_DIR$/src/mas/agents/TankerAgent.java" />
         <option value="$PROJECT_DIR$/src/mas/agents/ExploreAgent.java" />
-        <option value="$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java" />
-        <option value="$PROJECT_DIR$/src/mas/agents/CustomAgent.java" />
         <option value="$PROJECT_DIR$/src/mas/agents/CollectorAgent.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/ReceiveMapBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/ReceiveMapTankerBehavior.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/RequestConnectionBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/SendMapBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/ReceiveMapTankerBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/princ/Principal.java" />
+        <option value="$PROJECT_DIR$/src/mas/util/Tools.java" />
+        <option value="$PROJECT_DIR$/src/mas/agents/TankerAgent.java" />
         <option value="$PROJECT_DIR$/src/mas/behaviours/CollectBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/mas/agents/CustomAgent.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/BroadcastBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/TankerBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/mas/behaviours/CheckMailBehavior.java" />
       </list>
     </option>
   </component>
@@ -195,30 +192,20 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="229" />
-    <option name="y" value="145" />
-    <option name="width" value="938" />
-    <option name="height" value="899" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1" />
+    <option name="y" value="-4" />
+    <option name="width" value="1368" />
+    <option name="height" value="773" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,13 +243,6 @@
               <item name="DedaleEtuFull2018" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="mas" type="462c0819:PsiDirectoryNode" />
-              <item name="dummyagents" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DedaleEtuFull2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DedaleEtuFull2018" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="mas" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -275,7 +255,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -311,86 +290,45 @@
   </component>
   <component name="RunManager" selected="Application.Principal">
     <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
     </configuration>
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="princ.Principal" />
+      <module name="DedaleEtuFull2018" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="mas.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="princ.Principal" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="DedaleEtuFull2018" />
-      <envs />
     </configuration>
     <configuration name="TestClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="princ.TestClass" />
+      <module name="DedaleEtuFull2018" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="mas.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="princ.TestClass" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="DedaleEtuFull2018" />
-      <envs />
     </configuration>
     <configuration name="TestCreateGraphGS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="test.TestCreateGraphGS" />
+      <module name="DedaleEtuFull2018" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="test.TestCreateGraphGS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="DedaleEtuFull2018" />
-      <envs />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -400,24 +338,13 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
-      <envs />
       <patterns />
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
@@ -430,17 +357,21 @@
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
@@ -448,20 +379,17 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Application.Principal" />
-      <item index="1" class="java.lang.String" itemvalue="Application.TestClass" />
-      <item index="2" class="java.lang.String" itemvalue="Application.TestCreateGraphGS" />
+    <list>
+      <item itemvalue="Application.Principal" />
+      <item itemvalue="Application.TestClass" />
+      <item itemvalue="Application.TestCreateGraphGS" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.Principal" />
-        <item index="1" class="java.lang.String" itemvalue="Application.TestClass" />
+      <list>
+        <item itemvalue="Application.Principal" />
+        <item itemvalue="Application.TestClass" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -487,77 +415,79 @@
       <workItem from="1522753765488" duration="4183000" />
       <workItem from="1522869283442" duration="5503000" />
       <workItem from="1523273353090" duration="6350000" />
+      <workItem from="1525279260552" duration="9849000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58782000" />
+    <option name="totallyTimeSpent" value="68631000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="27" width="1922" height="1174" extended-state="7" />
+    <frame x="-1" y="-4" width="1368" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26459143" sideWeight="0.48125" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2266537" sideWeight="0.54375" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2266537" sideWeight="0.45625" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18958333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873806" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4795022" weight="0.26365054" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5475842" side_tool="true" visible="true" weight="0.2698908" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.45241582" weight="0.2698908" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18887262" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4941435" weight="0.32761312" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Python Console" order="9" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.090466924" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43314287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23229167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32879376" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.43314287" />
+      <window_info id="Image Layers" order="6" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" visible="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3288889" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.090466924" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23229167" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -570,21 +500,14 @@
     <breakpoint-manager>
       <option name="time" value="13" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/mas/util/Tools.java" />
-    <entry file="file://$PROJECT_DIR$/src/mas/util/ShortestPath.java" />
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SendMessageBehaviour.java" />
     <entry file="file://$PROJECT_DIR$/src/mas/util/NodeUnknownException.java" />
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1496">
-          <caret line="100" column="50" lean-forward="false" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
-          <folding>
-            <element signature="e#3182#3183#0" expanded="true" />
-            <element signature="e#3206#3207#0" expanded="true" />
-          </folding>
+          <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -593,19 +516,14 @@
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/RandomWalkBehaviour.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1496">
-          <caret line="100" column="50" lean-forward="false" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
-          <folding>
-            <element signature="e#3182#3183#0" expanded="true" />
-            <element signature="e#3206#3207#0" expanded="true" />
-          </folding>
+          <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -622,7 +540,7 @@
     <entry file="file://$PROJECT_DIR$/src/mas/dummyagents/DummyExploAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -636,27 +554,15 @@
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1584">
-          <caret line="100" column="50" lean-forward="false" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
-          <folding>
-            <element signature="e#3182#3183#0" expanded="true" />
-            <element signature="e#3206#3207#0" expanded="true" />
-          </folding>
+          <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/princ/Principal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/princ/Principal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ContainerBehaviour.java" />
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ContainerBehavior.java" />
@@ -665,7 +571,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/TestCreateGraphGS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="889">
-          <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+          <caret line="67" column="36" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -674,7 +580,7 @@
     <entry file="jar://$PROJECT_DIR$/lib/jade/jade.jar!/jade/core/behaviours/Behaviour.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="696">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
         </state>
       </provider>
     </entry>
@@ -682,93 +588,48 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="35" column="44" lean-forward="true" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setup#0;class#ExploreAgent#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mas/util/ShortestPath.java" />
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ReceiveMessageBehaviour.java" />
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SendMessageBehaviour.java" />
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/RequestConnectionBehaviour.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" column="32" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/CheckMailBehavior.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="51" column="34" lean-forward="false" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/TankerBehaviour.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1136#1137#0" expanded="false" />
-            <element signature="e#1160#1161#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SayHello.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="39" column="12" lean-forward="false" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SendMapBehaviour.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="38" column="33" lean-forward="false" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SendPositionBehavior.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="26" column="60" lean-forward="false" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ReceiveMapBehaviour.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="43" column="27" lean-forward="false" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/princ/TestClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
-          <caret line="28" column="73" lean-forward="false" selection-start-line="28" selection-start-column="73" selection-end-line="28" selection-end-column="73" />
-          <folding />
+          <caret line="28" column="73" selection-start-line="28" selection-start-column="73" selection-end-line="28" selection-end-column="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/agents/TankerAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/mas/dummyagents/DummyCollectorAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="62" column="40" lean-forward="false" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="459">
+          <caret line="122" column="191" selection-start-line="122" selection-start-column="176" selection-end-line="122" selection-end-column="191" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/dummyagents/DummyExploAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-216">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/RandomWalkBehaviour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="108" column="29" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ReceiveStepsBehavior.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="23" column="114" lean-forward="false" selection-start-line="23" selection-start-column="114" selection-end-line="23" selection-end-column="114" />
+        <state relative-caret-position="80">
+          <caret line="23" column="114" selection-start-line="23" selection-start-column="114" selection-end-line="23" selection-end-column="114" />
           <folding>
             <element signature="e#1339#1340#0" expanded="true" />
             <element signature="e#1392#1393#0" expanded="true" />
@@ -776,10 +637,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SayHello.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-96">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SendPositionBehavior.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SendStepsBehavior.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="62" column="23" lean-forward="false" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+        <state relative-caret-position="980">
+          <caret line="84" selection-start-line="84" selection-end-line="86" selection-end-column="34" />
           <folding>
             <element signature="e#4845#4846#0" expanded="true" />
             <element signature="e#4869#4870#0" expanded="true" />
@@ -787,109 +662,142 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/RandomWalkBehaviour.java">
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ReceiveMapBehaviour.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="108" column="29" lean-forward="false" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="399">
+          <caret line="57" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/dummyagents/DummyCollectorAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/SendMapBehaviour.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="122" column="191" lean-forward="false" selection-start-line="122" selection-start-column="176" selection-end-line="122" selection-end-column="191" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/agents/ExploreAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setup#0;class#ExploreAgent#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/dummyagents/DummyExploAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="75" column="5" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="75" selection-end-column="5" />
-          <folding>
-            <element signature="e#3182#3183#0" expanded="true" />
-            <element signature="e#3206#3207#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/agents/CustomAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="175" column="25" lean-forward="false" selection-start-line="175" selection-start-column="25" selection-end-line="175" selection-end-column="25" />
-          <folding>
-            <element signature="e#4725#4726#0" expanded="true" />
-            <element signature="e#4765#4766#0" expanded="true" />
-            <element signature="e#4800#4801#0" expanded="true" />
-            <element signature="e#4832#4833#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="31" column="63" selection-start-line="31" selection-start-column="63" selection-end-line="31" selection-end-column="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/princ/Principal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="216" column="0" lean-forward="true" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="36" column="57" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ReceiveMapTankerBehaviour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="23" column="69" selection-start-line="23" selection-start-column="69" selection-end-line="23" selection-end-column="69" />
           <folding>
-            <element signature="method#emptyPlatform#0;class#Principal#0" expanded="false" />
-            <element signature="method#createContainers#0;class#Principal#0" expanded="false" />
-            <element signature="method#createMonitoringAgents#0;class#Principal#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1983#1984#0" expanded="true" />
+            <element signature="e#2025#2026#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/RequestConnectionBehaviour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="27" column="60" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="27" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/agents/ExploreAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setup#0;class#ExploreAgent#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/agents/CollectorAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+          <folding>
+            <element signature="e#3473#3474#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mas/util/Tools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mas/agents/CollectorAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="94" column="50" lean-forward="false" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
+        <state relative-caret-position="266">
+          <caret line="112" column="26" lean-forward="true" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="26" />
           <folding>
-            <element signature="method#setup#0;class#CollectorAgent#0" expanded="false" />
-            <element signature="e#3236#3237#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
-            <element signature="e#3327#3328#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3414#3415#0" expanded="true" />
-            <element signature="e#3473#3474#0" expanded="true" />
+            <element signature="method#dijkstraNoeudPlusProche#0;class#Tools#0" />
+            <element signature="method#inGraph#0;class#Tools#0" />
+            <element signature="method#inArray#0;class#Tools#0" />
+            <element signature="method#inCommunicationRange#0;class#Tools#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/CollectBehaviour.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="148" column="27" lean-forward="false" selection-start-line="148" selection-start-column="27" selection-end-line="148" selection-end-column="27" />
+        <state relative-caret-position="-483">
+          <caret line="124" column="77" selection-start-line="124" selection-start-column="77" selection-end-line="124" selection-end-column="77" />
           <folding>
-            <element signature="e#8199#8200#0" expanded="true" />
-            <element signature="e#8223#8224#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/agents/TankerAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="1" selection-start-line="1" selection-end-line="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/BroadcastBehaviour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#654#655#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#1108#1109#0" expanded="true" />
+            <element signature="e#1132#1133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/agents/CustomAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="197" column="8" selection-start-line="197" selection-start-column="8" selection-end-line="197" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/ExploreBehavior.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="72" column="13" lean-forward="true" selection-start-line="69" selection-start-column="12" selection-end-line="72" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/TankerBehaviour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mas/behaviours/CheckMailBehavior.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="24" column="77" lean-forward="true" selection-start-line="24" selection-start-column="77" selection-end-line="24" selection-end-column="77" />
         </state>
       </provider>
     </entry>

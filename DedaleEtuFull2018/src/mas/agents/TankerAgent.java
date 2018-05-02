@@ -11,8 +11,6 @@ import mas.behaviours.*;
 
 public class TankerAgent extends CustomAgent{
 
-	private boolean placed = false;
-
 	/**
 	 * 
 	 */
@@ -44,33 +42,12 @@ public class TankerAgent extends CustomAgent{
 
         FSMBehaviour fsmBehaviour = new FSMBehaviour();
         fsmBehaviour.registerFirstState(new TankerBehaviour(this),"Tnk");
-        fsmBehaviour.registerState(new CheckMailBehavior(this),"Ckm");
-        fsmBehaviour.registerState(new RequestConnectionBehaviour(this),"Com");
-        fsmBehaviour.registerState(new SendMapBehaviour(this),"Smp");
-        fsmBehaviour.registerState(new ReceiveMapBehaviour(this),"Rmp");
-        fsmBehaviour.registerState(new SendPositionBehavior(this),"Spos");
-        fsmBehaviour.registerState(new ReceiveStepsBehavior(this),"Rstep");
-        fsmBehaviour.registerState(new SendStepsBehavior(this),"Sstep");
-
-
-        fsmBehaviour.registerTransition("Tnk","Ckm",1); //explore to check mail
-
-        fsmBehaviour.registerTransition("Ckm","Com",1); //check mail to start com
-        fsmBehaviour.registerTransition("Ckm","Smp",2); //check mail to send map
-
-        fsmBehaviour.registerTransition("Com","Rmp",1); //com to receive
-
-        fsmBehaviour.registerTransition("Smp","Rmp",1); // send to receive
-        fsmBehaviour.registerTransition("Smp","Spos",2); // send to sendpos
-
-        fsmBehaviour.registerTransition("Rmp","Tnk",1); // receive to explore
-        fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
-        fsmBehaviour.registerTransition("Rmp","Sstep",3); //receive to sendstep
-
-        fsmBehaviour.registerTransition("Spos","Rstep",1); // sendpos to receiveSteps
-        fsmBehaviour.registerTransition("Rstep","Tnk",1); // receiveSteps to Exp
-        fsmBehaviour.registerTransition("Sstep","Tnk",1); // sendSteps to Exp
-
+        fsmBehaviour.registerState(new ReceiveMapTankerBehaviour(this),"Rcv");
+        fsmBehaviour.registerState(new BroadcastBehaviour(this),"Brc");
+        fsmBehaviour.registerTransition("Tnk","Rcv",1);
+        fsmBehaviour.registerTransition("Rcv","Tnk",1);
+        fsmBehaviour.registerTransition("Tnk","Brc",2);
+        fsmBehaviour.registerTransition("Brc","Tnk",1);
         addBehaviour(fsmBehaviour);
 
 

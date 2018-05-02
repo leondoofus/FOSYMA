@@ -1,9 +1,9 @@
 package mas.behaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import mas.agents.CustomAgent;
-import mas.agents.TankerAgent;
 
 import java.io.IOException;
 
@@ -21,7 +21,6 @@ public class SendMapBehaviour extends SimpleBehaviour {
 
     @Override
     public void action() {
-        if (customAgent instanceof TankerAgent) System.err.println("ici----------");
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setSender(this.customAgent.getAID());
         try {
@@ -29,7 +28,12 @@ public class SendMapBehaviour extends SimpleBehaviour {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        msg.addReceiver(this.customAgent.getCommunicatingAgent());
+        //Broadcast map
+        for(DFAgentDescription agent: customAgent.getAgents()){
+            if (!agent.getName().getName().equals(myAgent.getName()))
+                msg.addReceiver(agent.getName());
+        }
+        //msg.addReceiver(this.customAgent.getCommunicatingAgent());
         ((mas.abstractAgent) this.myAgent).sendMessage(msg);
     }
 

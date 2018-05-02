@@ -101,4 +101,32 @@ public class Tools {
         }
         return false;
     }
+
+
+    /*
+     * Search for a node of which each level from 1 to depth has at least level*width neighbours
+     */
+    public static String centralize (HashMap<String, String[]> map, int depth, int width){
+        for (String key : map.keySet()) {
+            ArrayList<ArrayList<String>> graph = new ArrayList<>();
+            ArrayList<String> tmp2 = new ArrayList<>();
+            tmp2.add(key);
+            graph.add(tmp2);
+            for (int i = 1; i <= depth; i++){
+                tmp2 = new ArrayList<>();
+                for (String higherLevel : graph.get(graph.size()-1)){
+                    if (map.get(higherLevel) != null)
+                        for (String neighbour : map.get(higherLevel)){
+                            if (!inGraph(graph,neighbour) && !inArray(tmp2,neighbour)) {
+                                tmp2.add(neighbour);
+                            }
+                        }
+                }
+                if(tmp2.size() < i*width) break;
+                graph.add(tmp2);
+            }
+            if (graph.size()-1 == depth) return key;
+        }
+        return null;
+    }
 }

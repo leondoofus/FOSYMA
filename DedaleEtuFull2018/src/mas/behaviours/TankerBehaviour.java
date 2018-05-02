@@ -3,20 +3,22 @@ package mas.behaviours;
 import env.Attribute;
 import env.Couple;
 import jade.core.behaviours.SimpleBehaviour;
-import mas.agents.CustomAgent;
+import mas.abstractAgent;
+import mas.agents.TankerAgent;
+import mas.util.Tools;
 
 import java.util.List;
+import java.util.Random;
 
 public class TankerBehaviour extends SimpleBehaviour {
 
-    private static final long serialVersionUID = 9088209402507795289L;
-    private CustomAgent customAgent;
+    private TankerAgent tankerAgent;
     private String myName;
 
-    public TankerBehaviour (final CustomAgent customAgent) {
-        super(customAgent);
-        this.customAgent = customAgent;
-        myName = customAgent.getLocalName();
+    public TankerBehaviour (final TankerAgent tankerAgent) {
+        super(tankerAgent);
+        this.tankerAgent = tankerAgent;
+        myName = tankerAgent.getLocalName();
     }
 
     @Override
@@ -24,25 +26,53 @@ public class TankerBehaviour extends SimpleBehaviour {
         //Example to retrieve the current position
         String myPosition=((mas.abstractAgent)this.myAgent).getCurrentPosition();
 
-        if (myPosition!=""){
-            //List of observable from the agent's current position
-            List<Couple<String,List<Attribute>>> lobs=((mas.abstractAgent)this.myAgent).observe();//myPosition
-            customAgent.updateMap(lobs,myPosition);
-            //customAgent.printMap();
-            //DO NOTHING. But it could be a good idea to change that
+        if (tankerAgent.getTankerPos() == null) {
+            if (myPosition != "") {
+                //List of observable from the agent's current position
+                List<Couple<String, List<Attribute>>> lobs = ((mas.abstractAgent) this.myAgent).observe();//myPosition
+                tankerAgent.updateMap(lobs, myPosition);
+                randomMove(lobs);
+            }
+        } else {
+            if (!myPosition.equals(tankerAgent.getTankerPos())){
+                if (tankerAgent.stepsIsEmpty())
+                    tankerAgent.setSteps(Tools.dijkstra(tankerAgent.getMap(),myPosition,tankerAgent.getTankerPos()));
+                String step = tankerAgent.popStep();
+                if (tankerAgent.moveTo(step)) {
+                    this.tankerAgent.clearSteps();
+                }
+            }
         }
 
     }
 
     @Override
     public int onEnd() {
-        return 1;
+        if (tankerAgent.isMapCompleted()){
+            if (tankerAgent.getTankerPos() == null){
+                for (int i = 5; i > 0; i--){
+                    String s = Tools.centralize(tankerAgent.getMap(),i,i);
+                    if (s != null){
+                        tankerAgent.setTankerPos(s);
+                        break;
+                    }
+                }
+            }
+            return 2;
+        } else
+            return 1;
     }
 
     @Override
     public boolean done() {
-        customAgent.setPreviousBehaviour("TankerBehaviour");
+        tankerAgent.setPreviousBehaviour("TankerBehaviour");
         return true;
     }
 
+    private void randomMove(List<Couple<String, List<Attribute>>> lobs){
+        Random r= new Random();
+        int moveId=r.nextInt(lobs.size());
+        while (!tankerAgent.moveTo(lobs.get(moveId).getLeft()))
+            moveId=r.nextInt(lobs.size());
+    }
 }

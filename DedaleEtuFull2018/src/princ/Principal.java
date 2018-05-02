@@ -277,7 +277,7 @@ public class Principal {
 			System.out.println(agentName+" launched");
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		//Tanker-Silo (backPack that count for the exam, but not method pick. Can only receive from the collector agents)
 		c = containerList.get("container0");
@@ -290,7 +290,7 @@ public class Principal {
 			System.out.println(agentName+" launched");
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
-		}*/
+		}
 
 		System.out.println("Agents launched...");
 		return agentList;

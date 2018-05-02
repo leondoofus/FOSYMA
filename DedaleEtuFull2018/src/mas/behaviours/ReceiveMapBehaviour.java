@@ -5,7 +5,6 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 import mas.agents.CustomAgent;
-import mas.agents.TankerAgent;
 
 import java.util.HashMap;
 
@@ -53,7 +52,6 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
     }
 
     public int onEnd() {
-        if (customAgent instanceof TankerAgent) System.err.println(nextBehaviourSelect);
         return nextBehaviourSelect;
     }
 }
