@@ -52,7 +52,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     //System.out.println( myName+ " the agent is now blocked and cant move");
                     Set<String> unexplored = customAgent.geUnexploredNodes();
                     if (unexplored.isEmpty()) {
-                        System.err.println(myName + " : I explored the map");
+                        //System.err.println(myName + " : I explored the map");
                         //Random move from the current position
                         Random r= new Random();
                         int moveId=r.nextInt(lobs.size());

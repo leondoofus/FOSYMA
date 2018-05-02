@@ -28,7 +28,7 @@ public class SendStepsBehavior extends SimpleBehaviour {
             //System.out.println(this.customAgent.getLocalName() + "<----Position received from " + msg.getSender().getLocalName());
             String receiverPosition = msg.getContent();
 
-            msg = new ACLMessage(ACLMessage.PROPAGATE);
+            msg = new ACLMessage(ACLMessage.PROXY);
             msg.setSender(this.customAgent.getAID());
             HashMap<String,String[]> map = this.customAgent.getMap();
             /*ArrayList<String> explored = new ArrayList<>(map.keySet());
@@ -52,6 +52,16 @@ public class SendStepsBehavior extends SimpleBehaviour {
                 return;
             }
             ArrayList<String> steps = Tools.dijkstra(map, customAgent.getCurrentPosition(), receiverPosition); //step de sender to receiver
+            if(steps.size() == 0){
+                try {
+                    msg.setContentObject (new ArrayList<>());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                msg.addReceiver(this.customAgent.getCommunicatingAgent());
+                ((mas.abstractAgent) this.myAgent).sendMessage(msg);
+                return;
+            }
             ArrayList<String> step1 = new ArrayList<>();
             ArrayList<String> step2 = new ArrayList<>();
             for (String s : map.get(customAgent.getCurrentPosition())){
