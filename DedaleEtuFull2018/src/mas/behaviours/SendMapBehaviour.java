@@ -35,12 +35,12 @@ public class SendMapBehaviour extends SimpleBehaviour {
 
     @Override
     public boolean done() {
-        if(customAgent.getPreviousbehaviour().equals("CheckMailBehavior")){
+        if(customAgent.getPreviousBehaviour().equals("CheckMailBehavior")){
             nextBehaviourSelect = 1; // pass to receive map
         }else{
             nextBehaviourSelect = 2; //pass to send position
         }
-        customAgent.setPreviousbehaviour("SendMapBehaviour");
+        customAgent.setPreviousBehaviour("SendMapBehaviour");
         return true;
     }
 

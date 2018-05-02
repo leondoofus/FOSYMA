@@ -2,12 +2,7 @@ package mas.behaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
-import jade.lang.acl.UnreadableException;
 import mas.agents.CustomAgent;
-
-import java.io.IOException;
-import java.util.HashMap;
 
 public class SendPositionBehavior extends SimpleBehaviour {
 
@@ -29,7 +24,7 @@ public class SendPositionBehavior extends SimpleBehaviour {
 
     @Override
     public boolean done() {
-        customAgent.setPreviousbehaviour("SendPositionBehaviour");
+        customAgent.setPreviousBehaviour("SendPositionBehaviour");
         return true;
     }
 

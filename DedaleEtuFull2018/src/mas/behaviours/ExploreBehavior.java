@@ -43,10 +43,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     if (!canMove) {
                         customAgent.clearSteps();
                         System.out.println(myName + "I'm stuck ");
-                        Random r= new Random();
-                        int moveId=r.nextInt(lobs.size());
-                        while (!(this.customAgent).moveTo(lobs.get(moveId).getLeft()))
-                             moveId=r.nextInt(lobs.size());
+
                     }
                 } else {
                     //System.out.println( myName+ " the agent is now blocked and cant move");
@@ -54,9 +51,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                     if (unexplored.isEmpty()) {
                         //System.err.println(myName + " : I explored the map");
                         //Random move from the current position
-                        Random r= new Random();
-                        int moveId=r.nextInt(lobs.size());
-                        customAgent.moveTo(lobs.get(moveId).getLeft());
+                        randomMove(lobs);
                         //this.customAgent.die();
                         //this.customAgent.clearMap(); //TODO to delete
                     }
@@ -88,7 +83,14 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public boolean done() {
-        customAgent.setPreviousbehaviour("CheckMailBehavior");
+        customAgent.setPreviousBehaviour("CheckMailBehavior");
         return true;
+    }
+
+    private void randomMove(List<Couple<String, List<Attribute>>> lobs){
+        Random r= new Random();
+        int moveId=r.nextInt(lobs.size());
+        while (!(this.customAgent).moveTo(lobs.get(moveId).getLeft()))
+            moveId=r.nextInt(lobs.size());
     }
 }

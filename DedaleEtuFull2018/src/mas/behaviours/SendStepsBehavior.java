@@ -8,7 +8,6 @@ import mas.util.Tools;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
 
 public class SendStepsBehavior extends SimpleBehaviour {
 
@@ -106,7 +105,7 @@ public class SendStepsBehavior extends SimpleBehaviour {
 
     @Override
     public boolean done() {
-        customAgent.setPreviousbehaviour("SendStepsBehaviour");
+        customAgent.setPreviousBehaviour("SendStepsBehaviour");
         return true;
     }
 

@@ -1,5 +1,7 @@
 package mas.agents;
 
+import env.Attribute;
+import env.Couple;
 import jade.core.behaviours.FSMBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -7,11 +9,18 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import mas.behaviours.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 public class CollectorAgent extends CustomAgent {
+    private Set<String> myTreasureCases = new HashSet<>();
+    private int initBackpackCapacity;
 
     protected void setup() {
         super.setup();
+        initBackpackCapacity = getBackPackFreeSpace();
 
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
@@ -61,5 +70,28 @@ public class CollectorAgent extends CustomAgent {
 
     protected void takeDown(){
 
+    }
+    public void updateTreasure(List<Couple<String, List<Attribute>>> lobs){
+        for (Couple<String, List<Attribute>> c : lobs){
+            if (myTreasureCases.contains(c.getLeft()) && c.getRight().isEmpty()) {
+                myTreasureCases.remove(c.getLeft());
+                continue;
+            }
+            for (Attribute a : c.getRight())
+                if (a.getName().equals(getMyTreasureType()))
+                    myTreasureCases.add(c.getLeft());
+        }
+    }
+
+    public boolean treasureCasesIsEmpty (){
+        return myTreasureCases.isEmpty();
+    }
+
+    public int getInitBackpackCapacity(){
+        return initBackpackCapacity;
+    }
+
+    public String[] getMyTreasureCases() {
+        return (String[]) myTreasureCases.toArray();
     }
 }

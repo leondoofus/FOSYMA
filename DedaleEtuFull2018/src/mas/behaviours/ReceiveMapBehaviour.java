@@ -43,12 +43,12 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
     @Override
     public boolean done() {
         if (nextBehaviourSelect != 1)
-            if(customAgent.getPreviousbehaviour().equals("RequestConnectionBehaviour")){
+            if(customAgent.getPreviousBehaviour().equals("RequestConnectionBehaviour")){
                 nextBehaviourSelect = 2 ; //pass to send map
             }else{ //ca vient de sendmap
                 nextBehaviourSelect = 3; //pass to send step
             }
-        customAgent.setPreviousbehaviour("ReceiveMapBehaviour");
+        customAgent.setPreviousBehaviour("ReceiveMapBehaviour");
         return true;
     }
 

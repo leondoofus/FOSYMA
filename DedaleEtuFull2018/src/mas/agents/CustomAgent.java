@@ -22,8 +22,9 @@ public class CustomAgent extends abstractAgent {
     private HashMap<String,List<Attribute>> data;
     private HashMap<String,String[]> map;
     private AID comunicatingAgent;
-    private String Previousbehaviour;
+    private String previousBehaviour;
     private ArrayList<String> steps;
+    private String tankerPos = null;
 
     protected void setup(){
         super.setup();
@@ -108,9 +109,6 @@ public class CustomAgent extends abstractAgent {
         return res;
     }
 
-
-
-
     public AID getCommunicatingAgent() {
         return comunicatingAgent;
     }
@@ -129,12 +127,12 @@ public class CustomAgent extends abstractAgent {
         map.putAll(map2);
     }
 
-    public String getPreviousbehaviour() {
-        return Previousbehaviour;
+    public String getPreviousBehaviour() {
+        return previousBehaviour;
     }
 
-    public void setPreviousbehaviour(String previousbehaviour) {
-        Previousbehaviour = previousbehaviour;
+    public void setPreviousBehaviour(String previousBehaviour) {
+        this.previousBehaviour = previousBehaviour;
     }
 
     public void setSteps(ArrayList<String> steps){
@@ -168,5 +166,13 @@ public class CustomAgent extends abstractAgent {
         System.err.println("Agent-1 "+getAID().getLocalName()+" terminating.");
         takeDown();
         this.doDelete();
+    }
+
+    public boolean knowTanker(){
+        return tankerPos != null;
+    }
+
+    public String getTankerPos(){
+        return tankerPos;
     }
 }

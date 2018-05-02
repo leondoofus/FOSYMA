@@ -41,7 +41,7 @@ public class TankerBehaviour extends SimpleBehaviour {
 
     @Override
     public boolean done() {
-        customAgent.setPreviousbehaviour("TankerBehaviour");
+        customAgent.setPreviousBehaviour("TankerBehaviour");
         return true;
     }
 

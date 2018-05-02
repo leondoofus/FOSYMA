@@ -3,9 +3,7 @@ package mas.behaviours;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 import mas.agents.CustomAgent;
-import mas.agents.TankerAgent;
 
 public class RequestConnectionBehaviour extends SimpleBehaviour {
 
@@ -32,7 +30,7 @@ public class RequestConnectionBehaviour extends SimpleBehaviour {
 
     @Override
     public boolean done() {
-        customAgent.setPreviousbehaviour("RequestConnectionBehaviour");
+        customAgent.setPreviousBehaviour("RequestConnectionBehaviour");
         return true;
     }
 
