@@ -18,6 +18,7 @@ public class ReceiveMapTankerBehaviour extends SimpleBehaviour {
     }
 
     public void action() {
+        if (tankerAgent.isMapCompleted()) return;
         ACLMessage received = this.myAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.INFORM),500);
         if(received != null){
             try {

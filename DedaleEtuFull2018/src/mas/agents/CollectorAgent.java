@@ -92,6 +92,6 @@ public class CollectorAgent extends CustomAgent {
     }
 
     public String[] getMyTreasureCases() {
-        return (String[]) myTreasureCases.toArray();
+        return myTreasureCases.toArray(new String[myTreasureCases.size()]);
     }
 }

@@ -25,6 +25,7 @@ public class TankerBehaviour extends SimpleBehaviour {
     public void action() {
         //Example to retrieve the current position
         String myPosition=((mas.abstractAgent)this.myAgent).getCurrentPosition();
+        if (myPosition.equals(tankerAgent.getTankerPos())) return;
 
         if (tankerAgent.getTankerPos() == null) {
             if (myPosition != "") {
@@ -58,8 +59,7 @@ public class TankerBehaviour extends SimpleBehaviour {
                     }
                 }
             }
-            return 2;
-        } else
+        }
             return 1;
     }
 

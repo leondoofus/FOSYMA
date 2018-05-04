@@ -43,11 +43,8 @@ public class TankerAgent extends CustomAgent{
         FSMBehaviour fsmBehaviour = new FSMBehaviour();
         fsmBehaviour.registerFirstState(new TankerBehaviour(this),"Tnk");
         fsmBehaviour.registerState(new ReceiveMapTankerBehaviour(this),"Rcv");
-        fsmBehaviour.registerState(new BroadcastBehaviour(this),"Brc");
         fsmBehaviour.registerTransition("Tnk","Rcv",1);
         fsmBehaviour.registerTransition("Rcv","Tnk",1);
-        fsmBehaviour.registerTransition("Tnk","Brc",2);
-        fsmBehaviour.registerTransition("Brc","Tnk",1);
         addBehaviour(fsmBehaviour);
 
 

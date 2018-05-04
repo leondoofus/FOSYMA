@@ -18,16 +18,6 @@ public class CheckMailBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
-        if (customAgent.getTankerPos() == null){
-            final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.SUBSCRIBE);
-            final ACLMessage msg = this.customAgent.receive(msgTemplate);
-            if (msg != null) {
-                if(msg.getPostTimeStamp() - System.currentTimeMillis() < 200)
-                    customAgent.setTankerPos(msg.getContent());
-            }
-        } else {
-            customAgent.broadcastTanker();
-        }
         final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
         final ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {

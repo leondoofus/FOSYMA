@@ -10,15 +10,17 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 import mas.abstractAgent;
+import mas.util.Tools;
 
 import java.util.*;
 
-public class CustomAgent
-        extends abstractAgent {
+public class CustomAgent extends abstractAgent {
 
     /**
      *
      */
+    public static final int k = 5;
+
     private static final long serialVersionUID = -1784844593772918359L;
 
     private HashMap<String,List<Attribute>> data;
@@ -74,7 +76,18 @@ public class CustomAgent
             }
             map.put(myPosition, sons);
         }
-        if (getUnexploredNodes().isEmpty()) mapCompleted = true;
+        if (getUnexploredNodes().isEmpty()){
+            mapCompleted = true;
+            if (tankerPos == null){
+                for (int i = 5; i > 0; i--){
+                    String s = Tools.centralize(map,k,k);
+                    if (s != null){
+                        setTankerPos(s);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public String getUnvisitedNode(String myPosition){
@@ -134,7 +147,18 @@ public class CustomAgent
     public void fusion(HashMap<String,String[]> map2) {
         if (mapCompleted) return;
         map.putAll(map2);
-        if (getUnexploredNodes().isEmpty()) mapCompleted = true;
+        if (getUnexploredNodes().isEmpty()){
+            mapCompleted = true;
+            if (tankerPos == null){
+                for (int i = 5; i > 0; i--){
+                    String s = Tools.centralize(map,k,k);
+                    if (s != null){
+                        setTankerPos(s);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public boolean isMapCompleted(){ return mapCompleted; }
@@ -186,15 +210,4 @@ public class CustomAgent
 
     public void setTankerPos(String pos){ tankerPos = pos; }
 
-    public void broadcastTanker (){
-        DFAgentDescription[] allAgents = getAgents();
-        ACLMessage msg = new ACLMessage(ACLMessage.SUBSCRIBE);
-        msg.setSender(getAID());
-        msg.setContent(getTankerPos());
-        for(DFAgentDescription agent: allAgents){
-            if (!agent.getName().getName().equals(getName()))
-                msg.addReceiver(agent.getName());
-        }
-        sendMessage(msg);
-    }
 }
