@@ -25,6 +25,8 @@ public class CustomAgent extends abstractAgent {
 
     private HashMap<String,List<Attribute>> data;
     private HashMap<String,String[]> map;
+    private HashMap<String,Long> time;
+
     private AID comunicatingAgent;
     private String previousBehaviour;
     private ArrayList<String> steps;
@@ -34,6 +36,7 @@ public class CustomAgent extends abstractAgent {
     protected void setup(){
         super.setup();
         data = new HashMap<>();
+        time = new HashMap<>();
         map = new HashMap<>();
         steps = new ArrayList<>();
         mapCompleted = false;
@@ -76,18 +79,8 @@ public class CustomAgent extends abstractAgent {
             }
             map.put(myPosition, sons);
         }
-        if (getUnexploredNodes().isEmpty()){
-            mapCompleted = true;
-            if (tankerPos == null){
-                for (int i = 5; i > 0; i--){
-                    String s = Tools.centralize(map,k,k);
-                    if (s != null){
-                        setTankerPos(s);
-                        break;
-                    }
-                }
-            }
-        }
+        time.put(myPosition,System.currentTimeMillis());
+        computeTankerPos();
     }
 
     public String getUnvisitedNode(String myPosition){
@@ -147,18 +140,7 @@ public class CustomAgent extends abstractAgent {
     public void fusion(HashMap<String,String[]> map2) {
         if (mapCompleted) return;
         map.putAll(map2);
-        if (getUnexploredNodes().isEmpty()){
-            mapCompleted = true;
-            if (tankerPos == null){
-                for (int i = 5; i > 0; i--){
-                    String s = Tools.centralize(map,k,k);
-                    if (s != null){
-                        setTankerPos(s);
-                        break;
-                    }
-                }
-            }
-        }
+        computeTankerPos();
     }
 
     public boolean isMapCompleted(){ return mapCompleted; }
@@ -209,5 +191,34 @@ public class CustomAgent extends abstractAgent {
     }
 
     public void setTankerPos(String pos){ tankerPos = pos; }
+
+    public void computeTankerPos(){
+        if(!mapCompleted){
+            if (getUnexploredNodes().isEmpty()){
+                mapCompleted = true;
+                if (tankerPos == null){
+                    for (int i = 5; i > 0; i--){
+                        String s = Tools.centralize(map,k,k);
+                        if (s != null){
+                            setTankerPos(s);
+                            break;
+                        }
+                    }
+                }
+            }
+        }else{
+            System.out.println("eeeeeeeeeeeeeeee");
+            if (tankerPos == null){
+                for (int i = 5; i > 0; i--){
+                    String s = Tools.centralize(map,k,k);
+                    if (s != null){
+                        setTankerPos(s);
+                        break;
+                    }
+                }
+            }
+        }
+
+    }
 
 }

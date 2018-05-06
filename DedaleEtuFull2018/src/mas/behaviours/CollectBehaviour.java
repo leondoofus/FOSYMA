@@ -114,18 +114,26 @@ public class CollectBehaviour extends SimpleBehaviour {
                     }
                 } else {
                     if (collectorAgent.isMapCompleted()) {
+                        System.out.println(collectorAgent.getTankerPos());
+                        if(collectorAgent.getTankerPos() == null){
+                            System.out.println("cccccccccc");
+                            collectorAgent.computeTankerPos();
+                        }
                         if (collectorAgent.getBackPackFreeSpace() == 0){
                             if (collectorAgent.getTankerPos() != null)
                                 collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getTankerPos()));
                         } else {
                             if (collectorAgent.treasureCasesIsEmpty())
-                                if (collectorAgent.getInitBackpackCapacity() == collectorAgent.getBackPackFreeSpace())
+                                if (collectorAgent.getInitBackpackCapacity() == collectorAgent.getBackPackFreeSpace()){
                                     randomMove(lobs);
-                                else
-                                    if (collectorAgent.getTankerPos() != null)
+                                }else{
+                                    System.out.println("aaaaaaaaaaaa");
+                                    if (collectorAgent.getTankerPos() != null){
+                                        System.out.println("bbbbbbbbbbbbbbbb");
                                         collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getTankerPos()));
-                                    else
+                                    }else
                                         randomMove(lobs);
+                                }
                             else
                                 collectorAgent.setSteps(Tools.dijkstraNoeudPlusProche(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getMyTreasureCases()));
                         }

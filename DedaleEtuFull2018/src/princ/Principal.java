@@ -34,7 +34,7 @@ public class Principal {
 
 		System.out.println("Hello !");
 		//0) Create the real environment and the observed one
-		env= new Environment(Environment.ENVtype.GRID_T,5,null);
+		env= new Environment(Environment.ENVtype.GRID_T,6,null);
 		//env= new Environment(Environment.ENVtype.DOROGOVTSEV_T,5,null);
 		//env=new Environment("ressources/map2017-2","ressources/map2017-config");
 
@@ -189,7 +189,7 @@ public class Principal {
 		 */
 
 		//	wumpus on container0
-		/*
+        /*
 		c = containerList.get("container0");
 		agentName="Golem";
 		try {
@@ -199,12 +199,12 @@ public class Principal {
 			System.out.println(agentName+" launched");
 		} catch (StaleProxyException e) {
 			e.printStackTrace();
-		}*/
-
+		}
+        */
 		//	Explorer (no backpack)
 
 		c = containerList.get("container0");
-		agentName="Agent1";
+		agentName="Collector";
 		try {
 
 			Object[] objtab=new Object[]{env,EntityType.AGENT_COLLECTOR};//used to give information to the agent
@@ -216,7 +216,7 @@ public class Principal {
 		}
 
 		c = containerList.get("container0");
-		agentName="Agent2";
+		agentName="explore1";
 		try {
 
 			Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give information to the agent
@@ -228,7 +228,7 @@ public class Principal {
 		}
 
         c = containerList.get("container0");
-        agentName="Agent3";
+        agentName="explore2";
         try {
 
             Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give information to the agent
@@ -281,7 +281,7 @@ public class Principal {
 
 		//Tanker-Silo (backPack that count for the exam, but not method pick. Can only receive from the collector agents)
 		c = containerList.get("container0");
-		agentName="Agent5";
+		agentName="tanker";
 		try {
 
 			Object[] objtab=new Object[]{env,EntityType.AGENT_TANKER};//used to give informations to the agent

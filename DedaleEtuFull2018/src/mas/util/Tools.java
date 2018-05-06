@@ -3,8 +3,9 @@ package mas.util;
 import java.util.*;
 
 public class Tools {
-    public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
+        public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
         if (src.equals(dst))
+            //you are where you want to go
             return new ArrayList<>();
         ArrayList<String> explored = new ArrayList<>(map.keySet());
         ArrayList<String> unexplored = new ArrayList<>();

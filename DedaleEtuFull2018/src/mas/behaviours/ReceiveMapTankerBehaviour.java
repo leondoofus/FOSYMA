@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class ReceiveMapTankerBehaviour extends SimpleBehaviour {
 
     private final TankerAgent tankerAgent;
+    private boolean res = true;
 
     public ReceiveMapTankerBehaviour(final TankerAgent tankerAgent) {
         super(tankerAgent);
@@ -36,8 +37,14 @@ public class ReceiveMapTankerBehaviour extends SimpleBehaviour {
 
     @Override
     public boolean done() {
+        if (res){
+            String myPosition=((mas.abstractAgent)this.myAgent).getCurrentPosition();
+            if (myPosition.equals(tankerAgent.getTankerPos())){
+                res = false;
+            }
+        }
         tankerAgent.setPreviousBehaviour("ReceiveMapBehaviour");
-        return true;
+        return res;
     }
 
     public int onEnd() {
