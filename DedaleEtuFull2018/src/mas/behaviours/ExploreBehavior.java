@@ -28,6 +28,8 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
+        System.out.println(myName + " "+this.customAgent.getData().size());
+
         //customAgent.printMap();
         String myPosition = (this.customAgent).getCurrentPosition();
         //System.out.println( myName+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);

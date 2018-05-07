@@ -126,8 +126,16 @@ public class CollectBehaviour extends SimpleBehaviour {
                 if (collectorAgent.getBackPackFreeSpace() != 0){
                     //take tresure if possible
                     grab(lobs);
+
+                    Set<String> allnodes = collectorAgent.getAllNodeskey();
+
+                    System.out.println(myName + " "+this.collectorAgent.getData().size());
+
+                    HashMap<String,List<Attribute>> nodesAttributes = this.collectorAgent.getNodesAttributes(allnodes);
+
+                    nodesAttributes = getMyTreasureNodes(nodesAttributes);
                     //I cant find any more treasure to take :(
-                    if(collectorAgent.treasureCasesIsEmpty()){
+                    if(nodesAttributes.isEmpty()){
                         //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
                         if (collectorAgent.getTankerPos() != null){
                             collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getTankerPos()));
@@ -138,7 +146,7 @@ public class CollectBehaviour extends SimpleBehaviour {
                         }
                     }else{
                         //going to get treasure
-                        collectorAgent.setSteps(Tools.dijkstraNoeudPlusProche(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getMyTreasureCases()));
+                        collectorAgent.setSteps(Tools.dijkstraNoeudPlusProche(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),nodesAttributes.keySet().toArray(new String[nodesAttributes.size()])));
                     }
                     //I have no space im my backpack
                 }else{
@@ -160,12 +168,6 @@ public class CollectBehaviour extends SimpleBehaviour {
                 return;
             }
             if (this.collectorAgent.lastStep()){
-                /*TODO Il me semble que le tanker ne s'appelle pas que ça, il faudrait peut-etre son adresse, je pense qu'il
-                  TODO faudra filtrer les agents comme dans la methode getAgents de CustomAgent. Cependant si le nom de l'agent n'est
-                  TODO pas juste un msg err sera affiché qui n'est pas le cas ici, ce qui est bizarre. Je n'ai pas assez de tmps pour tester
-                  TODO donc envoie moi un msg si ça marche pas. Je poserai la question à cedric herpson.
-                  TODO j'ai rajouté une 2e condition dans laststep pour que ce soit juste
-                 */
                 System.out.println(this.myAgent.getLocalName()+" - My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
                 System.out.println(this.myAgent.getLocalName()+" - The agent tries to transfer is load into the Silo (if reachable); succes ? : "+((mas.abstractAgent)this.myAgent).emptyMyBackPack("Agent5"));
                 System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
@@ -260,4 +262,22 @@ public class CollectBehaviour extends SimpleBehaviour {
         collectorAgent.setPreviousBehaviour("CheckMailBehavior");
         return true;
     }
+
+    private HashMap<String,List<Attribute>> getMyTreasureNodes(HashMap<String,List<Attribute>> nodesAttributes){
+        String mytype = collectorAgent.getMyTreasureType();
+        for (Map.Entry<String, List<Attribute>> entry : nodesAttributes.entrySet()) {
+            String key = entry.getKey();
+            List<Attribute> value = entry.getValue();
+            //removing nodes that don't have treasure
+            for(Attribute a:value){
+                if(a.getName().equals(mytype)){
+                    System.out.println("there is my  treasure in this node");
+                }else{
+                    nodesAttributes.remove(key);
+                }
+            }
+        }
+        return  nodesAttributes;
+    }
+
 }

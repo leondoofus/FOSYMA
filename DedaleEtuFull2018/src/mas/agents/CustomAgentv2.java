@@ -9,19 +9,17 @@ import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
-import jade.lang.acl.ACLMessage;
 import mas.abstractAgent;
 import mas.util.Tools;
+import mas.util.nodeData;
 
 import java.util.*;
 
-public class CustomAgent extends abstractAgent {
+public class CustomAgentv2 extends abstractAgent {
 
     private static final long serialVersionUID = -1784844593772918359L;
 
-    private HashMap<String,List<Attribute>> data;
-    private HashMap<String,String[]> map;
-    private HashMap<String,Long> time;
+    private HashMap<String,nodeData> map;
 
     private AID comunicatingAgent;
     private String previousBehaviour;
@@ -32,8 +30,6 @@ public class CustomAgent extends abstractAgent {
     protected void setup(){
         super.setup();
 
-        data = new HashMap<>();
-        time = new HashMap<>();
         map = new HashMap<>();
         steps = new ArrayList<>();
         mapCompleted = false;
@@ -63,25 +59,23 @@ public class CustomAgent extends abstractAgent {
 
     public void updateMap( List<Couple<String, List<Attribute>>> lobs,String myPosition){
         if (mapCompleted) return;
-        if (!map.containsKey(myPosition)) {
-            String[] sons = new String[lobs.size() - 1];
-            int i = 0;
-            for (Couple c : lobs) {
-                data.put(myPosition,(List<Attribute>) c.getRight());
-                if (!myPosition.equals(c.getLeft())) {
-                    sons[i] = (String) c.getLeft();
-                    i++;
-                }
+        long currentTime = System.currentTimeMillis();
+        List<String> sons = new ArrayList<>();
+        nodeData nodeData;
+        for(Couple node : lobs){
+            if (!myPosition.equals(node.getLeft())) {
+                nodeData = new nodeData((List<Attribute>)node.getRight(),new ArrayList<String>(),currentTime);
+                map.put((String) node.getLeft(),nodeData);
+                sons.add((String) node.getLeft());
             }
-            map.put(myPosition, sons);
         }
-        time.put(myPosition,System.currentTimeMillis());
-        computeTankerPos();
+        nodeData = new nodeData((List<Attribute>)lobs.get(0).getRight(),sons,currentTime);
+        map.put(myPosition,nodeData);
     }
 
     public String getUnvisitedNode(String myPosition){
         String res = null;
-        String[] sons = map.get(myPosition);
+        List<String> sons = map.get(myPosition).getNeighbours();
         for (String s : sons) {
             if (!getMap().keySet().contains(s)) {
                 res = s;
@@ -97,8 +91,8 @@ public class CustomAgent extends abstractAgent {
         Set<String> explored = map.keySet();
         Set<String> unexplored = new HashSet<>();
         for (String key : map.keySet()) {
-            String[] tmp = map.get(key);
-            unexplored.addAll(Arrays.asList(tmp));
+            List<String> tmp = map.get(key).getNeighbours();
+            unexplored.addAll(tmp);
         }
         String[] unexploredAsStringtmp = unexplored.toArray(new String[unexplored.size()]);
         for (String s : unexploredAsStringtmp) {
@@ -128,7 +122,7 @@ public class CustomAgent extends abstractAgent {
     }
 
     public HashMap<String, String[]> getMap() {
-        return map;
+        return ;
     }
 
     public void clearMap () { map.clear(); }

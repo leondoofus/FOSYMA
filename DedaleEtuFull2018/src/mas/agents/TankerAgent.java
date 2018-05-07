@@ -1,12 +1,15 @@
 package mas.agents;
 
 
+import env.EntityType;
+import env.Environment;
 import jade.core.behaviours.FSMBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import mas.behaviours.*;
+import mas.abstractAgent;
 
 
 public class TankerAgent extends CustomAgent{
@@ -27,7 +30,6 @@ public class TankerAgent extends CustomAgent{
 	 */
 	protected void setup(){
         super.setup();
-
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
@@ -45,9 +47,8 @@ public class TankerAgent extends CustomAgent{
         fsmBehaviour.registerState(new ReceiveMapTankerBehaviour(this),"Rcv");
         fsmBehaviour.registerTransition("Tnk","Rcv",1);
         fsmBehaviour.registerTransition("Rcv","Tnk",1);
+
         addBehaviour(fsmBehaviour);
-
-
 		}
 
 	protected void takeDown(){
