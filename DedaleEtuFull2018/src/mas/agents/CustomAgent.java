@@ -143,6 +143,13 @@ public class CustomAgent extends abstractAgent {
         computeTankerPos();
     }
 
+    public boolean lastStep(){
+        if(steps.size() == 1){
+            return true;
+        }
+        return false;
+    }
+
     public boolean isMapCompleted(){ return mapCompleted; }
 
     public String getPreviousBehaviour() {
@@ -193,24 +200,11 @@ public class CustomAgent extends abstractAgent {
     public void setTankerPos(String pos){ tankerPos = pos; }
 
     public void computeTankerPos(){
-        if(!mapCompleted){
-            if (getUnexploredNodes().isEmpty()){
-                mapCompleted = true;
-                if (tankerPos == null){
-                    for (int i = 5; i > 0; i--){
-                        String s = Tools.centralize(map,k,k);
-                        if (s != null){
-                            setTankerPos(s);
-                            break;
-                        }
-                    }
-                }
-            }
-        }else{
-            System.out.println("eeeeeeeeeeeeeeee");
+        if (getUnexploredNodes() == null || getUnexploredNodes().isEmpty()){
+            mapCompleted = true;
             if (tankerPos == null){
                 for (int i = 5; i > 0; i--){
-                    String s = Tools.centralize(map,k,k);
+                    String s = Tools.centralize(map,i,i);
                     if (s != null){
                         setTankerPos(s);
                         break;
@@ -218,7 +212,5 @@ public class CustomAgent extends abstractAgent {
                 }
             }
         }
-
     }
-
 }

@@ -24,6 +24,30 @@ public class CollectBehaviour extends SimpleBehaviour {
 
     }
 
+
+    private void grab(List<Couple<String, List<Attribute>>> lobs){
+        for(Attribute a:lobs.get(0).getRight()){ //try to grab sth
+            switch (a) {
+                case TREASURE : case DIAMONDS :
+                    System.out.println("My treasure type is :"+((mas.abstractAgent)this.myAgent).getMyTreasureType());
+                    System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    System.out.println("Value of the treasure on the current position: "+a.getName() +": "+ a.getValue());
+                    System.out.println("The agent grabbed :"+((mas.abstractAgent)this.myAgent).pick());
+                    System.out.println("the remaining backpack capacity is: "+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    private void randomMove(List<Couple<String, List<Attribute>>> lobs){
+        Random r= new Random();
+        int moveId=r.nextInt(lobs.size());
+        while (!(this.collectorAgent).moveTo(lobs.get(moveId).getLeft()))
+            moveId=r.nextInt(lobs.size());
+    }
+
+
     /*
     @Override
     public void action() {
@@ -98,12 +122,68 @@ public class CollectBehaviour extends SimpleBehaviour {
             if (!myPosition.equals("")) {
                 List<Couple<String, List<Attribute>>> lobs = (this.collectorAgent).observe();
                 collectorAgent.updateMap(lobs,myPosition);
+                //I have space in my backpack
+                if (collectorAgent.getBackPackFreeSpace() != 0){
+                    //take tresure if possible
+                    grab(lobs);
+                    //I cant find any more treasure to take :(
+                    if(collectorAgent.treasureCasesIsEmpty()){
+                        //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
+                        if (collectorAgent.getTankerPos() != null){
+                            collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getTankerPos()));
 
+                        }else{
+                            //im waiting for the tanker position to be found(i need the full map to do so)
+                            randomMove(lobs);
+                        }
+                    }else{
+                        //going to get treasure
+                        collectorAgent.setSteps(Tools.dijkstraNoeudPlusProche(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getMyTreasureCases()));
+                    }
+                    //I have no space im my backpack
+                }else{
+                    collectorAgent.computeTankerPos();
+                    //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
+                    if (collectorAgent.getTankerPos() != null){
+                        collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMap(),collectorAgent.getCurrentPosition(),collectorAgent.getTankerPos()));
+
+                    }else{
+                        //im waiting for the tanker position to be found(i need the full map to do so)
+                        randomMove(lobs);
+                    }
+                }
+            }
+        } else {
+            String step = this.collectorAgent.popStep();
+            if (!((abstractAgent) this.myAgent).moveTo(step)) {
+                this.collectorAgent.clearSteps();
+                return;
+            }
+            if (this.collectorAgent.lastStep()){
+                System.out.println(this.myAgent.getLocalName()+" - My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                System.out.println(this.myAgent.getLocalName()+" - The agent tries to transfer is load into the Silo (if reachable); succes ? : "+((mas.abstractAgent)this.myAgent).emptyMyBackPack("Agent5"));
+                System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+            }
+            // if i find an other tresure on the way :), or when i get there
+            List<Couple<String, List<Attribute>>> lobs = (this.collectorAgent).observe();
+            collectorAgent.updateMap(lobs,myPosition);
+            if (collectorAgent.getBackPackFreeSpace() != 0)
+                grab(lobs);
+            collectorAgent.updateTreasure(lobs);
+        }
+    }
+
+
+    /*
+    @Override
+    public void action() {
+        String myPosition = (this.collectorAgent).getCurrentPosition();
+        if (this.collectorAgent.stepsIsEmpty()) {
+            if (!myPosition.equals("")) {
+                List<Couple<String, List<Attribute>>> lobs = (this.collectorAgent).observe();
+                collectorAgent.updateMap(lobs,myPosition);
                 if (collectorAgent.getBackPackFreeSpace() != 0)
                     grab(lobs);
-
-                collectorAgent.updateTreasure(lobs);
-
                 String notVisited = collectorAgent.getUnvisitedNode(myPosition);
                 if (notVisited != null) {
                     boolean canMove = (this.collectorAgent.moveTo(notVisited));
@@ -161,23 +241,7 @@ public class CollectBehaviour extends SimpleBehaviour {
         int moveId=r.nextInt(lobs.size());
         while (!(this.collectorAgent).moveTo(lobs.get(moveId).getLeft()))
             moveId=r.nextInt(lobs.size());
-    }
-
-    private void grab(List<Couple<String, List<Attribute>>> lobs){
-        for(Attribute a:lobs.get(0).getRight()){ //try to grab sth
-            switch (a) {
-                case TREASURE : case DIAMONDS :
-                    System.out.println("My treasure type is :"+((mas.abstractAgent)this.myAgent).getMyTreasureType());
-                    System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
-                    System.out.println("Value of the treasure on the current position: "+a.getName() +": "+ a.getValue());
-                    System.out.println("The agent grabbed :"+((mas.abstractAgent)this.myAgent).pick());
-                    System.out.println("the remaining backpack capacity is: "+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+    }*/
 
 
     @Override

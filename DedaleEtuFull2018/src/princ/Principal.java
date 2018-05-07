@@ -281,7 +281,7 @@ public class Principal {
 
 		//Tanker-Silo (backPack that count for the exam, but not method pick. Can only receive from the collector agents)
 		c = containerList.get("container0");
-		agentName="tanker";
+		agentName="Agent5";
 		try {
 
 			Object[] objtab=new Object[]{env,EntityType.AGENT_TANKER};//used to give informations to the agent
