@@ -16,11 +16,6 @@ import java.util.*;
 
 public class CustomAgent extends abstractAgent {
 
-    /**
-     *
-     */
-    public static final int k = 5;
-
     private static final long serialVersionUID = -1784844593772918359L;
 
     private HashMap<String,List<Attribute>> data;
@@ -61,7 +56,6 @@ public class CustomAgent extends abstractAgent {
         } catch (FIPAException e) {
             e.printStackTrace();
         }
-
         return result;
     }
 
@@ -144,7 +138,7 @@ public class CustomAgent extends abstractAgent {
     }
 
     public boolean lastStep(){
-        if(steps.size() == 1){
+        if(steps.size() == 1 && steps.get(0).equals(tankerPos)){
             return true;
         }
         return false;
