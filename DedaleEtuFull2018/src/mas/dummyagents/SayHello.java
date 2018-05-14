@@ -1,4 +1,4 @@
-package mas.behaviours;
+package mas.dummyagents;
 
 import env.Attribute;
 import env.Couple;

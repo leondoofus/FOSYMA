@@ -120,7 +120,7 @@ class RandomWalkExchangeBehaviour extends TickerBehaviour{
 				System.out.println("lobs after picking "+lobs2);
 			}
 			System.out.println(this.myAgent.getLocalName()+" - My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
-			System.out.println(this.myAgent.getLocalName()+" - The agent tries to transfer is load into the Silo (if reachable); succes ? : "+((mas.abstractAgent)this.myAgent).emptyMyBackPack("Agent5"));
+			System.out.println(this.myAgent.getLocalName()+" - The agent tries to transfer is load into the Silo (if reachable); succes ? : "+((mas.abstractAgent)this.myAgent).emptyMyBackPack("Tanker"));
 			System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
 
 			//Random move from the current position

@@ -1,4 +1,4 @@
-package mas.behaviours;
+package mas.uselessbehaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;

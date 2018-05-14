@@ -1,4 +1,4 @@
-package mas.behaviours;
+package mas.uselessbehaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -21,26 +21,14 @@ public class SendStepsBehavior extends SimpleBehaviour {
     @Override
     public void action() {
         ACLMessage msg = this.myAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE),200);
-        //MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE);
-        //ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {
-            //System.out.println(this.customAgent.getLocalName() + "<----Position received from " + msg.getSender().getLocalName());
             String receiverPosition = msg.getContent();
 
             msg = new ACLMessage(ACLMessage.PROXY);
             msg.setSender(this.customAgent.getAID());
-            HashMap<String,String[]> map = this.customAgent.getMap();
-            /*ArrayList<String> explored = new ArrayList<>(map.keySet());
-            ArrayList<String> unexplored = new ArrayList<>();
-            for (String[] s : map.values())
-                unexplored.addAll(Arrays.asList(s));
-            HashSet<String> tmp = new LinkedHashSet<>(unexplored);
-            unexplored.clear();
-            unexplored.addAll(tmp);
-            unexplored.removeAll(explored);
-
-            ArrayList<String> steps = Tools.dijkstraNoeudPlusProche(map,receiverPosition,unexplored.toArray(new String[unexplored.size()]));*/
-            if (map.get(receiverPosition) == null || !Tools.inCommunicationRange(map,customAgent.getCurrentPosition(),receiverPosition)){
+            HashMap<String,String[]> map = this.customAgent.getMapSons();
+            //TODO pas sur de la verification
+            if (this.customAgent.getMap().get(receiverPosition).getNeighbours().isEmpty() || !Tools.inCommunicationRange(map,customAgent.getCurrentPosition(),receiverPosition)){
                 try {
                     msg.setContentObject (new ArrayList<>());
                 } catch (IOException e) {
@@ -50,7 +38,7 @@ public class SendStepsBehavior extends SimpleBehaviour {
                 ((mas.abstractAgent) this.myAgent).sendMessage(msg);
                 return;
             }
-            ArrayList<String> steps = Tools.dijkstra(map, customAgent.getCurrentPosition(), receiverPosition); //step de sender to receiver
+            ArrayList<String> steps = Tools.dijkstra(map, customAgent.getCurrentPosition(), receiverPosition,customAgent.getTankerPos()); //step de sender to receiver
             if(steps.size() == 0){
                 try {
                     msg.setContentObject (new ArrayList<>());
@@ -74,23 +62,11 @@ public class SendStepsBehavior extends SimpleBehaviour {
                 while (moveId.equals(customAgent.getCurrentPosition()))
                     moveId = map.get(receiverPosition)[new Random().nextInt(map.get(receiverPosition).length)];
                 step2.add(moveId);
-                /*for (String s : map.get(receiverPosition)) {
-                    if (!s.equals(customAgent.getCurrentPosition())) {
-                        step2.add(s);
-                        break;
-                    }
-                }*/
             }else {
                 String moveId = map.get(receiverPosition)[new Random().nextInt(map.get(receiverPosition).length)];
                 while (moveId.equals(steps.get(steps.size() - 2)))
                     moveId = map.get(receiverPosition)[new Random().nextInt(map.get(receiverPosition).length)];
                 step2.add(moveId);
-                /*for (String s : map.get(receiverPosition)) {
-                    if (!s.equals(steps.get(steps.size() - 2))) {
-                        step2.add(s);
-                        break;
-                    }
-                }*/
             }
             try {
                 msg.setContentObject (step2);

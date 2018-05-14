@@ -8,6 +8,9 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import mas.behaviours.*;
+import mas.uselessbehaviours.ReceiveStepsBehavior;
+import mas.uselessbehaviours.SendPositionBehavior;
+import mas.uselessbehaviours.SendStepsBehavior;
 
 import java.util.HashSet;
 import java.util.List;
@@ -53,15 +56,10 @@ public class CollectorAgent extends CustomAgent {
         fsmBehaviour.registerTransition("Com","Rmp",1); //com to receive
 
         fsmBehaviour.registerTransition("Smp","Rmp",1); // send to receive
-        fsmBehaviour.registerTransition("Smp","Spos",2); // send to sendpos
+        fsmBehaviour.registerTransition("Smp","Col",2); // send to exp
 
         fsmBehaviour.registerTransition("Rmp","Col",1); // receive to explore
         fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
-        fsmBehaviour.registerTransition("Rmp","Sstep",3); //receive to sendstep
-
-        fsmBehaviour.registerTransition("Spos","Rstep",1); // sendpos to receiveSteps
-        fsmBehaviour.registerTransition("Rstep","Col",1); // receiveSteps to Exp
-        fsmBehaviour.registerTransition("Sstep","Col",1); // sendSteps to Exp
 
         addBehaviour(fsmBehaviour);
 
@@ -70,28 +68,5 @@ public class CollectorAgent extends CustomAgent {
 
     protected void takeDown(){
 
-    }
-    public void updateTreasure(List<Couple<String, List<Attribute>>> lobs){
-        for (Couple<String, List<Attribute>> c : lobs){
-            if (myTreasureCases.contains(c.getLeft()) && c.getRight().isEmpty()) {
-                myTreasureCases.remove(c.getLeft());
-                continue;
-            }
-            for (Attribute a : c.getRight())
-                if (a.getName().equals(getMyTreasureType()))
-                    myTreasureCases.add(c.getLeft());
-        }
-    }
-
-    public boolean treasureCasesIsEmpty (){
-        return myTreasureCases.isEmpty();
-    }
-
-    public int getInitBackpackCapacity(){
-        return initBackpackCapacity;
-    }
-
-    public String[] getMyTreasureCases() {
-        return myTreasureCases.toArray(new String[myTreasureCases.size()]);
     }
 }

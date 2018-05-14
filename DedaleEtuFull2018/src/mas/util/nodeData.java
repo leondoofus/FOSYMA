@@ -2,10 +2,11 @@ package mas.util;
 
 import env.Attribute;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class nodeData {
+public class nodeData implements Serializable{
 
     private List<Attribute> attrs;
     private List<String> neighbours;

@@ -1,66 +1,63 @@
 package mas.util;
+import org.graphstream.algorithm.BetweennessCentrality;
+import org.graphstream.algorithm.Dijkstra;
+import org.graphstream.algorithm.Dijkstra.Element;
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.SingleGraph;
 
 import java.util.*;
 
+
 public class Tools {
-        public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst)  {
-        if (src.equals(dst))
-            //you are where you want to go
+
+
+    public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst,String tankerPos)  {
+        if (src.equals(dst) || dst.equals(tankerPos)){
             return new ArrayList<>();
-        ArrayList<String> explored = new ArrayList<>(map.keySet());
-        ArrayList<String> unexplored = new ArrayList<>();
-        for (String[] s : map.values())
-            unexplored.addAll(Arrays.asList(s));
-        HashSet<String> tmp = new LinkedHashSet<>(unexplored);
-        unexplored.clear();
-        unexplored.addAll(tmp);
-        unexplored.removeAll(explored);
-        ArrayList<ArrayList<String>> graph = new ArrayList<>();
-        boolean dstInGraph = false;
-        ArrayList<String> tmp2 = new ArrayList<>();
-        tmp2.add(src);
-        graph.add(tmp2);
-        while (!dstInGraph){
-            tmp2 = new ArrayList<>();
-            for (String higherLevel : graph.get(graph.size()-1)){
-                if (map.get(higherLevel) != null)
-                    for (String neighbour : map.get(higherLevel)){
-                        if (!inGraph(graph,neighbour) && !inArray(tmp2,neighbour)) {
-                            tmp2.add(neighbour);
-                            if (neighbour.equals(dst))
-                                dstInGraph = true;
-                        }
-                    }
-            }
-            graph.add(tmp2);
         }
-        ArrayList<String> chemin = new ArrayList<>();
-        chemin.add(dst);
-        for (int i = graph.size() - 2; i > 0; i--){
-            boolean ok = false;
-            for (String s : graph.get(i)){
-                if (!ok) {
-                    if (!unexplored.contains(s)) {
-                        for (String t : map.get(s)) {
-                            if (!ok)
-                                if (t.equals(chemin.get(0))) {
-                                    chemin.add(0,s);
-                                    ok = true;
-                                }
-                        }
-                    }
-                }
+        for (String s : map.get(src)){
+            if (s.equals(dst)){
+                ArrayList<String> res = new ArrayList<>();
+                res.add(dst);
+                return res;
             }
         }
-        return chemin;
+        Graph graph = new SingleGraph("GF1");
+        graph.setStrict(false);
+        graph.setAutoCreate(true);
+        for(String father : map.keySet()){
+            for (String sons :map.get(father)){
+                graph.addEdge(father+sons,father,sons);
+            }
+        }
+        if (tankerPos != null){
+            graph.removeNode(tankerPos);
+        }
+        Dijkstra dijkstra = new Dijkstra();
+        dijkstra.setSource(graph.getNode(src));
+        dijkstra.init(graph);
+        dijkstra.compute();
+        Path p = dijkstra.getPath(graph.getNode(dst));
+        ArrayList<String> res = new ArrayList<>();
+        for (Node N: p.getNodeSet()){
+            res.add(N.toString());
+        }
+        if(res.size() == 0){
+            return new ArrayList<>();
+        }
+        res.remove(0);
+        return res;
     }
 
-    public static ArrayList<String> dijkstraNoeudPlusProche (HashMap<String, String[]> map, String src, String [] unexplored){
+
+    public static ArrayList<String> dijkstraClosestNode(HashMap<String, String[]> map, String src, String [] unexplored,String tankerPos){
         if (unexplored.length == 0) return new ArrayList<>();
-        ArrayList<String> res = dijkstra(map,src,unexplored[0]);
+        ArrayList<String> res = dijkstra(map,src,unexplored[0],tankerPos);
         for (int i = 1; i < unexplored.length; i++){
-            ArrayList<String> tmp = dijkstra(map,src,unexplored[i]);
-            if (tmp.size() < res.size()) res = tmp;
+            ArrayList<String> tmp = dijkstra(map,src,unexplored[i],tankerPos);
+            if (tmp.size() < res.size() && tmp.size()!=0){
+                res = tmp;
+            }
         }
         return res;
     }
@@ -107,27 +104,29 @@ public class Tools {
     /*
      * Search for a node of which each level from 1 to depth has at least level*width neighbours
      */
-    public static String centralize (HashMap<String, String[]> map, int depth, int width){
-        for (String key : map.keySet()) {
-            ArrayList<ArrayList<String>> graph = new ArrayList<>();
-            ArrayList<String> tmp2 = new ArrayList<>();
-            tmp2.add(key);
-            graph.add(tmp2);
-            for (int i = 1; i <= depth; i++){
-                tmp2 = new ArrayList<>();
-                for (String higherLevel : graph.get(graph.size()-1)){
-                    if (map.get(higherLevel) != null)
-                        for (String neighbour : map.get(higherLevel)){
-                            if (!inGraph(graph,neighbour) && !inArray(tmp2,neighbour)) {
-                                tmp2.add(neighbour);
-                            }
-                        }
-                }
-                if(tmp2.size() < i*width) break;
-                graph.add(tmp2);
+    public static String centralize (HashMap<String, String[]> map){
+        Graph graph = new SingleGraph("GF1");
+        graph.setStrict(false);
+        graph.setAutoCreate(true);
+        for(String father : map.keySet()){
+            for (String sons :map.get(father)){
+                graph.addEdge(father+sons,father,sons);
             }
-            if (graph.size()-1 == depth) return key;
         }
-        return null;
+        BetweennessCentrality bcb = new BetweennessCentrality();
+        bcb.init(graph);
+        bcb.compute();
+        double maxCb = 0;
+        Node node = graph.getNode(0);
+        for(Node n :graph.getNodeSet()){
+            double tmp =  n.getAttribute("Cb");
+            if(maxCb < tmp){
+                maxCb = tmp;
+                node = graph.getNode(n.toString());
+            }
+        }
+        return node.toString();
     }
 }
+
+

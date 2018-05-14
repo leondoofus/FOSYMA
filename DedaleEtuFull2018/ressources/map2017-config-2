@@ -7,9 +7,9 @@ treasure:69:11
 diamonds:96:77
 diamonds:14:57
 diamonds:38:6
-agent:Agent1:129:170:-1
-agent:Agent2:130:-1:95
-agent:Agent3:5:41:-1
-agent:Agent4:99:-1:13
-agent:Agent5:93:50:-1
-agent:Agent6:32:-1:5
+wumpus:Golem:129:170:-1
+agentCollect:Collector1:130:-1:95
+agentCollect:Collector2:5:41:-1
+agentExplo:explore1:99:-1:13
+agentExplo:explore2:93:50:-1
+agentTanker:Tanker:32:1000000:1000000

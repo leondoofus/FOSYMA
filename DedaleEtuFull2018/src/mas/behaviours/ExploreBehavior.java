@@ -14,7 +14,7 @@ import java.util.*;
 public class ExploreBehavior extends SimpleBehaviour {
 
     private static final long serialVersionUID = 9088209402507795289L;
-    private CustomAgent customAgent;
+    protected CustomAgent customAgent;
     private String myName;
 
 
@@ -28,15 +28,13 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
-        System.out.println(myName + " "+this.customAgent.getData().size());
-
         //customAgent.printMap();
         String myPosition = (this.customAgent).getCurrentPosition();
         //System.out.println( myName+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
+        List<Couple<String, List<Attribute>>> lobs = (this.customAgent).observe();
+        customAgent.updateMap(lobs,myPosition);
         if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
-                List<Couple<String, List<Attribute>>> lobs = (this.customAgent).observe();
-                customAgent.updateMap(lobs,myPosition);
                 String notVisited = customAgent.getUnvisitedNode(myPosition);
                 //System.out.print( myName+ " printing the next case where i want to go : ");
                 //System.out.println(notVisited);
@@ -44,35 +42,27 @@ public class ExploreBehavior extends SimpleBehaviour {
                     boolean canMove = (this.customAgent.moveTo(notVisited));
                     if (!canMove) {
                         customAgent.clearSteps();
+                        randomMove(lobs);
                         //System.out.println(myName + "I'm stuck ");
-
                     }
                 } else {
-                    //System.out.println( myName+ " the agent is now blocked and cant move");
-                    if (customAgent.isMapCompleted()) {
-                        //System.err.println(myName + " : I explored the map");
-                        //Random move from the current position
-                        randomMove(lobs);
-                        //this.customAgent.die();
-                        //this.customAgent.clearMap(); //TODO to delete
+                    Set<String> unexplored = customAgent.getUnexploredNodes();
+                    if(unexplored.isEmpty()){
+                        startAfterExplore(myPosition);
+                        movetoStep(lobs);
                     } else {
-                        Set<String> unexplored = customAgent.getUnexploredNodes();
                         //System.out.println( myName + " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
                         //this.customAgent.setSteps(Tools.dijkstra(myMap, myPosition, unexploredAsString[0]))
-                        this.customAgent.setSteps(Tools.dijkstraNoeudPlusProche(customAgent.getMap()
-                                ,myPosition,unexplored.toArray(new String[unexplored.size()])));
-                        String step = this.customAgent.popStep();
-                        if (!(this.customAgent).moveTo(step)) {
-                            this.customAgent.clearSteps();
-                        }
+                        this.customAgent.setSteps(Tools.dijkstraClosestNode(customAgent.getMapSons()
+                                ,myPosition,unexplored.toArray(new String[unexplored.size()]),customAgent.getTankerPos()));
+                        movetoStep(lobs);
+
                     }
                 }
             }
         } else {
-            String step = this.customAgent.popStep();
-            if (!((abstractAgent) this.myAgent).moveTo(step)) {
-                this.customAgent.clearSteps();
-            }
+            customAgent.updateMap(lobs,myPosition);
+            movetoStep(lobs);
         }
     }
 
@@ -89,9 +79,32 @@ public class ExploreBehavior extends SimpleBehaviour {
     }
 
     private void randomMove(List<Couple<String, List<Attribute>>> lobs){
+        /*
+        for(Attribute a : lobs.get(0).getRight()){
+            if(a.getName().equals("Stench")){
+                startAfterExplore(lobs.get(0).getLeft());
+                return;
+            }
+        }*/
         Random r= new Random();
         int moveId=r.nextInt(lobs.size());
         while (!(this.customAgent).moveTo(lobs.get(moveId).getLeft()))
             moveId=r.nextInt(lobs.size());
+    }
+    private void movetoStep(List<Couple<String, List<Attribute>>> lobs){
+        if(!this.customAgent.setpsIsEmpty()){
+            String step = this.customAgent.popStep();
+            if(!step.equals(this.customAgent.getTankerPos())){
+                if (!((abstractAgent) this.myAgent).moveTo(step)) {
+                    randomMove(lobs);
+                    this.customAgent.clearSteps();
+                }
+            }else{
+                randomMove(lobs);
+            }
+        }
+    }
+    public void startAfterExplore(String myPosition){
+        this.customAgent.setSteps(Tools.dijkstra(customAgent.getMapSons(),myPosition,this.customAgent.getRandomNode(),customAgent.getTankerPos()));
     }
 }

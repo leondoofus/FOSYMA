@@ -1,4 +1,4 @@
-package mas.behaviours;
+package mas.uselessbehaviours;
 
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -21,7 +21,7 @@ public class ReceiveStepsBehavior extends SimpleBehaviour {
         //System.out.println(this.myAgent.getLocalName() +" Is waiting for Steps");
         final ACLMessage msg = this.customAgent.blockingReceive(MessageTemplate.MatchPerformative(ACLMessage.PROXY),200);
         if (msg != null) {
-            //System.out.println(this.myAgent.getLocalName() + "<----Result received from " + msg.getSender().getLocalName());
+            //System.out.println(this.myAgent.getLocalName() + "<----Result received from " + msg.getSender().getLfocalName());
             try {
                 if (msg.getContentObject() instanceof ArrayList) {
                     customAgent.setSteps((ArrayList<String>) msg.getContentObject());

@@ -26,7 +26,6 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
             try {
                 if (received.getContentObject() instanceof HashMap) {
                     this.customAgent.setCommunicatingAgent(received.getSender());
-                    //System.out.println(this.myAgent.getLocalName() + " : Map received from " + received.getSender().getLocalName());
                     HashMap map = (HashMap) received.getContentObject();
                     customAgent.fusion(map);
                     customAgent.clearSteps();
@@ -45,7 +44,7 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
             if(customAgent.getPreviousBehaviour().equals("RequestConnectionBehaviour")){
                 nextBehaviourSelect = 2 ; //pass to send map
             }else{ //ca vient de sendmap
-                nextBehaviourSelect = 3; //pass to send step
+                nextBehaviourSelect = 1; //pass to exp
             }
         customAgent.setPreviousBehaviour("ReceiveMapBehaviour");
         return true;

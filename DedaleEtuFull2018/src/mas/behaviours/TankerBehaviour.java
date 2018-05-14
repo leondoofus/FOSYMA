@@ -28,17 +28,17 @@ public class TankerBehaviour extends SimpleBehaviour {
         if (myPosition.equals(tankerAgent.getTankerPos())){
             return;
         }
+        List<Couple<String, List<Attribute>>> lobs = ((mas.abstractAgent) this.myAgent).observe();//myPosition
+        tankerAgent.updateMap(lobs, myPosition);
         if (tankerAgent.getTankerPos() == null) {
             if (myPosition != "") {
                 //List of observable from the agent's current position
-                List<Couple<String, List<Attribute>>> lobs = ((mas.abstractAgent) this.myAgent).observe();//myPosition
-                tankerAgent.updateMap(lobs, myPosition);
                 randomMove(lobs);
             }
         } else {
             if (!myPosition.equals(tankerAgent.getTankerPos())){
                 if (tankerAgent.stepsIsEmpty())
-                    tankerAgent.setSteps(Tools.dijkstra(tankerAgent.getMap(),myPosition,tankerAgent.getTankerPos()));
+                    tankerAgent.setSteps(Tools.dijkstra(tankerAgent.getMapSons(),myPosition,tankerAgent.getTankerPos(),null));
                 String step = tankerAgent.popStep();
                 if (tankerAgent.moveTo(step)) {
                     this.tankerAgent.clearSteps();
@@ -50,10 +50,10 @@ public class TankerBehaviour extends SimpleBehaviour {
 
     @Override
     public int onEnd() {
-        if (tankerAgent.isMapCompleted()){
+        if (tankerAgent.getUnexploredNodes().isEmpty()){
             if (tankerAgent.getTankerPos() == null){
                 for (int i = 5; i > 0; i--){
-                    String s = Tools.centralize(tankerAgent.getMap(),i,i);
+                    String s = Tools.centralize(tankerAgent.getMapSons());
                     if (s != null){
                         tankerAgent.setTankerPos(s);
                         break;
