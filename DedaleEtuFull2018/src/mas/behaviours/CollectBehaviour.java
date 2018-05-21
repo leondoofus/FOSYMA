@@ -80,7 +80,7 @@ public class CollectBehaviour extends SimpleBehaviour {
                         movetoStep(lobs);
 
                     }
-                    //I have no space im my backpack
+                    //I have no space in my backpack
                 } else {
                     collectorAgent.computeTankerPos();
                     //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());

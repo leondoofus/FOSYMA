@@ -6,13 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class nodeData implements Serializable{
+public class NodeData implements Serializable{
 
     private List<Attribute> attrs;
     private List<String> neighbours;
     private long time;
 
-    public nodeData(List<Attribute> attrs,List<String> neighbours,long time){
+    public NodeData(List<Attribute> attrs, List<String> neighbours, long time){
         this.attrs = attrs;
         this.neighbours = neighbours;
         this.time = time;
