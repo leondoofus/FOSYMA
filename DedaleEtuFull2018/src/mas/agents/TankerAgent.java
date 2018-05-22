@@ -14,9 +14,7 @@ import mas.abstractAgent;
 
 public class TankerAgent extends CustomAgent{
 
-	/**
-	 * 
-	 */
+    private String wumpusPosition = null;
 	private static final long serialVersionUID = -1784844593772918359L;
 
 
@@ -72,11 +70,26 @@ public class TankerAgent extends CustomAgent{
         fsmBehaviour.registerTransition("Rcv","Tnk",1);
 
         addBehaviour(fsmBehaviour);
-		}
+	}
 
-	protected void takeDown(){
+
+	public void wumpusPosition(String pos){
+	    wumpusPosition = pos;
+    }
+
+    public void clearwumpusPosition(){
+	    wumpusPosition = null;
+    }
+
+    public String getWumpusPosition() {
+        return wumpusPosition;
+    }
+
+    protected void takeDown(){
 
 	}
+
+
 }
 
 

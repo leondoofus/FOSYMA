@@ -1,7 +1,5 @@
 package mas.agents;
 
-import env.Attribute;
-import env.Couple;
 import jade.core.behaviours.FSMBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -13,7 +11,6 @@ import mas.uselessbehaviours.SendPositionBehavior;
 import mas.uselessbehaviours.SendStepsBehavior;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 

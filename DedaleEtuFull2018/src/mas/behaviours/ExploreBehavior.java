@@ -79,13 +79,6 @@ public class ExploreBehavior extends SimpleBehaviour {
     }
 
     private void randomMove(List<Couple<String, List<Attribute>>> lobs){
-        /*
-        for(Attribute a : lobs.get(0).getRight()){
-            if(a.getName().equals("Stench")){
-                startAfterExplore(lobs.get(0).getLeft());
-                return;
-            }
-        }*/
         Random r= new Random();
         int moveId=r.nextInt(lobs.size());
         while (!(this.customAgent).moveTo(lobs.get(moveId).getLeft()))
@@ -105,6 +98,7 @@ public class ExploreBehavior extends SimpleBehaviour {
         }
     }
     public void startAfterExplore(String myPosition){
+        System.out.println("aaaaa");
         this.customAgent.setSteps(Tools.dijkstra(customAgent.getMapSons(),myPosition,this.customAgent.getRandomNode(),customAgent.getTankerPos()));
     }
 }

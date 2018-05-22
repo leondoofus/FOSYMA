@@ -5,7 +5,7 @@ import env.EntityType;
 import env.Environment;
 
 import mas.abstractAgent;
-import mas.behaviours.*;
+import mas.uselessbehaviours.RandomWalkBehaviour;
 
 
 public class DummyExploAgent extends abstractAgent{

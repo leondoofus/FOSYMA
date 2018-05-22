@@ -241,7 +241,7 @@ public class Principal {
         try {
 
             Object[] objtab=new Object[]{env,EntityType.AGENT_EXPLORER};//used to give information to the agent
-            AgentController	ag=c.createNewAgent(agentName,ExploreTimedAgent.class.getName(),objtab);
+            AgentController	ag=c.createNewAgent(agentName,ExploreAgent.class.getName(),objtab);
             agentList.add(ag);
             System.out.println(agentName+" launched");
         } catch (StaleProxyException e) {

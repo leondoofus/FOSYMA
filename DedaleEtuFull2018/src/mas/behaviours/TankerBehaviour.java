@@ -38,10 +38,18 @@ public class TankerBehaviour extends SimpleBehaviour {
         } else {
             if (!myPosition.equals(tankerAgent.getTankerPos())){
                 if (tankerAgent.stepsIsEmpty())
-                    tankerAgent.setSteps(Tools.dijkstra(tankerAgent.getMapSons(),myPosition,tankerAgent.getTankerPos(),null));
+                    tankerAgent.setSteps(Tools.dijkstra(tankerAgent.getMapSons(),myPosition,tankerAgent.getTankerPos(),tankerAgent.getWumpusPosition()));
+                    tankerAgent.clearwumpusPosition();
                 String step = tankerAgent.popStep();
-                if (tankerAgent.moveTo(step)) {
+                if (!tankerAgent.moveTo(step)) {
+                    for( Attribute a :lobs.get(0).getRight()){
+                        if(a.getName().equals("Stench")){
+                            this.tankerAgent.wumpusPosition(step);
+                            break;
+                        }
+                    }
                     this.tankerAgent.clearSteps();
+                    randomMove(lobs);
                 }
             }
         }
@@ -76,4 +84,5 @@ public class TankerBehaviour extends SimpleBehaviour {
         while (!tankerAgent.moveTo(lobs.get(moveId).getLeft()))
             moveId=r.nextInt(lobs.size());
     }
+
 }

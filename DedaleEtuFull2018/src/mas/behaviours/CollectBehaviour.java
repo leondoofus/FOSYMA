@@ -29,19 +29,17 @@ public class CollectBehaviour extends SimpleBehaviour {
         for(Attribute a:lobs.get(0).getRight()){ //try to grab sth
             switch (a) {
                 case TREASURE : case DIAMONDS :
-                    System.out.println("My treasure type is :"+((mas.abstractAgent)this.myAgent).getMyTreasureType());
-                    System.out.println("My current backpack capacity is:"+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    System.out.println("My treasure type is :"+((abstractAgent)this.myAgent).getMyTreasureType());
+                    System.out.println("My current backpack capacity is:"+ ((abstractAgent)this.myAgent).getBackPackFreeSpace());
                     System.out.println("Value of the treasure on the current position: "+a.getName() +": "+ a.getValue());
-                    System.out.println("The agent grabbed :"+((mas.abstractAgent)this.myAgent).pick());
-                    System.out.println("the remaining backpack capacity is: "+ ((mas.abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    System.out.println("The agent grabbed :"+((abstractAgent)this.myAgent).pick());
+                    System.out.println("the remaining backpack capacity is: "+ ((abstractAgent)this.myAgent).getBackPackFreeSpace());
                     break;
                 default:
                     break;
             }
         }
     }
-
-
 
     private void randomMove(List<Couple<String, List<Attribute>>> lobs){
         Random r= new Random();
@@ -50,52 +48,13 @@ public class CollectBehaviour extends SimpleBehaviour {
             moveId=r.nextInt(lobs.size());
     }
 
+
     @Override
     public void action() {
-        String myPosition = (this.collectorAgent).getCurrentPosition();
-        if (!myPosition.equals("")) {
-            List<Couple<String, List<Attribute>>> lobs = (this.collectorAgent).observe();
-            grab(lobs);
-            lobs = (this.collectorAgent).observe();
-            collectorAgent.updateMap(lobs, myPosition);
-            if (this.collectorAgent.stepsIsEmpty()) {
-                if (collectorAgent.getBackPackFreeSpace() != 0) {
-                    //I have space in my backpack
-                    //take tresure if possible
-                    Set<String> allnodes = collectorAgent.getAllNodeskey();
-                    HashMap<String, List<Attribute>> nodesAttributes = this.collectorAgent.getNodesAttributes(allnodes);
-                    ArrayList<String> myPrecious = getMyTreasureNodes(nodesAttributes);
-                    //I cant find any more treasure to take :(
-                    if (myPrecious.isEmpty()) {
-                        //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
-                        if (collectorAgent.getTankerPos() != null) {
-                            collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), collectorAgent.getTankerPos(),null));
-                            movetoStep(lobs);
-                        } else {
-                            //im waiting for the tanker position to be found(i need the full map to do so)
-                            randomMove(lobs);
-                        }
-                    } else {
-                        collectorAgent.setSteps(Tools.dijkstraClosestNode(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), myPrecious.toArray(new String[myPrecious.size()]),collectorAgent.getTankerPos()));
-                        movetoStep(lobs);
-
-                    }
-                    //I have no space in my backpack
-                } else {
-                    collectorAgent.computeTankerPos();
-                    //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
-                    if (collectorAgent.getTankerPos() != null) {
-                        collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), collectorAgent.getTankerPos(),null));
-                        movetoStep(lobs);
-
-                    } else {
-                        //im waiting for the tanker position to be found(i need the full map to do so)
-                        randomMove(lobs);
-                    }
-                }
-            } else {
-                movetoStep(lobs);
-            }
+        if(this.collectorAgent.getTankerPos() == null){
+            Explore();
+        }else {
+            Collect();
         }
     }
 
@@ -134,15 +93,105 @@ public class CollectBehaviour extends SimpleBehaviour {
                     randomMove(lobs);
                 }
             }else{
-                System.out.println(this.myAgent.getLocalName() + " - My current backpack capacity is:" + ((mas.abstractAgent) this.myAgent).getBackPackFreeSpace());
-                System.out.println(this.myAgent.getLocalName() + " - The agent tries to transfer is load into the Silo (if reachable); succes ? : " + ((mas.abstractAgent) this.myAgent).emptyMyBackPack("Tanker"));
-                System.out.println("My current backpack capacity is:" + ((mas.abstractAgent) this.myAgent).getBackPackFreeSpace());
+                System.out.println(this.myAgent.getLocalName() + " - My current backpack capacity is:" + ((abstractAgent) this.myAgent).getBackPackFreeSpace());
+                System.out.println(this.myAgent.getLocalName() + " - The agent tries to transfer is load into the Silo (if reachable); succes ? : " + ((abstractAgent) this.myAgent).emptyMyBackPack("Tanker"));
+                System.out.println("My current backpack capacity is:" + ((abstractAgent) this.myAgent).getBackPackFreeSpace());
                 this.collectorAgent.clearSteps();
                 randomMove(lobs);
             }
         }else{
             randomMove(lobs);
         }
+    }
+
+    public void Collect(){
+        String myPosition = (this.collectorAgent).getCurrentPosition();
+        if (!myPosition.equals("")) {
+            List<Couple<String, List<Attribute>>> lobs = (this.collectorAgent).observe();
+            grab(lobs);
+            lobs = (this.collectorAgent).observe();
+            collectorAgent.updateMap(lobs, myPosition);
+            if (this.collectorAgent.stepsIsEmpty()) {
+                if (collectorAgent.getBackPackFreeSpace() != 0) {
+                    //I have space in my backpack
+                    //take tresure if possible
+                    Set<String> allnodes = collectorAgent.getAllNodeskey();
+                    HashMap<String, List<Attribute>> nodesAttributes = this.collectorAgent.getNodesAttributes(allnodes);
+                    ArrayList<String> myPrecious = getMyTreasureNodes(nodesAttributes);
+                    //I cant find any more treasure to take :(
+                    if (myPrecious.isEmpty()) {
+                        //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
+                        if (collectorAgent.getTankerPos() != null) {
+                            collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), collectorAgent.getTankerPos(),null));
+                            movetoStep(lobs);
+                        } else {
+                            randomMove(lobs);
+                        }
+                    } else {
+                        collectorAgent.setSteps(Tools.dijkstraClosestNode(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), myPrecious.toArray(new String[myPrecious.size()]),collectorAgent.getTankerPos()));
+                        movetoStep(lobs);
+
+                    }
+                    //I have no space in my backpack
+                } else {
+                    collectorAgent.computeTankerPos();
+                    //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
+                    if (collectorAgent.getTankerPos() != null) {
+                        collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), collectorAgent.getTankerPos(),null));
+                        movetoStep(lobs);
+
+                    } else {
+                        //im waiting for the tanker position to be found(i need the full map to do so)
+                        randomMove(lobs);
+                    }
+                }
+            } else {
+                movetoStep(lobs);
+            }
+        }
+    }
+
+    public void Explore(){
+        //customAgent.printMap();
+        String myPosition = (this.collectorAgent).getCurrentPosition();
+        //System.out.println( myName+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
+        List<Couple<String, List<Attribute>>> lobs = (this.collectorAgent).observe();
+        collectorAgent.updateMap(lobs,myPosition);
+        if (this.collectorAgent.stepsIsEmpty()) {
+            if (!myPosition.equals("")) {
+                String notVisited = collectorAgent.getUnvisitedNode(myPosition);
+                //System.out.print( myName+ " printing the next case where i want to go : ");
+                //System.out.println(notVisited);
+                if (notVisited != null) {
+                    boolean canMove = (this.collectorAgent.moveTo(notVisited));
+                    if (!canMove) {
+                        collectorAgent.clearSteps();
+                        randomMove(lobs);
+                        //System.out.println(myName + "I'm stuck ");
+                    }
+                } else {
+                    Set<String> unexplored = collectorAgent.getUnexploredNodes();
+                    if(unexplored.isEmpty()){
+                        startAfterExplore(myPosition);
+                        movetoStep(lobs);
+                    } else {
+                        //System.out.println( myName + " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
+                        //this.customAgent.setSteps(Tools.dijkstra(myMap, myPosition, unexploredAsString[0]))
+                        this.collectorAgent.setSteps(Tools.dijkstraClosestNode(collectorAgent.getMapSons()
+                                ,myPosition,unexplored.toArray(new String[unexplored.size()]),collectorAgent.getTankerPos()));
+                        movetoStep(lobs);
+
+                    }
+                }
+            }
+        } else {
+            collectorAgent.updateMap(lobs,myPosition);
+            movetoStep(lobs);
+        }
+    }
+
+    public void startAfterExplore(String myPosition){
+        this.collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(),myPosition,this.collectorAgent.getRandomNode(),collectorAgent.getTankerPos()));
     }
 
 }

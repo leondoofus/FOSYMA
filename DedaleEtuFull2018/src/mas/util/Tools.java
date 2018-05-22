@@ -14,8 +14,11 @@ public class Tools {
 
 
     public static ArrayList<String> dijkstra (HashMap<String,String[]> map, String src, String dst, String tankerPos)  {
-        if (src.equals(dst) || dst.equals(tankerPos)){
+        if (src.equals(dst) || dst.equals(tankerPos) ||src.equals(tankerPos)){
             return new ArrayList<>();
+        }
+        if(src.equals("")){
+            System.out.println("aaaaaa");
         }
         for (String s : map.get(src)){
             if (s.equals(dst)){

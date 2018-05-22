@@ -1,4 +1,4 @@
-package mas.behaviours;
+package mas.uselessbehaviours;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package mas.behaviours;
+package mas.uselessbehaviours;
 
 import env.Attribute;
 import env.Couple;
