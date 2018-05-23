@@ -156,12 +156,25 @@ Ici les comportement \texttt{Main} est definit comme le comportement principal d
 \paragraph{Centralisation dans le graphe :} Nous plaçons le Tanker sur le nœud de plus haute Betweenness centrality dans le graphe. c'est a dire le nœud  qui est dans le plus grande nombre de plus cours chemins entre deux autres nœuds quelconques du graphe. pour faire ce calcul nous utilisons l'algorithme fournis par graphstream. Dans la plupart des cas cette méthode est très efficace. elle permet de minimiser le chemin que les agents collecteurs ont a faire entre leur trésor et le tanker. L'inconvénient cependant, est que si le graphe se décompose en 2 grands sous-graphes de même taille qui se connectent par un nœud unique, une fois le Tanker est placé il est possible qu'il se trouve sur ce nœud unique, les agents ne peuvent donc plus accéder à la partie du graphe dans laquelle ils ne sont pas partie du graphe.\\
 \tab Une autre méthode a été proposée. prendre le nœud ayant les plus grand nombre de descendants.ce qui permet d'éviter Nous allons éviter le blocage du cas précédent. Cependant cela nécessiterais de communiquer la position du tanker a tous les agents. ce qui nous semblais être une moins bonne stratégie.
 	
-\subsection{Trucs pas implémenté}
-{\Huge INTERBLOCAGE !!!}
+\subsection{Interblocage}
+
+\paragraph{}nous voulions un système robuste pour la gestion de l'inter-blocage. Il nous semblais en effet très important de minimiser un maximum les risque que deux agents se veuillent se  diriger vers une case occupé par un autre agent, c'est pour cette raison que nous avons conçus notre système de communication de façon a ce qu'un échange de carte de fasse le plus souvent possible. Bien ce cette méthode soit peu économe en messages elle minimise les interblocages dans la phase d'exploration car les agents ne se dirigent pas vers les nœuds qui se trouvent déjà dans leur carte. Nous exploitons cette fonctionnalité de la façon suivante : lorsque deux agents se trouvent a proximité de deux cases, ils échangent leurs carte respectives et de ce fait ne se dirigent pas vers la position ou se trouve l'autre agent en communication car celle-ci sera marque comme exploré.\\
+\tab La méthode décrite ci dessus ne permet cependant pas d'éviter les interblocages dans la phase de récupération des trésors, pour contrer cela lorsque l'un de nos agents n'arrive pas a faire un mouvement, il vas sélectionner une case au hasard dans ses voisin et essayer de s'y déplacer jusqu'à ce que ce soit possible.
+
 \subsection{Amélioration}
-Nous pourrions réduire le nombre de messages envoyés en stockant les agents communiqués après avoir la complétion de la carte.\\
-\tab Si les agents sont dans un réseau des environnements, il faudra reconstruire la structure de donnée pour sauvegarder les cartes différentes ainsi que la situation de l'agent dans chaque carte.
+Nous pensons qu'il serais possible de grandement améliorer la gestion des interblocages \\
+\tab gestion de plusieurs tankers \\
+\tab un tanker qui se déplace \\
+\tab blocage du wumpus\\
+\tab comportement de fuite vis a vis du wumpus \\
+\tab Si les agents sont lâchés dans un réseau composé de différents environnements, il faudra reconstruire la structure de donnée pour sauvegarder les cartes différentes ainsi que la situation de l'agent dans chaque carte.
 \section{Conclusion}
+fonctionne 
+rmassage rapide 
+exploration tres rapide 
+vulnerabilités 
+bloquage
+sous optimale 
 
 
 
