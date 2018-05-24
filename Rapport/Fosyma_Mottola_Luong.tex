@@ -162,13 +162,21 @@ Ici les comportement \texttt{Main} est definit comme le comportement principal d
 \tab La méthode décrite ci dessus ne permet cependant pas d'éviter les interblocages dans la phase de récupération des trésors, pour contrer cela lorsque l'un de nos agents n'arrive pas a faire un mouvement, il vas sélectionner une case au hasard dans ses voisin et essayer de s'y déplacer jusqu'à ce que ce soit possible.
 
 \subsection{Amélioration}
-Nous pensons qu'il serais possible de grandement améliorer la gestion des interblocages \\
-\tab gestion de plusieurs tankers \\
-\tab un tanker qui se déplace \\
-\tab blocage du wumpus\\
-\tab comportement de fuite vis a vis du wumpus \\
+Nous pensons qu'il serais possible de grandement améliorer la gestion des interblocages, en effets la sélection d'une case au hasard lorsqu'un agent se bloque est sous optimale lorsque les agents se croisent dans une ligne.\\
+\tab Pour accélérer la récupération des Trésors il serais possible d'augmenter le nombre de tanker cela pourrais potentiellement diminuer le temps de trajet des agents des trésors vers le Tanker, on pourrais aussi imaginer un tanker qui se déplace vers les gants collecteurs.\\
+\tab Nous avons aussi penser a réorienter les agents explorateurs après la complétion de la carte pour bloquer l'agent wumpus, cela nous permettrais de ne pas nous soucier de la mise a jour de la carte après l'exportation\\
 \tab Si les agents sont lâchés dans un réseau composé de différents environnements, il faudra reconstruire la structure de donnée pour sauvegarder les cartes différentes ainsi que la situation de l'agent dans chaque carte.
 \section{Conclusion}
+\tab Vous trouverez ci dessous Les performances de notre algorithmes sur l'instance de l'examen de 2017\\
+\begin{center}
+\begin{tabular}{lll}
+   Instance2017 & Trésors & Diamants \\
+   Total & 280 & 140\\
+   Ramassé & 202 & 128 \\
+\end{tabular}
+\end{center}
+\paragraph
+En conclusion 
 fonctionne 
 rmassage rapide 
 exploration tres rapide 

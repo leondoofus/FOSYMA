@@ -12,4 +12,4 @@ agentCollect:Collector1:130:-1:95
 agentCollect:Collector2:5:41:-1
 agentExplo:explore1:99:-1:13
 agentExplo:explore2:93:50:-1
-agentTanker:Tanker:32:1000000:1000000
+agentTanker:Tanker:32:300:200

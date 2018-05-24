@@ -39,7 +39,6 @@ public class TankerAgent extends CustomAgent{
         } catch (FIPAException fe){
             fe.printStackTrace();
         }
-
         FSMBehaviour fsmBehaviour = new FSMBehaviour();
         fsmBehaviour.registerFirstState(new ExploreBehaviortanker(this),"Exp");
         fsmBehaviour.registerState(new CheckMailBehavior(this),"Ckm");
@@ -63,8 +62,6 @@ public class TankerAgent extends CustomAgent{
 
         fsmBehaviour.registerTransition("Rmp","Exp",1); // receive to explore
         fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
-
-
 
         fsmBehaviour.registerTransition("Tnk","Rcv",1);
         fsmBehaviour.registerTransition("Rcv","Tnk",1);

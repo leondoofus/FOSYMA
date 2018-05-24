@@ -17,9 +17,6 @@ public class Tools {
         if (src.equals(dst) || dst.equals(tankerPos) ||src.equals(tankerPos)){
             return new ArrayList<>();
         }
-        if(src.equals("")){
-            System.out.println("aaaaaa");
-        }
         for (String s : map.get(src)){
             if (s.equals(dst)){
                 ArrayList<String> res = new ArrayList<>();

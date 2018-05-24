@@ -98,7 +98,6 @@ public class ExploreBehavior extends SimpleBehaviour {
         }
     }
     public void startAfterExplore(String myPosition){
-        System.out.println("aaaaa");
         this.customAgent.setSteps(Tools.dijkstra(customAgent.getMapSons(),myPosition,this.customAgent.getRandomNode(),customAgent.getTankerPos()));
     }
 }

@@ -53,7 +53,6 @@ public class TankerBehaviour extends SimpleBehaviour {
                 }
             }
         }
-
     }
 
     @Override

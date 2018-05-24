@@ -29,11 +29,10 @@ public class CollectBehaviour extends SimpleBehaviour {
         for(Attribute a:lobs.get(0).getRight()){ //try to grab sth
             switch (a) {
                 case TREASURE : case DIAMONDS :
-                    System.out.println("My treasure type is :"+((abstractAgent)this.myAgent).getMyTreasureType());
-                    System.out.println("My current backpack capacity is:"+ ((abstractAgent)this.myAgent).getBackPackFreeSpace());
-                    System.out.println("Value of the treasure on the current position: "+a.getName() +": "+ a.getValue());
-                    System.out.println("The agent grabbed :"+((abstractAgent)this.myAgent).pick());
-                    System.out.println("the remaining backpack capacity is: "+ ((abstractAgent)this.myAgent).getBackPackFreeSpace());
+                    ((abstractAgent)this.myAgent).getMyTreasureType();
+                    ((abstractAgent)this.myAgent).getBackPackFreeSpace();
+                    System.err.println("Value of the treasure on the current position: "+a.getName() +" : "+ a.getValue()+" picked : "+((abstractAgent)this.myAgent).pick());
+                    ((abstractAgent)this.myAgent).getBackPackFreeSpace();
                     break;
                 default:
                     break;
@@ -93,9 +92,9 @@ public class CollectBehaviour extends SimpleBehaviour {
                     randomMove(lobs);
                 }
             }else{
-                System.out.println(this.myAgent.getLocalName() + " - My current backpack capacity is:" + ((abstractAgent) this.myAgent).getBackPackFreeSpace());
-                System.out.println(this.myAgent.getLocalName() + " - The agent tries to transfer is load into the Silo (if reachable); succes ? : " + ((abstractAgent) this.myAgent).emptyMyBackPack("Tanker"));
-                System.out.println("My current backpack capacity is:" + ((abstractAgent) this.myAgent).getBackPackFreeSpace());
+                ((abstractAgent) this.myAgent).getBackPackFreeSpace();
+                ((abstractAgent) this.myAgent).emptyMyBackPack("Tanker");
+                ((abstractAgent) this.myAgent).getBackPackFreeSpace();
                 this.collectorAgent.clearSteps();
                 randomMove(lobs);
             }
