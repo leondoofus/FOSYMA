@@ -174,7 +174,6 @@ On note donc que le nombre de messages envoyés dans le pire des cas à chaque c
 \begin{center}
 	\includegraphics[width=0.8\textwidth]{extend.png}
 \end{center}
-\iffalse
 \begin{center}
 	\qquad \begin{psmatrix}
 		& & Start&\\
@@ -197,24 +196,22 @@ On note donc que le nombre de messages envoyés dans le pire des cas à chaque c
 	\psset{doubleline=true}
 	\ncline{1,3}{2,3}
 \end{center}
-\fi
 \subsection{Les Outils}
 \paragraph{Calcul de chemin :} Nous utilisions l'algorithme de Dijkstra en considérant des arêtes ayant toutes le même poids, de ce fait le plus cours chemin sera celui qui a le moins d'arêtes. L'implémentation utilisée de cette algorithme est celle fournie par \texttt{graphStream}. Quant à la recherche du plus court chemin vers plusieurs cases, on applique cet algorithmes vers chacune des cases et on prend le chemin avec la valeur la plus proche.\\
 \tab Pour empêcher le blocage des agents explorateurs et collecteurs sur le tanker du fait que celui-ci ne bouge pas. Après que la position du tanker est déterminée nous enlevons ce n\oe{}ud des graphes pour le calcul de Dijkstra ce qui permet aux agents de passer autour du Tanker.\\
-\tab \textbf{O(n log(n) + m)} avec n le nombre de n\oe{}uds et m nombre d'arêtes.
+\tab \textbf Complexité de Dijkstra en{O(n log(n) + m)} avec n le nombre de n\oe{}uds et m nombre d'arêtes.
 
 \paragraph{Centralisation dans le graphe :} Nous plaçons le Tanker sur le n\oe{}ud de plus haute \href{https://en.wikipedia.org/wiki/Betweenness_centrality}{Betweenness centrality} dans le graphe, c'est-à-dire le n\oe{}ud  qui est dans le plus grande nombre de plus cours chemins entre deux autres n\oe{}uds quelconques du graphe. Pour faire ce calcul nous utilisons l'algorithme fourni par \texttt{graphStream}. Dans la plupart des cas, cette méthode est très efficace. Elle permet de minimiser le chemin que les agents collecteurs ont a faire entre leur trésor et le tanker. L'inconvénient cependant, est que si le graphe se décompose en 2 grands sous-graphes de même taille qui se connectent par un n\oe{}ud unique, une fois le Tanker est placé, il est possible qu'il se trouve sur ce n\oe{}ud unique, les agents ne peuvent donc plus accéder à la partie du graphe dans laquelle ils ne font pas partie du graphe.\\
 \tab Une autre méthode a été proposée. C'est de prendre le n\oe{}ud ayant les plus grand nombre de descendants, ce qui permet d'éviter le blocage du cas précédent. Cependant cela nécessiterais de communiquer la position du tanker a tous les agents, ce qui nous semblais être plus coûteux en terme de communication et une moins bonne stratégie.
+\tab \textbf Complexité en{O(nm)} avec n le nombre de n\oe{}uds et m nombre d'arêtes.
+
 
 	
 \subsection{Interblocage}
 \tab Nous voulions un système robuste pour la gestion de l'interblocage. Il nous semblait en effet très important de minimiser un maximum des risques que deux agents se veuillent se diriger vers une case occupée par un autre agent, c'est pour cette raison que nous avons conçu notre système de communication de façon à ce qu'un échange de carte de fasse le plus souvent possible. Bien que cette méthode soit peu économe en messages, elle minimise les interblocages dans la phase d'exploration car les agents ne se dirigent pas vers les n\oe{}uds qui se trouvent déjà dans leur carte. Nous exploitons cette fonctionnalité de la façon suivante : lorsque deux agents se trouvent à proximité de deux cases, ils échangent leurs carte respectives et de ce fait ne se dirigent pas vers la position où se trouve l'autre agent en communication car celle-ci sera marquée comme explorée.\\
 \tab La méthode décrite ci-dessus ne permet cependant pas d'éviter les interblocages dans la phase de récupération des trésors, pour contrer cela lorsque l'un de nos agents n'arrive pas à faire un mouvement, il va sélectionner une case au hasard parmi ses voisins et essayer de s'y déplacer jusqu'à ce que ce soit possible.
 
-\subsection{Amélioration}
-Nous pensons qu'il serait possible de grandement améliorer la gestion des interblocages, en effet la sélection d'une case au hasard lorsqu'un agent se bloque est sous optimale lorsque les agents se croisent dans une ligne.\\
-\tab Pour accélérer la récupération des trésors il serait possible d'augmenter le nombre de Tanker cela pourrait potentiellement diminuer le temps de trajet des agents des trésors vers le Tanker, on pourrais aussi imaginer un Tanker qui se déplace vers les gants collecteurs.\\
-\tab Nous avons aussi pensé à réorienter les agents explorateurs après la complétion de la carte pour bloquer l'agent Wumpus, cela nous permettrait de ne pas nous soucier de la mise à jour de la carte après l'exportation\\
+
 \section{Conclusion}
 \tab Vous trouverez ci dessous les performances de notre algorithmes sur l'instance de l'examen de 2017\\
 \begin{center}
@@ -225,10 +222,12 @@ Nous pensons qu'il serait possible de grandement améliorer la gestion des inter
 \end{tabular}
 \end{center}
 \tab
-En conclusion notre méthode remplie le critère de récupération des trésors sur la carte fonctionne ramassage rapide 
-exploration très rapide vulnérabilités 
-blocage sous optimale .
+En conclusion notre méthode remplie le critère de récupération des trésors sur la carte bien que nous remarquons un perte substantielle du nombre de trésors ramassé due a méthode de ramassage et au déplacement des trésors par le wumpus. Les communications entre agents, cher en nombre de messages permettent un partage de l'information rapide entre nos agents. la position de notre tanker nous semble optimale, bien que le déplacement de celui ci nous permettrais sans doute de récupérer les trésors plus rapidement. de plus le tanker statique risque de créer des problèmes sur certaines cartes partagés en deux par un couloir. Notre approche vis a vis des interblocages pourrais se résumer de la façon suivante, nous essayons d'en minimiser le nombre avant que ceux ci arrivent, mais la gestion aléatoire des blocages est sous optimale.
 
+\paragraph{Améliorations}  
+Nous pensons qu'il serait possible de grandement améliorer la gestion des interblocages, en effet la sélection d'une case au hasard lorsqu'un agent se bloque est sous optimale lorsque les agents se croisent dans une ligne.\\
+\tab Pour accélérer la récupération des trésors il serait possible d'augmenter le nombre de Tanker cela pourrait potentiellement diminuer le temps de trajet des agents des trésors vers le Tanker, on pourrais aussi imaginer un Tanker qui se déplace vers les agents collecteurs.\\
+\tab Nous avons aussi pensé à réorienter les agents explorateurs après la complétion de la carte pour bloquer l'agent Wumpus, cela nous permettrait de ne pas nous soucier de la mise à jour de la carte après l'exportation\\ 
 
 
 	
