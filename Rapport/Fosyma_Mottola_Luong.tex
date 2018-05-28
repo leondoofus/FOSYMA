@@ -88,7 +88,7 @@ numbers=left,
 	\subsection{Comportement des Agents}
 	Les comportements de nos trois types d'agents sont tous implémentés sous la forme de \texttt{FSMBehaviours} qui sont des Automates fini. La classe offre des méthodes pour enregistrer les états et les transitions qui définissent l'ordre des behaviours.	Chaque état de l'automate fini est un behaviour qui est exécuté selon l'ordre définit par l'utilisateur.\\
 \linebreak 
-\tab \textbf voici un exemple du code de l'automate fini de notre agent explorateur.
+\tab Voici un exemple du code de l'automate fini de notre agent explorateur.
 \begin{lstlisting}
 FSMBehaviour fsmBehaviour = new FSMBehaviour();
 fsmBehaviour.registerFirstState(new MainBehavior(this),"Main");
@@ -112,6 +112,7 @@ fsmBehaviour.registerTransition("Rmp","Smp",2); // receive to send
 
 addBehaviour(fsmBehaviour);
 \end{lstlisting}
+
 %Le schéma ci-dessous représente le comportement composé de nos agents :
 %\begin{center}
 %	\includegraphics[width=0.5\textwidth]{automate.png}
@@ -138,7 +139,7 @@ addBehaviour(fsmBehaviour);
 	\tab Nous allons décrire dans cette section le comportement principal de chaque agent, puis dans la section suivante la suite de behaviours qui leur permet de communiquer et qui est identique pour tous les types d'agents.
 
 \paragraph{Agent Explorateur :}
-Sa mission principale est d'explorer la carte et d'établir une connaissance commune pour tous les agents. Il construit la carte au fur et à mesure dans sa propre table de hachage. Il met à jour dans sa structure de données personnalisée, la disponibilité et la quantité des trésors. Lors de la phase de la communication, tous les agents s'échangent leur carte pour compléter la connaissance. On note que tous les n\oe{}uds de la carte sont horodaté, cela nous permet lors de l'échange de la carte de sélectionner les n\oe{}uds les plus récents s'ils sont présents dans les deux cartes. Une fois la carte est complète, l'agent sélectionne des n\oe{}uds aléatoires dans la carte pour mettre à jour leur contenu, tel que la quantité de trésors présente.
+Sa mission principale est d'explorer la carte et d'établir une connaissance commune pour tous les agents. Il construit la carte au fur et à mesure dans sa propre table de hachage. Il met à jour dans sa structure de données personnalisée, la disponibilité et la quantité des trésors. Lors de la phase de la communication, tous les agents s'échangent leur carte pour compléter la connaissance. On note que tous les n\oe{}uds de la carte sont horodatés, cela nous permet lors de l'échange de la carte de sélectionner les n\oe{}uds les plus récents s'ils sont présents dans les deux cartes. Une fois la carte est complète, l'agent sélectionne des n\oe{}uds aléatoires dans la carte pour mettre à jour leur contenu, tel que la quantité de trésors présente.
 
 \paragraph{Agent Explorateur des n\oe{}uds plus vieux:}
 Cet agent a exactement le même comportement que l'agent explorateur avant la complétion de la carte, cependant lorsque celle-ci est complète son but est d'aller explorer les n\oe{}uds les plus vieux de la carte et non des n\oe{}uds sélectionnés au hasard.
@@ -170,9 +171,6 @@ Description de l'algorithme :
 On note donc que le nombre de messages envoyés dans le pire des cas à chaque communication est \textbf{n+1}. De plus, après chaque mouvement, même si aucun agent ne se trouve dans le rayon de communication de l'agent en question, \textbf{n} messages serons envoyé. Il serait donc possible de grandement réduire le nombre de messages en débutant la communication lors du blocage de l'agent, mais du fait que les agents peuvent communiquer s'ils sont dans le rayon de communication (c'est-à-dire une distance de 2 n\oe{}uds du graphe), cela réduirait grandement le nombre d'échange de cartes, ce qui ne nous semblait pas convenir à notre stratégie d'exploration. 
 
 \begin{center}
-	\includegraphics[width=0.8\textwidth]{extend.png}
-\end{center}
-\begin{center}
 	\qquad \begin{psmatrix}
 		& & Start&\\
 		& & [mnode=circle] Main &\\
@@ -197,12 +195,11 @@ On note donc que le nombre de messages envoyés dans le pire des cas à chaque c
 \subsection{Les Outils}
 \paragraph{Calcul de chemin :} Nous utilisions l'algorithme de Dijkstra en considérant des arêtes ayant toutes le même poids, de ce fait le plus cours chemin sera celui qui a le moins d'arêtes. L'implémentation utilisée de cette algorithme est celle fournie par \texttt{graphStream}. Quant à la recherche du plus court chemin vers plusieurs cases, on applique cet algorithmes vers chacune des cases et on sélectionne le chemin avec la valeur la plus proche.\\
 \tab On note qu'après le calcul de la position du tanker, nous enlevons le n\oe{}ud des graphes pour le calcul de Dijkstra, cela permet d'empêcher le blocage des agents explorateurs et collecteurs sur le tanker du fait que celui-ci ne se déplace pas. Les autres agents passent donc autour du Tanker.\\
-\tab \textbf La Complexité de l'algorithme de Dijkstra est en{O(n log(n) + m)} avec n le nombre de n\oe{}uds et m nombre d'arêtes.
+\tab La complexité de l'algorithme de Dijkstra est en \textbf{O(n log(n) + m)} avec n le nombre de n\oe{}uds et m nombre d'arêtes.
 
 \paragraph{Centralisation dans le graphe :} Nous plaçons le Tanker sur le n\oe{}ud de plus haute \href{https://en.wikipedia.org/wiki/Betweenness_centrality}{Betweenness centrality} dans le graphe, c'est-à-dire le n\oe{}ud  qui est dans le plus grande nombre de plus cours chemins entre deux autres n\oe{}uds quelconques du graphe. Pour faire ce calcul nous utilisons l'algorithme fourni par \texttt{graphStream}. Dans la plupart des cas, cette méthode est très efficace. Elle permet de minimiser le chemin que les agents collecteurs ont a faire entre leur trésor et le tanker. L'inconvénient cependant, est que si le graphe se décompose en 2 grands sous-graphes de même taille qui se connectent par un n\oe{}ud unique, une fois que le Tanker est placé, il est possible qu'il se trouve sur ce n\oe{}ud unique, les agents ne peuvent donc plus accéder à la partie du graphe de laquelle ils ne font pas partie.\\
-\tab Une autre méthode a été proposée : de prendre le n\oe{}ud ayant les plus grand nombre de descendants, ce qui permet d'éviter le blocage du cas précédent. Cependant cela nécessiterais de communiquer la position du tanker a tous les agents, ce qui nous semblais être plus coûteux en terme de communication et une moins bonne stratégie.
-\tab \textbf La Complexité de l'algorithme du calculd de la Betweenness centrality est  en{O(nm)}.
-
+\tab Une autre méthode a été proposée : de prendre le n\oe{}ud ayant les plus grand nombre de descendants, ce qui permet d'éviter le blocage du cas précédent. Cependant cela nécessiterais de communiquer la position du tanker a tous les agents, ce qui nous semblais être plus coûteux en terme de communication et une moins bonne stratégie.\\
+\tab La complexité de l'algorithme du calcul de la Betweenness centrality est en \textbf{O(nm)}.
 
 	
 \subsection{Interblocage}
