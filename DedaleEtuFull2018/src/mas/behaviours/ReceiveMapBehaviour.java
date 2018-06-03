@@ -28,7 +28,6 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
                     this.customAgent.setCommunicatingAgent(received.getSender());
                     HashMap map = (HashMap) received.getContentObject();
                     customAgent.fusion(map);
-                    customAgent.clearSteps();
                 }
             } catch (UnreadableException e) {
                 e.printStackTrace();

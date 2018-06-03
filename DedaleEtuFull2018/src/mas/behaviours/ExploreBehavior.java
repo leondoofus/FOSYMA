@@ -32,6 +32,10 @@ public class ExploreBehavior extends SimpleBehaviour {
         List<Couple<String, List<Attribute>>> lobs = (this.customAgent).observe();
         customAgent.updateMap(lobs,myPosition);
         if (this.customAgent.stepsIsEmpty()) {
+            if(myPosition.equals(this.customAgent.getTankerPos())){
+                randomMove(lobs);
+                return;
+            }
             if (!myPosition.equals("")) {
                 String notVisited = customAgent.getUnvisitedNode(myPosition);
                 if (notVisited != null) {
@@ -43,7 +47,7 @@ public class ExploreBehavior extends SimpleBehaviour {
                 } else {
                     Set<String> unexplored = customAgent.getUnexploredNodes();
                     if(unexplored.isEmpty()){
-                        startAfterExplore(myPosition);
+                        this.customAgent.setSteps(Tools.dijkstra(customAgent.getMapSons(),myPosition,this.customAgent.getRandomNode(),customAgent.getTankerPos()));
                         movetoStep(lobs);
                     } else {
                         this.customAgent.setSteps(Tools.dijkstraClosestNode(customAgent.getMapSons()
@@ -80,13 +84,7 @@ public class ExploreBehavior extends SimpleBehaviour {
     private void movetoStep(List<Couple<String, List<Attribute>>> lobs){
         if(!this.customAgent.setpsIsEmpty()){
             String step = this.customAgent.popStep();
-            if(!step.equals(this.customAgent.getTankerPos())){
-                if (!((abstractAgent) this.myAgent).moveTo(step)) {
-                    randomMove(lobs);
-                    this.customAgent.clearSteps();
-                }
-            }else{
-                System.out.println(myName+ " tanker move");
+            if (!((abstractAgent) this.myAgent).moveTo(step)) {
                 randomMove(lobs);
                 this.customAgent.clearSteps();
             }

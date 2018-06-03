@@ -29,10 +29,9 @@ public class CollectBehaviour extends SimpleBehaviour {
         for(Attribute a:lobs.get(0).getRight()){ //try to grab sth
             switch (a) {
                 case TREASURE : case DIAMONDS :
-                    ((abstractAgent)this.myAgent).getMyTreasureType();
-                    ((abstractAgent)this.myAgent).getBackPackFreeSpace();
                     System.err.println(myName +" "+a.getName() +" : "+ a.getValue()+" picked : "+((abstractAgent)this.myAgent).pick());
-                    ((abstractAgent)this.myAgent).getBackPackFreeSpace();
+                    lobs = (this.collectorAgent).observe();
+                    this.collectorAgent.updateMap(lobs,(this.collectorAgent).getCurrentPosition());
                     break;
                 default:
                     break;
@@ -92,9 +91,7 @@ public class CollectBehaviour extends SimpleBehaviour {
                     randomMove(lobs);
                 }
             }else{
-                ((abstractAgent) this.myAgent).getBackPackFreeSpace();
-                ((abstractAgent) this.myAgent).emptyMyBackPack("Tank");
-                ((abstractAgent) this.myAgent).getBackPackFreeSpace();
+                System.out.println(this.myAgent.getLocalName()+" - The agent tries to transfer is load into the Silo (if reachable); succes ? : "+((mas.abstractAgent)this.myAgent).emptyMyBackPack("Tank"));
                 this.collectorAgent.clearSteps();
                 randomMove(lobs);
             }
@@ -119,7 +116,6 @@ public class CollectBehaviour extends SimpleBehaviour {
                     ArrayList<String> myPrecious = getMyTreasureNodes(nodesAttributes);
                     //I cant find any more treasure to take :(
                     if (myPrecious.isEmpty()) {
-                        //System.err.println(collectorAgent.isMapCompleted()+" "+collectorAgent.getTankerPos());
                         if (collectorAgent.getTankerPos() != null) {
                             collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), collectorAgent.getTankerPos(),null));
                             movetoStep(lobs);
@@ -127,6 +123,9 @@ public class CollectBehaviour extends SimpleBehaviour {
                             randomMove(lobs);
                         }
                     } else {
+                        /*if(myPrecious.size()>1){
+                            myPrecious.remove((Math.random()<0.5)?0:1);
+                        }*/
                         collectorAgent.setSteps(Tools.dijkstraClosestNode(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), myPrecious.toArray(new String[myPrecious.size()]),collectorAgent.getTankerPos()));
                         movetoStep(lobs);
 

@@ -21,6 +21,7 @@ public class CheckMailBehavior extends SimpleBehaviour {
         final MessageTemplate msgTemplate = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
         final ACLMessage msg = this.customAgent.receive(msgTemplate);
         if (msg != null) {
+            this.customAgent.rec
             if(msg.getPostTimeStamp() - System.currentTimeMillis() < 50){
                 customAgent.setCommunicatingAgent(msg.getSender());
                 //System.out.println(this.customAgent.getLocalName() + " : --Result received from " + msg.getSender().getLocalName());

@@ -212,6 +212,10 @@ public class CustomAgent extends abstractAgent {
         this.steps = steps;
     }
 
+    public ArrayList<String> getSteps(){
+        return steps;
+    }
+
     public String popStep(){
         return steps.remove(0);
     }
