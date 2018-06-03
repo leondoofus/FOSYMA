@@ -51,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/src/mas/behaviours/CheckMailBehavior.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="287">
-              <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -582,12 +582,12 @@
       <workItem from="1526980932616" duration="5040000" />
       <workItem from="1527183683232" duration="3341000" />
       <workItem from="1527334520526" duration="228000" />
-      <workItem from="1528056271365" duration="12169000" />
+      <workItem from="1528056271365" duration="12290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="202099000" />
+    <option name="totallyTimeSpent" value="202220000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -961,7 +961,7 @@
     <entry file="file://$PROJECT_DIR$/src/mas/behaviours/CheckMailBehavior.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
-          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
