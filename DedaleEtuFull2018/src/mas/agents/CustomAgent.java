@@ -102,7 +102,6 @@ public class CustomAgent extends abstractAgent {
         ArrayList<String> givenList = new ArrayList<String>(map.keySet());
         Random rand = new Random();
         String res = givenList.get(rand.nextInt(givenList.size()));
-        //System.out.println(res);
         return res;
     }
 

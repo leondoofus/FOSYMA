@@ -28,22 +28,17 @@ public class ExploreBehavior extends SimpleBehaviour {
 
     @Override
     public void action() {
-        //customAgent.printMap();
         String myPosition = (this.customAgent).getCurrentPosition();
-        //System.out.println( myName+ " I'm at the case : " + myPosition+ " nb explore behaviour :"+nbexp);
         List<Couple<String, List<Attribute>>> lobs = (this.customAgent).observe();
         customAgent.updateMap(lobs,myPosition);
         if (this.customAgent.stepsIsEmpty()) {
             if (!myPosition.equals("")) {
                 String notVisited = customAgent.getUnvisitedNode(myPosition);
-                //System.out.print( myName+ " printing the next case where i want to go : ");
-                //System.out.println(notVisited);
                 if (notVisited != null) {
                     boolean canMove = (this.customAgent.moveTo(notVisited));
                     if (!canMove) {
                         customAgent.clearSteps();
                         randomMove(lobs);
-                        //System.out.println(myName + "I'm stuck ");
                     }
                 } else {
                     Set<String> unexplored = customAgent.getUnexploredNodes();
@@ -51,8 +46,6 @@ public class ExploreBehavior extends SimpleBehaviour {
                         startAfterExplore(myPosition);
                         movetoStep(lobs);
                     } else {
-                        //System.out.println( myName + " my destination : " + unexploredAsString[0] + " my position : " + myPosition);
-                        //this.customAgent.setSteps(Tools.dijkstra(myMap, myPosition, unexploredAsString[0]))
                         this.customAgent.setSteps(Tools.dijkstraClosestNode(customAgent.getMapSons()
                                 ,myPosition,unexplored.toArray(new String[unexplored.size()]),customAgent.getTankerPos()));
                         movetoStep(lobs);
@@ -93,7 +86,9 @@ public class ExploreBehavior extends SimpleBehaviour {
                     this.customAgent.clearSteps();
                 }
             }else{
+                System.out.println(myName+ " tanker move");
                 randomMove(lobs);
+                this.customAgent.clearSteps();
             }
         }
     }

@@ -69,20 +69,18 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="dedale-full-0.3.jar">
+      <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/dedale/dedale-full-0.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../junit-4.12.jar!/" />
         </CLASSES>
-        <JAVADOC>
-          <root url="jar://$MODULE_DIR$/lib/dedale/dedale-full-0.3-doc.jar!/doc" />
-        </JAVADOC>
+        <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../junit-4.12.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/dedale/dedale-full-0.32.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

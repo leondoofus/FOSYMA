@@ -31,7 +31,7 @@ public class CollectBehaviour extends SimpleBehaviour {
                 case TREASURE : case DIAMONDS :
                     ((abstractAgent)this.myAgent).getMyTreasureType();
                     ((abstractAgent)this.myAgent).getBackPackFreeSpace();
-                    System.err.println("Value of the treasure on the current position: "+a.getName() +" : "+ a.getValue()+" picked : "+((abstractAgent)this.myAgent).pick());
+                    System.err.println(myName +" "+a.getName() +" : "+ a.getValue()+" picked : "+((abstractAgent)this.myAgent).pick());
                     ((abstractAgent)this.myAgent).getBackPackFreeSpace();
                     break;
                 default:
@@ -93,7 +93,7 @@ public class CollectBehaviour extends SimpleBehaviour {
                 }
             }else{
                 ((abstractAgent) this.myAgent).getBackPackFreeSpace();
-                ((abstractAgent) this.myAgent).emptyMyBackPack("Tanker");
+                ((abstractAgent) this.myAgent).emptyMyBackPack("Tank");
                 ((abstractAgent) this.myAgent).getBackPackFreeSpace();
                 this.collectorAgent.clearSteps();
                 randomMove(lobs);
