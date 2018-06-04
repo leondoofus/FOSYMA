@@ -34,6 +34,8 @@ public class ReceiveMapBehaviour extends SimpleBehaviour{
             }
             nextBehaviourSelect = 2;
         }
+        while (myAgent.receive() != null){
+        }
 
     }
 

@@ -189,7 +189,7 @@ public class CustomAgent extends abstractAgent {
                 map.put(node, map2.get(node));
             }
         }
-        map.putAll(map2);
+        //map.putAll(map2);
         computeTankerPos();
     }
 
