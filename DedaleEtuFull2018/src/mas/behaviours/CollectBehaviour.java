@@ -116,12 +116,19 @@ public class CollectBehaviour extends SimpleBehaviour {
                     ArrayList<String> myPrecious = getMyTreasureNodes(nodesAttributes);
                     //I cant find any more treasure to take :(
                     if (myPrecious.isEmpty()) {
-                        if (collectorAgent.getTankerPos() != null) {
-                            collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), collectorAgent.getTankerPos(),null));
-                            movetoStep(lobs);
-                        } else {
-                            randomMove(lobs);
+                        if(collectorAgent.getBackPackFreeSpace() == collectorAgent.getInitBackpackCapacity()){
+                            this.startAfterExplore(myPosition);
+
+                        }else{
+                            if (collectorAgent.getTankerPos() != null) {
+                                collectorAgent.setSteps(Tools.dijkstra(collectorAgent.getMapSons(), collectorAgent.getCurrentPosition(), collectorAgent.getTankerPos(),null));
+                                movetoStep(lobs);
+                            } else {
+                                this.startAfterExplore(myPosition);
+
+                            }
                         }
+
                     } else {
                         /*if(myPrecious.size()>1){
                             myPrecious.remove((Math.random()<0.5)?0:1);

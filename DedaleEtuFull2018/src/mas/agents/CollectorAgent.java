@@ -66,4 +66,8 @@ public class CollectorAgent extends CustomAgent {
     protected void takeDown(){
 
     }
+
+    public int getInitBackpackCapacity() {
+        return initBackpackCapacity;
+    }
 }

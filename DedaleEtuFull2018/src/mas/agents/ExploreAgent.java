@@ -10,9 +10,10 @@ import mas.behaviours.*;
 
 public class ExploreAgent extends CustomAgent {
 
+    private int totbckp;
+
     protected void setup() {
         super.setup();
-
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
@@ -53,6 +54,5 @@ public class ExploreAgent extends CustomAgent {
     protected void takeDown(){
 
     }
-
 
 }
